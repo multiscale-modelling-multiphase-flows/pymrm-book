@@ -1,0 +1,60 @@
+# Book settings
+title: Multiphase Reactor Modeling using pymrm
+author: E.A.J.F. Peters, M. van Sint Annaland
+logo: content/logo.png
+
+# Execution settings
+execute:
+  execute_notebooks: force
+
+# PDF settings
+latex:
+  latex_documents:
+    targetname: mrm-jupyter-book.tex
+
+# Bibliography
+bibtex_bibfiles:
+  - content/references.bib
+
+# Repository information
+repository:
+  url: https://github.com/executablebooks/jupyter-book
+  path_to_book: content  # Corrected from 'docs' to 'content'
+  branch: master
+
+# HTML and Theme configuration
+html:
+  favicon: content/logo.png
+  theme:
+    name: sphinx_book_theme
+    custom_dir: _themes/custom
+    options:
+      logo_only: true
+      home_page_in_toc: true
+      path_to_docs: content
+      navigation_with_keys: true
+      collapse_navigation: true      # Enable collapsing sections
+      navigation_depth: 2            # Depth of collapsible items (increase for deeper nesting)
+      show_navbar_depth: 2           # Show deeper levels in the navbar
+      repository_url: https://github.com/executablebooks/jupyter-book
+      repository_branch: master
+      body_max_width: none  # This allows full width
+      content_max_width: none  # This allows full width
+  use_repository_button: true
+  use_issues_button: true
+  use_edit_page_button: true
+  use_download_button: true
+  section_numbering: true
+
+# Custom CSS
+sphinx:
+  config:
+    html_static_path: ["_static"]
+    html_css_files:
+      - custom.css
+    numfig: true  # Number figures, tables, and code blocks
+    numfig_secnum_depth: 2  # Depth of section numbering (1=Chapters, 2=Sections, 3=Subsections)
+
+# MyST Notebook settings
+myst_nb:
+  execute: false
