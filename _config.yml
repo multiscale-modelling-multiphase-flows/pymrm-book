@@ -18,9 +18,9 @@ bibtex_bibfiles:
 
 # Repository information
 repository:
-  url: https://github.com/executablebooks/jupyter-book
-  path_to_book: content  # Corrected from 'docs' to 'content'
-  branch: master
+  url: https://github.com/eajfpeters/pymrm-book
+  path_to_book: _build/html  # Corrected from 'docs' to 'content'
+  branch: main
 
 # HTML and Theme configuration
 html:
