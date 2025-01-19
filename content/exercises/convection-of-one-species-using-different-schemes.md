@@ -39,22 +39,19 @@ Suggested approach:
 
 **Questions**:
 
-a)  Implement upwind discretization, where
+1.  Implement upwind discretization, where
 
-> $$f_{i} = \left\{ \begin{matrix}
->  - v\left( \frac{c_{0} - c_{in}}{\Delta x} \right),\ for\ i = 0 \\
->  - v\left( \frac{c_{i} - c_{i - 1}}{\Delta x} \right),\ for\ i > 0
-> \end{matrix} \right.\ $$
+$$f_{i} = \left\{ \begin{matrix}
+  - v\left( \frac{c_{0} - c_{in}}{\Delta x} \right),\ \text{for}\ i = 0 \\
+  - v\left( \frac{c_{i} - c_{i - 1}}{\Delta x} \right),\ \text{for}\ i > 0
+\end{matrix} \right.\ $$
 
-b)  Implement central differencing, where
+2.  Implement central differencing, where
 
-> $$f_{i} = \left\{ \begin{array}{r}
-> \begin{matrix}
->  - v\left( \frac{c_{1} - c_{in}}{\Delta x} \right),\ for\ i = 0 \\
->  - v\left( \frac{c_{i + 1} - c_{i - 1}}{2\ \Delta x} \right),\ for\ i > 0
-> \end{matrix} \\
->  - v\left( \frac{c_{i} - c_{i - 1}}{\Delta x} \right),\ for\ i = N - 1
-> \end{array} \right.\ $$
+$$f_{i} = \left\{ \begin{array}{l}
+  - v\left( \frac{c_{1} - c_{in}}{\Delta x} \right),\ \text{for}\ i = 0 \\
+  - v\left( \frac{c_{i + 1} - c_{i - 1}}{2\ \Delta x} \right),\ \text{for}\ i > 0 \\
+  - v\left( \frac{c_{i} - c_{i - 1}}{\Delta x} \right),\ \text{for}\ i = N - 1
+\end{array} \right.\ $$
 
-c)  Implement a TVD scheme, e.g. Min-Mod, for the convection. See
-    lecture notes for the scheme.
+3.  Implement a TVD scheme, e.g. Min-Mod, for the convection. See lecture notes for the scheme.

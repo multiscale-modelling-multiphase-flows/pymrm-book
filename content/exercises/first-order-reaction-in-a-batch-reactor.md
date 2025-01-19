@@ -14,13 +14,13 @@ Suggested approach:
 
 -   Provide an analytical expression of the concentration as function of
     time. Verify your codes with the analytical solution for the case
-    $k = 1\ s^{- 1}$, with initial concentration
-    $c_{0} = 1\ \frac{mol}{m^{3}}$.
+    $k = 1.0~\mathrm{s^{-1}}$, with initial concentration
+    $c_{0} = 1.0~\mathrm{mol\cdot m^{-3}}$.
 
 **Questions**:
 
-a)  Solve using forward Euler discretization
+1.  Solve using forward Euler discretization
 
-b)  Solve using backward Euler discretization
+2.  Solve using backward Euler discretization
 
-c)  Solve using scipy.integrate.solve_ivp
+3.  Solve using `scipy.integrate.solve_ivp`

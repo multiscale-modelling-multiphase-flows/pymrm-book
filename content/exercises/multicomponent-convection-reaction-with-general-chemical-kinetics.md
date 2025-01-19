@@ -24,20 +24,24 @@ sparse matrices.)
 
 **Questions**:
 
-a)  Repeat the case of exercise 2.2 with this general method. Does it
+1. Repeat the case of exercise 2.2 with this general method. Does it
     give the same results?
 
-b)  Implement a system non-linear reactions. For example:
+2. Implement a system non-linear reactions. For example:
 
-$${A \rightarrow X
-}{2X + Y \rightarrow 3X
-}{B + X \rightarrow Y + D
-}{X \rightarrow E}$$
+$$
+\begin{align*}
+A &\rightarrow X \\
+2X + Y &\rightarrow 3X \\
+B + X &\rightarrow Y + D \\
+X &\rightarrow E
+\end{align*}
+$$
 
 This is the famous Brusselator (see
 [Wikipedia](https://en.wikipedia.org/wiki/Brusselator)). Here components
 $A$ and $B$ are present in access and thus constant. The kinetics is
 usually written down in a dimensionless form with all reaction
 coefficient equal to 1. Suggested inlet concentrations are: $c_{A} = 1$,
-$c_{B} = 1.7$, $c_{X} = 0$, $c_{Y} = 0$ and for case two: : $c_{A} = 1$,
+$c_{B} = 1.7$, $c_{X} = 0$, $c_{Y} = 0$ and for case two: $c_{A} = 1$,
 $c_{B} = 3$, $c_{X} = 0$, $c_{Y} = 0$.
