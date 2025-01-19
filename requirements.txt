@@ -1,7 +1,7 @@
 jupyter-book
-pymrm>=2.0.0
 matplotlib
 numpy
 scipy
 pandas
 numba
+pymrm>=2.1.3
