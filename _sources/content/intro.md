@@ -1,0 +1,33 @@
+# {octicon}`home` Multiphase Reactor Modeling
+
+This book is work in progress. Currently it contains a set of exercises, a set of examples and case studies.
+
+::::{grid} 1 2 2 5
+:gutter: 1 1 1 2
+
+:::{grid-item-card} {octicon}`rocket;2.5em;sd-mr-1` Getting Started
+
+Install the pymrm Python package and run some multiphase reactor models.
+:::
+
+:::{grid-item-card} {octicon}`book;2.5em;sd-mr-1` Multiphase Reactor Modeling
+
+Theoretical background of multiphase reactor modeling.
+:::
+
+:::{grid-item-card} {octicon}`graph;2.5em;sd-mr-1` Examples
+
+Example Python notebooks and csae studies highlighting different use cases for pymrm.
+:::
+
+:::{grid-item-card} {octicon}`pencil;2.5em;sd-mr-1` Exercises
+:link: exercises/index
+:link-type: doc
+A set of reactor modeling exercises.
+:::
+
+:::{grid-item-card} {octicon}`code-square;2.5em;sd-mr-1` Guide and API
+The pymrm user-guide and API reference. 
+:::
+
+::::
