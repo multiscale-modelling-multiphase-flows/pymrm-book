@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>2.2. Multicomponent convection-reaction with first-order chemical kinetics &#8212; Multiphase Reactor Modeling using PyMRM</title>
+    <title>Examples &#8212; Multiphase Reactor Modeling using PyMRM</title>
   
   
   
@@ -63,12 +63,12 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'content/exercises/multicomponent-convection-reaction-with-first-order-chemical-kinetics';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/examples/examples';</script>
     <link rel="icon" href="../../_static/logo.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2.3. Multicomponent convection-reaction with general chemical kinetics" href="multicomponent-convection-reaction-with-general-chemical-kinetics.html" />
-    <link rel="prev" title="2.1. Convection of one species using different schemes" href="convection-of-one-species-using-different-schemes.html" />
+    <link rel="next" title="Counter diffusion and reaction in a slab" href="../../pymrm/examples/counter_diffusion_reaction.html" />
+    <link rel="prev" title="pymrm.solve.newton" href="../api/generated/all/pymrm.solve.newton.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -173,57 +173,57 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Exercises</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 has-children"><a class="reference internal" href="ode-solving-for-reactor-modeling.html">1. ODE Solving for reactor modeling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="first-order-reaction-in-a-batch-reactor.html">1.1. First order reaction in a batch reactor</a></li>
-<li class="toctree-l3"><a class="reference internal" href="equilibrium-consecutive-batch-reactions.html">1.2. Equilibrium consecutive batch reactions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="steady-state-1d-fixed-bed-reactor-model-first-order-exothermal-reaction.html">1.3. Steady state 1D fixed bed reactor model: first order exothermal reaction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../exercises/index.html">Exercises</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../exercises/ode-solving-for-reactor-modeling.html">1. ODE Solving for reactor modeling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/first-order-reaction-in-a-batch-reactor.html">1.1. First order reaction in a batch reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/equilibrium-consecutive-batch-reactions.html">1.2. Equilibrium consecutive batch reactions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/steady-state-1d-fixed-bed-reactor-model-first-order-exothermal-reaction.html">1.3. Steady state 1D fixed bed reactor model: first order exothermal reaction</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="unsteady-convection-reaction-equations.html">2. Unsteady Convection-Reaction equations</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="convection-of-one-species-using-different-schemes.html">2.1. Convection of one species using different schemes</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">2.2. Multicomponent convection-reaction with first-order chemical kinetics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="multicomponent-convection-reaction-with-general-chemical-kinetics.html">2.3. Multicomponent convection-reaction with general chemical kinetics</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../exercises/unsteady-convection-reaction-equations.html">2. Unsteady Convection-Reaction equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/convection-of-one-species-using-different-schemes.html">2.1. Convection of one species using different schemes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/multicomponent-convection-reaction-with-first-order-chemical-kinetics.html">2.2. Multicomponent convection-reaction with first-order chemical kinetics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/multicomponent-convection-reaction-with-general-chemical-kinetics.html">2.3. Multicomponent convection-reaction with general chemical kinetics</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="implicit-convection-diffusion-reaction.html">3. Implicit convection-diffusion-reaction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="solving-a-one-component-1d-diffusion-reaction-equation.html">3.1. Solving a one-component 1D diffusion-reaction equation </a></li>
-<li class="toctree-l3"><a class="reference internal" href="multi-component-1d-counter-diffusion-with-reaction.html">3.2. Multi-component 1D counter-diffusion with reaction</a></li>
-<li class="toctree-l3"><a class="reference internal" href="multi-component-1d-counter-current-convection-with-reaction.html">3.3. Multi-component 1D counter-current convection with reaction</a></li>
-<li class="toctree-l3"><a class="reference internal" href="convection-dispersion-reaction-in-a-1d-reactor-model.html">3.4. Convection-dispersion-reaction in a 1D reactor model </a></li>
-<li class="toctree-l3"><a class="reference internal" href="particle-model-first-order-reaction.html">3.5. Particle model: first order reaction</a></li>
-<li class="toctree-l3"><a class="reference internal" href="weisz-and-hicks-model.html">3.6. Weisz and Hicks model</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../exercises/implicit-convection-diffusion-reaction.html">3. Implicit convection-diffusion-reaction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/solving-a-one-component-1d-diffusion-reaction-equation.html">3.1. Solving a one-component 1D diffusion-reaction equation </a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/multi-component-1d-counter-diffusion-with-reaction.html">3.2. Multi-component 1D counter-diffusion with reaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/multi-component-1d-counter-current-convection-with-reaction.html">3.3. Multi-component 1D counter-current convection with reaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/convection-dispersion-reaction-in-a-1d-reactor-model.html">3.4. Convection-dispersion-reaction in a 1D reactor model </a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/particle-model-first-order-reaction.html">3.5. Particle model: first order reaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/weisz-and-hicks-model.html">3.6. Weisz and Hicks model</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="modeling-dispersion-and-mass-transfer.html">4. Modeling Dispersion and Mass Transfer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="counter-current-column-processes.html">4.1. Counter-current column processes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reactor-model-for-heterogeneous-bubble-columns.html">4.2. Reactor model for heterogeneous bubble columns</a></li>
-<li class="toctree-l3"><a class="reference internal" href="kunii-and-levenspiel-model-for-a-fine-particle-fluidized-bed.html">4.3. Kunii and Levenspiel model for a 'fine particle' fluidized bed</a></li>
-<li class="toctree-l3"><a class="reference internal" href="computing-residence-time-distributions.html">4.4. Computing residence time distributions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="the-westerterp-wave-model-for-axial-dispersion-in-packed-beds.html">4.5. The Westerterp wave-model for axial dispersion in packed beds</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modeling-a-desiccant-dryer.html">4.6. Modeling a desiccant dryer</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../exercises/modeling-dispersion-and-mass-transfer.html">4. Modeling Dispersion and Mass Transfer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/counter-current-column-processes.html">4.1. Counter-current column processes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/reactor-model-for-heterogeneous-bubble-columns.html">4.2. Reactor model for heterogeneous bubble columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/kunii-and-levenspiel-model-for-a-fine-particle-fluidized-bed.html">4.3. Kunii and Levenspiel model for a 'fine particle' fluidized bed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/computing-residence-time-distributions.html">4.4. Computing residence time distributions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/the-westerterp-wave-model-for-axial-dispersion-in-packed-beds.html">4.5. The Westerterp wave-model for axial dispersion in packed beds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/modeling-a-desiccant-dryer.html">4.6. Modeling a desiccant dryer</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="2d-reactor-models.html">5. 2D reactor models</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="axial-convection-with-radial-dispersion.html">5.1. Axial convection with radial dispersion</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diffusion-reaction-in-a-cylindrical-pore.html">5.2. Diffusion-reaction in a cylindrical pore</a></li>
-<li class="toctree-l3"><a class="reference internal" href="2d-membrane-fixed-bed-reactor-model.html">5.3. 2D Membrane Fixed Bed Reactor Model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="steady-state-2d-fixed-bed-reactor-model-first-order-exothermal-reaction.html">5.4. Steady-state 2D fixed bed reactor model: first order exothermal reaction</a></li>
-<li class="toctree-l3"><a class="reference internal" href="a-2d-gas-solid-fluidized-bed.html">5.5. A 2D Gas-solid fluidized bed</a></li>
-<li class="toctree-l3"><a class="reference internal" href="a-2d-bubble-column-model.html">5.6. A 2D Bubble column model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="taylor-dispersion.html">5.7. Taylor Dispersion</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../exercises/2d-reactor-models.html">5. 2D reactor models</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/axial-convection-with-radial-dispersion.html">5.1. Axial convection with radial dispersion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/diffusion-reaction-in-a-cylindrical-pore.html">5.2. Diffusion-reaction in a cylindrical pore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/2d-membrane-fixed-bed-reactor-model.html">5.3. 2D Membrane Fixed Bed Reactor Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/steady-state-2d-fixed-bed-reactor-model-first-order-exothermal-reaction.html">5.4. Steady-state 2D fixed bed reactor model: first order exothermal reaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/a-2d-gas-solid-fluidized-bed.html">5.5. A 2D Gas-solid fluidized bed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/a-2d-bubble-column-model.html">5.6. A 2D Bubble column model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/taylor-dispersion.html">5.7. Taylor Dispersion</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="generalized-maxwell-stefan-equations.html">6. Generalized Maxwell-Stefan equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="ternary-diffusion-with-maxwell-stefan-equations.html">6.1. Ternary diffusion with Maxwell-Stefan equations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dehydrogenation-of-ethanol.html">6.2. Dehydrogenation of ethanol</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mass-transfer-limitations-using-maxwell-stefan-equations.html">6.3. Mass transfer limitations using Maxwell-Stefan equations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../exercises/generalized-maxwell-stefan-equations.html">6. Generalized Maxwell-Stefan equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/ternary-diffusion-with-maxwell-stefan-equations.html">6.1. Ternary diffusion with Maxwell-Stefan equations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/dehydrogenation-of-ethanol.html">6.2. Dehydrogenation of ethanol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/mass-transfer-limitations-using-maxwell-stefan-equations.html">6.3. Mass transfer limitations using Maxwell-Stefan equations</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="advanced-reactor-modeling.html">7. Advanced reactor modeling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="coupled-batch-reactor-and-particle-model.html">7.1. Coupled batch reactor and particle model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="particle-model-coupled-to-column-model.html">7.2. Particle model coupled to column model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pressure-velocity-coupling-in-column-models.html">7.3. Pressure-velocity coupling in column models</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../exercises/advanced-reactor-modeling.html">7. Advanced reactor modeling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/coupled-batch-reactor-and-particle-model.html">7.1. Coupled batch reactor and particle model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/particle-model-coupled-to-column-model.html">7.2. Particle model coupled to column model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exercises/pressure-velocity-coupling-in-column-models.html">7.3. Pressure-velocity coupling in column models</a></li>
 </ul>
 </details></li>
 </ul>
@@ -275,7 +275,7 @@
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../pymrm/examples/counter_diffusion_reaction.html">Counter diffusion and reaction in a slab</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../pymrm/examples/particle_model_effectiveness.html">Particle model: diffusion + first order reaction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../pymrm/examples/counter_current_reaction.html">Counter-current convection and reaction</a></li>
@@ -362,7 +362,7 @@
       
       
       
-      <li><a href="https://github.com/eajfpeters/pymrm-book/edit/main/_build/html/content/exercises/multicomponent-convection-reaction-with-first-order-chemical-kinetics.md" target="_blank"
+      <li><a href="https://github.com/eajfpeters/pymrm-book/edit/main/_build/html/content/examples/examples.rst" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -379,7 +379,7 @@
       
       
       
-      <li><a href="https://github.com/eajfpeters/pymrm-book/issues/new?title=Issue%20on%20page%20%2Fcontent/exercises/multicomponent-convection-reaction-with-first-order-chemical-kinetics.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/eajfpeters/pymrm-book/issues/new?title=Issue%20on%20page%20%2Fcontent/examples/examples.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -409,7 +409,7 @@
       
       
       
-      <li><a href="../../_sources/content/exercises/multicomponent-convection-reaction-with-first-order-chemical-kinetics.md" target="_blank"
+      <li><a href="../../_sources/content/examples/examples.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -419,7 +419,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.rst</span>
 </a>
 </li>
       
@@ -483,7 +483,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Multicomponent convection-reaction with first-order chemical kinetics</h1>
+    <h1>Examples</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -497,53 +497,22 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="multicomponent-convection-reaction-with-first-order-chemical-kinetics">
-<h1><span class="section-number">2.2. </span>Multicomponent convection-reaction with first-order chemical kinetics<a class="headerlink" href="#multicomponent-convection-reaction-with-first-order-chemical-kinetics" title="Link to this heading">#</a></h1>
-<p>In this exercise we will consider the unsteady convection-reaction
-equation for three components:</p>
-<div class="math notranslate nohighlight">
-\[\frac{\partial c_{i}}{\partial t} + v\ \frac{\partial c_{i}}{\partial x} = r_{i},\]</div>
-<p>where the index <span class="math notranslate nohighlight">\(i\)</span> refers to one of the 3 components <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span> or <span class="math notranslate nohighlight">\(C\)</span>. All
-species move with the (same constant) velocity. The same kinetics as in
-exercise 1.2 will be used:</p>
-<div class="math notranslate nohighlight">
-\[A \rightleftarrows B \rightarrow C\]</div>
-<p>For unsteady convection-reaction consider a first order temporal
-discretization where the convection term is evaluated explicitly (using
-e.g. a TVD scheme) and the reaction term implicitly:</p>
-<div class="math notranslate nohighlight">
-\[\frac{\mathbf{c}_{j}^{n + 1} - \mathbf{c}_{j}^{n}}{\Delta t} = \mathbf{f}_{conv,j}^{n} + \mathbf{r}_{j}^{n + 1}\]</div>
-<p>Here the bold-vector notation is used to indicate column vectors of 3
-long where the 3 elements correspond to the 3 species. The subscript <span class="math notranslate nohighlight">\(j\)</span>
-indicates the spatial cell and the superscript <span class="math notranslate nohighlight">\(n\)</span> the time step.</p>
-<p><strong>Questions</strong>:</p>
-<ol class="arabic simple">
-<li><p>Implement the unsteady convection-reaction equations.</p></li>
-</ol>
-<p>Suggested approach:</p>
-<ul class="simple">
-<li><p>Use a two dimensional array <span class="math notranslate nohighlight">\(c[i,j]\)</span> where the first index, <span class="math notranslate nohighlight">\(i=0,...,
-N-1\)</span>, refers to the spatial positions and the second one, <span class="math notranslate nohighlight">\(i=0,1\)</span> and <span class="math notranslate nohighlight">\(2\)</span>
-, the index of the species.</p></li>
-<li><p>Compute the convection term using the concentration on the old
-time-step</p></li>
-<li><p>Next loop over all grid cells <span class="math notranslate nohighlight">\(j=1...N\)</span> and in each cell solve (with
-<span class="math notranslate nohighlight">\(\mathbf{r} = \mathbf{J\ c}\)</span>):</p></li>
+  <section id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h1>
+<p>Below is a list of available example notebooks.</p>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Example Notebooks</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pymrm/examples/counter_diffusion_reaction.html">Counter diffusion and reaction in a slab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pymrm/examples/particle_model_effectiveness.html">Particle model: diffusion + first order reaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pymrm/examples/counter_current_reaction.html">Counter-current convection and reaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pymrm/examples/tvd.html">TVD schemes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pymrm/examples/unsteady_diffusion_reaction_2D.html">Unsteady diffusion + reaction 1/2/3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pymrm/examples/unsteady_convection_reaction.html">Unsteady convection + reaction 1D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pymrm/examples/darcy_flow.html">Darcy flow in a 2D domain with varying permeability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pymrm/examples/lid_driven_cavity.html">Lid-driven cavity</a></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[\frac{\mathbf{c}_{j}^{n + 1} - \mathbf{c}_{j}^{n}}{\Delta t} = \mathbf{f}_{conv,j}^{n} + \mathbf{J}\mathbf{c}_{j}^{n + 1} \rightarrow \ \left( \mathbf{I -}\mathbf{J}\Delta t \right)\ \mathbf{c}_{j}^{n + 1} = \mathbf{c}_{j}^{n} + \mathbf{f}_{conv,j}^{n}\ \Delta t\]</div>
-<ul class="simple">
-<li><p>Please, notice how close this is to the problem solved in the second
-part of exercise 1.2b). Reuse the part of your code developed there.</p></li>
-</ul>
-<ol class="arabic simple" start="2">
-<li><p>Perform simulations using the same kinetics as in exercise 1.2.
-Consider an initially empty column of length <span class="math notranslate nohighlight">\(L = 1~\mathrm{m}\)</span>. At the
-inlet feed pure <span class="math notranslate nohighlight">\(A\)</span> with <span class="math notranslate nohighlight">\(c_{A,in} = 1~\mathrm{mol\cdot m^{-3}}\)</span>. Vary the
-residence time by changing the velocity <span class="math notranslate nohighlight">\(v\)</span>.</p></li>
-<li><p>Plot concentration profiles in the column for the three species at
-different times.</p></li>
-</ol>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -559,7 +528,7 @@ different times.</p></li>
         },
         kernelOptions: {
             name: "python3",
-            path: "./content/exercises"
+            path: "./content/examples"
         },
         predefinedOutput: true
     }
@@ -577,20 +546,20 @@ different times.</p></li>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="convection-of-one-species-using-different-schemes.html"
+       href="../api/generated/all/pymrm.solve.newton.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">2.1. </span>Convection of one species using different schemes</p>
+        <p class="prev-next-title">pymrm.solve.newton</p>
       </div>
     </a>
     <a class="right-next"
-       href="multicomponent-convection-reaction-with-general-chemical-kinetics.html"
+       href="../../pymrm/examples/counter_diffusion_reaction.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">2.3. </span>Multicomponent convection-reaction with general chemical kinetics</p>
+        <p class="prev-next-title">Counter diffusion and reaction in a slab</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
