@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Option 1: using Anaconda &#8212; Multiphase Reactor Modeling using PyMRM</title>
+    <title>Installation Guide &#8212; Multiphase Reactor Modeling using PyMRM</title>
   
   
   
@@ -61,10 +61,12 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'pymrm/docs/mrm_python_install';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pymrm/docs/installation';</script>
     <link rel="icon" href="../../_static/logo.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Exercises" href="../../content/exercises/index.html" />
+    <link rel="prev" title="Multiphase Reactor Modeling using PyMRM" href="../../content/index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -115,8 +117,6 @@
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
@@ -170,7 +170,8 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Getting started with PyMRM</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../content/exercises/index.html">Exercises</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../content/exercises/ode-solving-for-reactor-modeling.html">1. ODE Solving for reactor modeling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../content/exercises/first-order-reaction-in-a-batch-reactor.html">1.1. First order reaction in a batch reactor</a></li>
@@ -360,7 +361,7 @@
       
       
       
-      <li><a href="https://github.com/eajfpeters/pymrm-book/edit/main/_build/html/pymrm/docs/mrm_python_install.md" target="_blank"
+      <li><a href="https://github.com/eajfpeters/pymrm-book/edit/main/_build/html/pymrm/docs/installation.md" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -377,7 +378,7 @@
       
       
       
-      <li><a href="https://github.com/eajfpeters/pymrm-book/issues/new?title=Issue%20on%20page%20%2Fpymrm/docs/mrm_python_install.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/eajfpeters/pymrm-book/issues/new?title=Issue%20on%20page%20%2Fpymrm/docs/installation.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -407,7 +408,7 @@
       
       
       
-      <li><a href="../../_sources/pymrm/docs/mrm_python_install.md" target="_blank"
+      <li><a href="../../_sources/pymrm/docs/installation.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -483,7 +484,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Option 1: using Anaconda</h1>
+    <h1>Installation Guide</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -493,23 +494,12 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Option 1: using Anaconda</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-install-anaconda">Step 1: Install Anaconda</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-set-up-the-virtual-environment">Step 2: Set Up the Virtual Environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-activate-the-environment">Step 3: Activate the Environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-install-visual-studio-code-vs-code">Step 4: Install Visual Studio Code (VS Code)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-configure-vs-code">Step 5: Configure VS Code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-installing-python">Step 1: Installing Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-setting-up-a-virtual-environment">Step 2: Setting Up a Virtual Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-installing-required-packages">Step 3: Installing Required Packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-verifying-the-installation">Step 4: Verifying the Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-using-python-venv-and-requirements-txt">Option 2: Using Python venv and requirements.txt</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-install-python">Step 1: Install Python</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-create-and-activate-a-virtual-environment">Step 2: Create and Activate a Virtual Environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-install-required-packages">Step 3: Install Required Packages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-install-and-configure-vs-code">Step 4: Install and Configure VS Code</a></li>
-</ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -520,80 +510,155 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <p>In the Multiphase Reactor Modeling class we will use Python. For computations we will use the standard packages, Numpy and Scipy, and our own package: pymrm.</p>
-<section id="option-1-using-anaconda">
-<h1>Option 1: using Anaconda<a class="headerlink" href="#option-1-using-anaconda" title="Link to this heading">#</a></h1>
-<p>A suggested setup under Windows is using Anaconda (for Python) in combination with VS Code.</p>
-<section id="step-1-install-anaconda">
-<h2>Step 1: Install Anaconda<a class="headerlink" href="#step-1-install-anaconda" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Download the <a class="reference external" href="https://www.anaconda.com/download">Anaconda installer</a> for your operating system from the Anaconda website.</p></li>
-<li><p>Follow the installation instructions on the website to install Anaconda.</p></li>
+  <section class="tex2jax_ignore mathjax_ignore" id="installation-guide">
+<h1>Installation Guide<a class="headerlink" href="#installation-guide" title="Link to this heading">#</a></h1>
+<p>In the Multiphase Reactor Modeling class, we will use Python for computations. We will utilize standard packages such as NumPy and SciPy, along with our own package: PyMRM.</p>
+<section id="step-1-installing-python">
+<h2>Step 1: Installing Python<a class="headerlink" href="#step-1-installing-python" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>Download and Install Python</strong>:</p>
+<ul class="simple">
+<li><p>Go to the <a class="reference external" href="https://www.python.org/downloads/">official Python website</a>.</p></li>
+<li><p>Download the latest version of Python for your operating system.</p></li>
+<li><p>Follow the installation instructions for your operating system.</p></li>
+<li><p>Ensure that you check the option to add Python to your system PATH during installation.</p></li>
+</ul>
+</li>
+<li><p><strong>Verify Python Installation</strong>:</p>
+<ul>
+<li><p>Open a terminal or command prompt.</p></li>
+<li><p>Run the following command to verify the installation:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>--version
+</pre></div>
+</div>
+</li>
+<li><p>You should see the installed Python version.</p></li>
+</ul>
+</li>
 </ol>
 </section>
-<section id="step-2-set-up-the-virtual-environment">
-<h2>Step 2: Set Up the Virtual Environment<a class="headerlink" href="#step-2-set-up-the-virtual-environment" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Open the Anaconda Prompt (or your terminal on macOS/Linux).</p></li>
-<li><p>Navigate to the directory containing your environment.yml file.</p></li>
-<li><p>Create the Anaconda environment by running:
-<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">create</span> <span class="pre">-f</span> <span class="pre">environment.yml</span></code>
-This command creates a new environment named <code class="docutils literal notranslate"><span class="pre">mrm</span></code> configured with the necessary Python packages.</p></li>
+<section id="step-2-setting-up-a-virtual-environment">
+<h2>Step 2: Setting Up a Virtual Environment<a class="headerlink" href="#step-2-setting-up-a-virtual-environment" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>Create a Virtual Environment</strong>:</p>
+<ul>
+<li><p>Open a terminal or command prompt.</p></li>
+<li><p>Navigate to your project directory.</p></li>
+<li><p>Run the following command to create a virtual environment:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p><strong>Activate the Virtual Environment</strong>:</p>
+<ul>
+<li><p>On Windows:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>venv<span class="se">\S</span>cripts<span class="se">\a</span>ctivate
+</pre></div>
+</div>
+</li>
+<li><p>On macOS and Linux:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>venv/bin/activate
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p><strong>Verify Virtual Environment Activation</strong>:</p>
+<ul>
+<li><p>Run the following command to verify that the virtual environment is activated:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>which<span class="w"> </span>python
+</pre></div>
+</div>
+</li>
+<li><p>The output should point to the Python executable within the virtual environment.</p></li>
+</ul>
+</li>
 </ol>
 </section>
-<section id="step-3-activate-the-environment">
-<h2>Step 3: Activate the Environment<a class="headerlink" href="#step-3-activate-the-environment" title="Link to this heading">#</a></h2>
-<p>Activate the newly created environment by running: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">mrm</span></code></p>
-</section>
-<section id="step-4-install-visual-studio-code-vs-code">
-<h2>Step 4: Install Visual Studio Code (VS Code)<a class="headerlink" href="#step-4-install-visual-studio-code-vs-code" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Download and install VS Code from the official website.</p></li>
-<li><p>Install the Python extension for VS Code by Microsoft from the VS Code marketplace.</p></li>
+<section id="step-3-installing-required-packages">
+<h2>Step 3: Installing Required Packages<a class="headerlink" href="#step-3-installing-required-packages" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>Upgrade pip</strong>:</p>
+<ul>
+<li><p>Run the following command to upgrade pip to the latest version:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p><strong>Install NumPy and SciPy</strong>:</p>
+<ul>
+<li><p>Run the following command to install NumPy and SciPy:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> </span>scipy
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p><strong>Install Matplotlib</strong>:</p>
+<ul>
+<li><p>Run the following command to install Matplotlib for plotting:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>matplotlib
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p><strong>Install PyMRM</strong>:</p>
+<ul>
+<li><p>If PyMRM is available on PyPI, run the following command:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pymrm
+</pre></div>
+</div>
+</li>
+<li><p>If you are installing from a local version, navigate to the directory containing <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> and run:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>.
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
 </ol>
 </section>
-<section id="step-5-configure-vs-code">
-<h2>Step 5: Configure VS Code<a class="headerlink" href="#step-5-configure-vs-code" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Open VS Code.</p></li>
-<li><p>Open the Command Palette (<code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+P</span></code> or <code class="docutils literal notranslate"><span class="pre">Cmd+Shift+P)</span></code> and type: <code class="docutils literal notranslate"><span class="pre">Python:</span> <span class="pre">Select</span> <span class="pre">Interpreter</span></code></p></li>
-<li><p>Choose the Python interpreter from your mrm environment.</p></li>
+<section id="step-4-verifying-the-installation">
+<h2>Step 4: Verifying the Installation<a class="headerlink" href="#step-4-verifying-the-installation" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>Create a Test Script</strong>:</p>
+<ul>
+<li><p>Create a new Python file named <code class="docutils literal notranslate"><span class="pre">test_installation.py</span></code>.</p></li>
+<li><p>Add the following code to the file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pymrm</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;NumPy version:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SciPy version:&quot;</span><span class="p">,</span> <span class="n">scipy</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matplotlib version:&quot;</span><span class="p">,</span> <span class="n">plt</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PyMRM version:&quot;</span><span class="p">,</span> <span class="n">pymrm</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p><strong>Run the Test Script</strong>:</p>
+<ul>
+<li><p>Run the following command to execute the test script:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>test_installation.py
+</pre></div>
+</div>
+</li>
+<li><p>Verify that the versions of the installed packages are printed without any errors.</p></li>
+</ul>
+</li>
 </ol>
 </section>
-</section>
-<section id="option-2-using-python-venv-and-requirements-txt">
-<h1>Option 2: Using Python venv and requirements.txt<a class="headerlink" href="#option-2-using-python-venv-and-requirements-txt" title="Link to this heading">#</a></h1>
-<p>If you prefer not to use Anaconda, you can set up your environment using Python’s built-in venv module.</p>
-<section id="step-1-install-python">
-<h2>Step 1: Install Python<a class="headerlink" href="#step-1-install-python" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Download Python from the <a class="reference external" href="https://www.python.org/downloads/">official Python website</a>.</p></li>
-<li><p>Follow the instructions to install Python on your system.</p></li>
-</ol>
-</section>
-<section id="step-2-create-and-activate-a-virtual-environment">
-<h2>Step 2: Create and Activate a Virtual Environment<a class="headerlink" href="#step-2-create-and-activate-a-virtual-environment" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Open your terminal or command prompt.</p></li>
-<li><p>Navigate to your project directory or where you want to place your virtual environment.</p></li>
-<li><p>Run the following command to create a virtual environment named mrm: <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">venv</span> <span class="pre">mrm</span></code>
-Activate the virtual environment:
-On Windows: <code class="docutils literal notranslate"><span class="pre">mrm\Scripts\activate</span></code>
-On macOS/Linux: <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">mrm/bin/activate</span></code></p></li>
-</ol>
-</section>
-<section id="step-3-install-required-packages">
-<h2>Step 3: Install Required Packages<a class="headerlink" href="#step-3-install-required-packages" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Ensure you are in the directory containing the requirements.txt file.</p></li>
-<li><p>Install the required packages using: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span></code></p></li>
-</ol>
-</section>
-<section id="step-4-install-and-configure-vs-code">
-<h2>Step 4: Install and Configure VS Code<a class="headerlink" href="#step-4-install-and-configure-vs-code" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Follow the same installation and configuration instructions for VS Code as described in Option 1, steps 4 and 5.</p></li>
-</ol>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>You have successfully installed Python, set up a virtual environment, and installed the required packages for the Multiphase Reactor Modeling class. You are now ready to start using PyMRM for your computations.</p>
 </section>
 </section>
 
@@ -627,6 +692,24 @@ On macOS/Linux: <code class="docutils literal notranslate"><span class="pre">sou
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../../content/index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-home" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z"></path></svg> Multiphase Reactor Modeling using PyMRM</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../content/exercises/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Exercises</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -644,23 +727,12 @@ On macOS/Linux: <code class="docutils literal notranslate"><span class="pre">sou
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Option 1: using Anaconda</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-install-anaconda">Step 1: Install Anaconda</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-set-up-the-virtual-environment">Step 2: Set Up the Virtual Environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-activate-the-environment">Step 3: Activate the Environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-install-visual-studio-code-vs-code">Step 4: Install Visual Studio Code (VS Code)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-configure-vs-code">Step 5: Configure VS Code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-installing-python">Step 1: Installing Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-setting-up-a-virtual-environment">Step 2: Setting Up a Virtual Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-installing-required-packages">Step 3: Installing Required Packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-verifying-the-installation">Step 4: Verifying the Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-using-python-venv-and-requirements-txt">Option 2: Using Python venv and requirements.txt</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-install-python">Step 1: Install Python</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-create-and-activate-a-virtual-environment">Step 2: Create and Activate a Virtual Environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-install-required-packages">Step 3: Install Required Packages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-install-and-configure-vs-code">Step 4: Install and Configure VS Code</a></li>
-</ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
