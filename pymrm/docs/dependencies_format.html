@@ -537,8 +537,8 @@
 <section id="key-concepts">
 <h3>Key Concepts<a class="headerlink" href="#key-concepts" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>A <strong>field function</strong> maps an input field to an output field of the same shape, such as a Laplace operator or a reaction rate calculation.</p></li>
-<li><p>A <strong>dependency notation</strong> specifies how values at one position in the field depend on values at other positions.</p></li>
+<li><p>A <strong>field function</strong> maps an input field (e.g. concentrations) to an output field (e.g. reaction rates). Think of such as a a reaction rate calculation or a Laplace operator.</p></li>
+<li><p>A <strong>dependency notation</strong> specifies how values at one position in the output field depend on input values at other positions.</p></li>
 <li><p>Dependencies are particularly relevant for:</p>
 <ul>
 <li><p><strong>Spatial axes</strong>: Often involve nearest-neighbor interactions (e.g., stencils).</p></li>
@@ -553,28 +553,29 @@
 <section id="dependency-notation">
 <h2>Dependency Notation<a class="headerlink" href="#dependency-notation" title="Link to this heading">#</a></h2>
 <p>A single dependency is represented as a <strong>tuple of four elements</strong>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(function_index, field_index, fixed_axes_list, periodic_axes_list)
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(in_index, out_index, fixed_axes_list, periodic_axes_list)
 </pre></div>
 </div>
 <section id="components">
 <h3>Components<a class="headerlink" href="#components" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">function_index</span></code></strong>:</p>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">in_index</span></code></strong>:</p>
 <ul class="simple">
-<li><p>A tuple representing the position in the output (function) array.</p></li>
-<li><p>Only relevant for axes listed in the <code class="docutils literal notranslate"><span class="pre">fixed_axes_list</span></code>.</p></li>
-<li><p>Can be set to <code class="docutils literal notranslate"><span class="pre">None</span></code> if all axes are spatial (no fixed axes).</p></li>
+<li><p>A tuple representing the position in the input (field) array that contributes to the value at <code class="docutils literal notranslate"><span class="pre">out_index</span></code>.</p></li>
+<li></li>
 </ul>
 </li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">field_index</span></code></strong>:</p>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">out_index</span></code></strong>:</p>
 <ul class="simple">
-<li><p>A tuple representing the position in the input (field) array that contributes to the value at <code class="docutils literal notranslate"><span class="pre">function_index</span></code>.</p></li>
+<li><p>A tuple representing the position in the output array (i.e. discretized output field).</p></li>
+<li><p>Only relevant for axes listed in the <code class="docutils literal notranslate"><span class="pre">fixed_axes_list</span></code>.</p></li>
+<li><p>Can be set to <code class="docutils literal notranslate"><span class="pre">None</span></code> if all axes are spatial (no fixed axes).</p></li>
 </ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">fixed_axes_list</span></code></strong>:</p>
 <ul class="simple">
 <li><p>A list of axes that are considered “fixed” (non-spatial), such as axes representing species or phases.</p></li>
-<li><p>These axes require an explicit reference in <code class="docutils literal notranslate"><span class="pre">function_index</span></code>.</p></li>
+<li><p>These axes require an explicit reference in <code class="docutils literal notranslate"><span class="pre">out_index</span></code>.</p></li>
 </ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">periodic_axes_list</span></code></strong>:</p>
@@ -589,8 +590,9 @@
 <h3>Key Rules<a class="headerlink" href="#key-rules" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Spatial axes</strong>: Dependencies on spatial axes often follow stencils (e.g., nearest neighbors).</p></li>
-<li><p><strong>Fixed axes</strong>: The <code class="docutils literal notranslate"><span class="pre">function_index</span></code> specifies the fixed position on these axes.</p></li>
-<li><p><strong>Ignored values</strong>: For axes not listed in the <code class="docutils literal notranslate"><span class="pre">fixed_axes_list</span></code>, the values in <code class="docutils literal notranslate"><span class="pre">function_index</span></code> are ignored. If <code class="docutils literal notranslate"><span class="pre">fixed_axes_list</span></code> is empty, <code class="docutils literal notranslate"><span class="pre">function_index</span></code> can be <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>Fixed axes</strong>: For the indices along fixed axis the value of the indices are abolute. That is, the value at <code class="docutils literal notranslate"><span class="pre">out_index</span></code> depends on tha value at <code class="docutils literal notranslate"><span class="pre">in_index</span></code>.</p></li>
+<li><p><strong>Relative axes</strong>: For axes not listed in the <code class="docutils literal notranslate"><span class="pre">fixed_axes_list</span></code>, the values in <code class="docutils literal notranslate"><span class="pre">out_index</span></code> are ignored. In this case the value of <code class="docutils literal notranslate"><span class="pre">in_index</span></code> along this axis should be interpreted relative. This means the value at index <code class="docutils literal notranslate"><span class="pre">i</span></code> depends on the value at <code class="docutils literal notranslate"><span class="pre">i+in_index</span></code></p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">fixed_axes_list</span></code> is empty, all axis are relative <code class="docutils literal notranslate"><span class="pre">out_index</span></code> can be <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
 </ul>
 </section>
 <hr class="docutils" />
@@ -599,17 +601,17 @@
 <section id="simple-stencils-spatial-dependencies-only">
 <h4>Simple Stencils (Spatial Dependencies Only)<a class="headerlink" href="#simple-stencils-spatial-dependencies-only" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">(None,</span> <span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0),</span> <span class="pre">[],</span> <span class="pre">[])</span></code>: The value at <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j,</span> <span class="pre">k)</span></code> depends on the field value at <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j,</span> <span class="pre">k)</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">(None,</span> <span class="pre">(0,</span> <span class="pre">1,</span> <span class="pre">0),</span> <span class="pre">[],</span> <span class="pre">[])</span></code>: The value at <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j,</span> <span class="pre">k)</span></code> depends on the field value at <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j+1,</span> <span class="pre">k)</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">(None,</span> <span class="pre">(-1,</span> <span class="pre">1,</span> <span class="pre">0),</span> <span class="pre">[],</span> <span class="pre">[])</span></code>: The value at <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j,</span> <span class="pre">k)</span></code> depends on the field value at <code class="docutils literal notranslate"><span class="pre">(i-1,</span> <span class="pre">j+1,</span> <span class="pre">k)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">((0,</span> <span class="pre">0,</span> <span class="pre">0),</span> <span class="pre">None,</span> <span class="pre">[],</span> <span class="pre">[])</span></code>: The value at <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j,</span> <span class="pre">k)</span></code> depends on the field value at <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j,</span> <span class="pre">k)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">((0,</span> <span class="pre">1,</span> <span class="pre">0),</span> <span class="pre">None,</span> <span class="pre">[],</span> <span class="pre">[])</span></code>: The value at <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j,</span> <span class="pre">k)</span></code> depends on the field value at <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j+1,</span> <span class="pre">k)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">((-1,</span> <span class="pre">1,</span> <span class="pre">0),</span> <span class="pre">None,</span> <span class="pre">[],</span> <span class="pre">[])</span></code>: The value at <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j,</span> <span class="pre">k)</span></code> depends on the field value at <code class="docutils literal notranslate"><span class="pre">(i-1,</span> <span class="pre">j+1,</span> <span class="pre">k)</span></code>.</p></li>
 </ol>
 </section>
 <section id="fixed-axes-non-spatial-dependencies">
 <h4>Fixed Axes (Non-Spatial Dependencies)<a class="headerlink" href="#fixed-axes-non-spatial-dependencies" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">((0,</span> <span class="pre">0,</span> <span class="pre">0),</span> <span class="pre">(-1,</span> <span class="pre">1,</span> <span class="pre">0),</span> <span class="pre">[2],</span> <span class="pre">[])</span></code>: The value at <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j,</span> <span class="pre">0)</span></code> depends on the field value at <code class="docutils literal notranslate"><span class="pre">(i-1,</span> <span class="pre">j+1,</span> <span class="pre">0)</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">((0,</span> <span class="pre">0,</span> <span class="pre">0),</span> <span class="pre">(-1,</span> <span class="pre">1,</span> <span class="pre">1),</span> <span class="pre">[2],</span> <span class="pre">[])</span></code>: The value at <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j,</span> <span class="pre">0)</span></code> depends on the field value at <code class="docutils literal notranslate"><span class="pre">(i-1,</span> <span class="pre">j+1,</span> <span class="pre">1)</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">((0,</span> <span class="pre">0,</span> <span class="pre">1),</span> <span class="pre">(-1,</span> <span class="pre">1,</span> <span class="pre">0),</span> <span class="pre">[2],</span> <span class="pre">[])</span></code>: The value at <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j,</span> <span class="pre">1)</span></code> depends on the field value at <code class="docutils literal notranslate"><span class="pre">(i-1,</span> <span class="pre">j+1,</span> <span class="pre">0)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">((-1,</span> <span class="pre">1,</span> <span class="pre">0),</span> <span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0),</span> <span class="pre">[2],</span> <span class="pre">[])</span></code>: The value at <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j,</span> <span class="pre">0)</span></code> depends on the field value at <code class="docutils literal notranslate"><span class="pre">(i-1,</span> <span class="pre">j+1,</span> <span class="pre">0)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">((-1,</span> <span class="pre">1,</span> <span class="pre">1),</span> <span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0),</span> <span class="pre">[2],</span> <span class="pre">[])</span></code>: The value at <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j,</span> <span class="pre">0)</span></code> depends on the field value at <code class="docutils literal notranslate"><span class="pre">(i-1,</span> <span class="pre">j+1,</span> <span class="pre">1)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">((-1,</span> <span class="pre">1,</span> <span class="pre">0),</span> <span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">1),</span> <span class="pre">[2],</span> <span class="pre">[])</span></code>: The value at <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j,</span> <span class="pre">1)</span></code> depends on the field value at <code class="docutils literal notranslate"><span class="pre">(i-1,</span> <span class="pre">j+1,</span> <span class="pre">0)</span></code>.</p></li>
 </ol>
 </section>
 </section>
@@ -622,16 +624,16 @@
 <h3>1. <strong>Simple Stencils</strong><a class="headerlink" href="#simple-stencils" title="Link to this heading">#</a></h3>
 <p>For stencils with no <code class="docutils literal notranslate"><span class="pre">fixed_axes_list</span></code> or <code class="docutils literal notranslate"><span class="pre">periodic_axes_list</span></code>, the structure can be reduced to a single tuple:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">(None,</span> <span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0),</span> <span class="pre">[],</span> <span class="pre">[])</span></code> → <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">(None,</span> <span class="pre">(0,</span> <span class="pre">1,</span> <span class="pre">0),</span> <span class="pre">[],</span> <span class="pre">[])</span></code> → <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">1,</span> <span class="pre">0)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">(None,</span> <span class="pre">(-1,</span> <span class="pre">1,</span> <span class="pre">0),</span> <span class="pre">[],</span> <span class="pre">[])</span></code> → <code class="docutils literal notranslate"><span class="pre">(-1,</span> <span class="pre">1,</span> <span class="pre">0)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">((0,</span> <span class="pre">0,</span> <span class="pre">0),</span> <span class="pre">None,</span> <span class="pre">[],</span> <span class="pre">[])</span></code> → <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">((0,</span> <span class="pre">1,</span> <span class="pre">0),</span> <span class="pre">None,</span> <span class="pre">[],</span> <span class="pre">[])</span></code> → <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">1,</span> <span class="pre">0)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">((-1,</span> <span class="pre">1,</span> <span class="pre">0),</span> <span class="pre">None,</span> <span class="pre">[],</span> <span class="pre">[])</span></code> → <code class="docutils literal notranslate"><span class="pre">(-1,</span> <span class="pre">1,</span> <span class="pre">0)</span></code></p></li>
 </ul>
 </section>
 <section id="no-periodic-axes">
 <h3>2. <strong>No Periodic Axes</strong><a class="headerlink" href="#no-periodic-axes" title="Link to this heading">#</a></h3>
 <p>If <code class="docutils literal notranslate"><span class="pre">periodic_axes_list</span></code> is empty, it can be omitted:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">((0,</span> <span class="pre">0,</span> <span class="pre">0),</span> <span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">1),</span> <span class="pre">[2],</span> <span class="pre">[])</span></code> → <code class="docutils literal notranslate"><span class="pre">((0,</span> <span class="pre">0,</span> <span class="pre">0),</span> <span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">1),</span> <span class="pre">[2])</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">((0,</span> <span class="pre">0,</span> <span class="pre">1),</span> <span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0),</span> <span class="pre">[2],</span> <span class="pre">[])</span></code> → <code class="docutils literal notranslate"><span class="pre">((0,</span> <span class="pre">0,</span> <span class="pre">1),</span> <span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0),</span> <span class="pre">[2])</span></code></p></li>
 </ul>
 </section>
 </section>
@@ -666,7 +668,7 @@
 <section id="example-multi-component-diffusion">
 <h3>Example: Multi-Component Diffusion<a class="headerlink" href="#example-multi-component-diffusion" title="Link to this heading">#</a></h3>
 <p>In a multi-component diffusion problem, the function value for one species depends on all species in neighboring cells:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dependencies</span> <span class="o">=</span> <span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)),</span> <span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)),</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dependencies</span> <span class="o">=</span> <span class="p">(([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)),</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </section>
