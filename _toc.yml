@@ -99,3 +99,5 @@ chapters:
     title: Modules
   - file: content/api/alphabetical_overview
     title: All Functions and Classes
+- file: content/examples/examples
+  title: Examples

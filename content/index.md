@@ -16,7 +16,8 @@ Theoretical background of multiphase reactor modeling.
 :::
 
 :::{grid-item-card} {octicon}`graph;2.5em;sd-mr-1` Examples
-
+:link: examples/examples
+:link-type: doc
 Example Python notebooks and case studies highlighting different use cases for pymrm.
 :::
 
