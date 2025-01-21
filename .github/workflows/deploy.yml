@@ -11,6 +11,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+      with:
+        submodules: recursive
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -19,8 +21,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install -r pymrm/requirements.txt
-        pip install -e pymrm 
+        pip install ./pymrm   
         pip install -r requirements.txt        
         pip install jupyter-book
 
