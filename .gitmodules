@@ -1,3 +1,4 @@
 [submodule "pymrm"]
 	path = pymrm
 	url = https://github.com/eajfpeters/pymrm.git
+	branck = main

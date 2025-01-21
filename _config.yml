@@ -1,11 +1,15 @@
 # Book settings
-title: Multiphase Reactor Modeling using pymrm
-author: E.A.J.F. Peters, M. van Sint Annaland
+title: Multiphase Reactor Modeling using PyMRM
+author: E.A.J.F. Peters and M. van Sint Annaland
+copyright: 2025, TU/e
 logo: content/logo.png
+
+#exclude_patterns: ["pymrm/exercises/*","pymrm/examples/*", "pymrm/scripts/*"]
+#only_build_toc_files: true
 
 # Execution settings
 execute:
-  execute_notebooks: force
+  execute_notebooks: off
 
 # PDF settings
 latex:
@@ -19,7 +23,7 @@ bibtex_bibfiles:
 # Repository information
 repository:
   url: https://github.com/eajfpeters/pymrm-book
-  path_to_book: _build/html  # Corrected from 'docs' to 'content'
+  path_to_book: _build/html
   branch: main
 
 # HTML and Theme configuration
@@ -37,7 +41,7 @@ html:
       navigation_depth: 2            # Depth of collapsible items (increase for deeper nesting)
       show_navbar_depth: 2           # Show deeper levels in the navbar
       repository_url: https://github.com/executablebooks/jupyter-book
-      repository_branch: master
+      repository_branch: main
       body_max_width: none  # This allows full width
       content_max_width: none  # This allows full width
   use_repository_button: true
@@ -46,7 +50,6 @@ html:
   use_download_button: true
   section_numbering: true
 
-# Custom CSS
 sphinx:
   config:
     html_static_path: ["_static"]
@@ -54,7 +57,14 @@ sphinx:
       - custom.css
     numfig: true  # Number figures, tables, and code blocks
     numfig_secnum_depth: 2  # Depth of section numbering (1=Chapters, 2=Sections, 3=Subsections)
-
+    autodoc_mock_imports: []
+  extra_extensions:
+    - sphinx.ext.autodoc
+    - sphinx.ext.napoleon
+    - sphinx.ext.viewcode
+    - sphinx_autodoc_typehints
+    - sphinx.ext.autosummary
+  
 # MyST Notebook settings
 myst_nb:
   execute: false

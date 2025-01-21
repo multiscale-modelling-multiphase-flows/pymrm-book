@@ -1,5 +1,5 @@
 format: jb-book
-root: content/intro
+root: content/index
 
 chapters:
 - file: content/exercises/index
@@ -90,3 +90,12 @@ chapters:
       title: Particle model coupled to column model
     - file: content/exercises/pressure-velocity-coupling-in-column-models
       title: Pressure-velocity coupling in column models
+- file: content/api/index
+  title: API Reference
+  options:
+    numbered: false
+  sections:
+  - file: content/api/api
+    title: Modules
+  - file: content/api/alphabetical_overview
+    title: All Functions and Classes
