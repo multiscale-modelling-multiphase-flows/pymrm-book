@@ -2,15 +2,18 @@ format: jb-book
 root: content/index
 
 chapters:
-- file: pymrm/docs/installation
-  title: Getting started with PyMRM
+- file: content/getting_started/getting_started
+  title: Getting Started with PyMRM
+  sections:
+  - file: pymrm/docs/installation
+    title: Installation of PyMRM
 - file: content/exercises/index
   title: Exercises
   options:
     numbered: true
   sections:
   - file: content/exercises/ode-solving-for-reactor-modeling
-    title: ODE Solving for reactor modeling
+    title: ODE Solving for Reactor Modeling
     sections:
     - file: content/exercises/first-order-reaction-in-a-batch-reactor
       title: First order reaction in a batch reactor
@@ -58,7 +61,7 @@ chapters:
     - file: content/exercises/modeling-a-desiccant-dryer
       title: Modeling a desiccant dryer
   - file: content/exercises/2d-reactor-models
-    title: 2D reactor models
+    title: 2D Reactor Models
     sections:
     - file: content/exercises/axial-convection-with-radial-dispersion
       title: Axial convection with radial dispersion
@@ -84,7 +87,7 @@ chapters:
     - file: content/exercises/mass-transfer-limitations-using-maxwell-stefan-equations
       title: Mass transfer limitations using Maxwell-Stefan equations
   - file: content/exercises/advanced-reactor-modeling
-    title: Advanced reactor modeling
+    title: Advanced Reactor Modeling
     sections:
     - file: content/exercises/coupled-batch-reactor-and-particle-model
       title: Coupled batch reactor and particle model

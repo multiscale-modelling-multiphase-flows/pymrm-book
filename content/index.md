@@ -6,7 +6,7 @@ This book is work in progress. Currently it contains a set of exercises, a set o
 :gutter: 1 1 1 2
 
 :::{grid-item-card} {octicon}`rocket;2.5em;sd-mr-1` Getting Started
-:link: ../pymrm/docs/installation
+:link: getting_started/getting_started
 :link-type: doc
 Install the pymrm Python package and run some multiphase reactor models.
 :::
