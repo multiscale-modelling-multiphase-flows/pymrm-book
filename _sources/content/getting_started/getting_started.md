@@ -12,7 +12,7 @@ If you prefer to explore sample notebooks quickly, you can use [Google Colab](ht
    - Click on the **GitHub** tab.
 3. **Enter the repository URL**:  
    Paste this URL into the input box:  
-   [https://github.com/multiscale-modelling-multiphase-flows/pymrm](https://github.com/multiscale-modelling-multiphase-flows/pymrm).
+   [](https://github.com/multiscale-modelling-multiphase-flows/pymrm).
 4. Navigate to the [examples folder](https://github.com/multiscale-modelling-multiphase-flows/pymrm/tree/main/examples) and choose a notebook, such as [counter_diffusion_reaction.ipynb](https://github.com/multiscale-modelling-multiphase-flows/pymrm/blob/main/examples/counter_diffusion_reaction.ipynb).
 
 Using this setup, you can explore and run sample notebooks directly from the repository.

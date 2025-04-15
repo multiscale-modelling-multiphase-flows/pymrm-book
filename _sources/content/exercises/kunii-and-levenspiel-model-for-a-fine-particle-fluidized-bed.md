@@ -1,90 +1,60 @@
-# Kunii and Levenspiel model for a 'fine particle' fluidized bed
+# Kunii and Levenspiel Model for a 'Fine Particle' Fluidized Bed
 
-In reactor models of fluidized beds we usually distinguish different
-'phases', such as the emulsion phase and bubble phase. Depending on the
-flow regime, there can be other phases, such as cloud and wake. To
-construct the reactor model one needs to determine the balance equations
-for concentrations in each phase, including mass exchange between
-phases.
+In reactor models of fluidized beds, we typically distinguish different phases, such as the emulsion phase and bubble phase. Depending on the flow regime, additional phases like cloud and wake may also exist. To construct the reactor model, one needs to determine the balance equations for concentrations in each phase, including mass exchange between phases.
 
-In this exercise we will only consider two phases, namely, emulsion and
-bubble. The emulsion phase is a dense particle phase, where the voidage
-remains close to the value at minimum fluidization conditions,
-$\varepsilon_{mf}$. At gas velocities above the minimum fluidization
-velocity, excess gas can create voids, that are referred to as bubbles.
-For fluidized beds with fine particles (Geldart A), the emulsion phase
-has a low permeability. This makes that excess gas mostly remains in the
-bubbles, and that bubbles rise fast relative to the gas velocity in the
-emulsion phase, $u_{b} > \frac{u_{mf}}{\varepsilon_{mf}}$.
+In this exercise, we consider two phases: the emulsion phase and the bubble phase. The emulsion phase is a dense particle phase where the voidage remains close to the value at minimum fluidization conditions, $\varepsilon_{mf}$. At gas velocities above the minimum fluidization velocity, excess gas creates voids referred to as bubbles. For fluidized beds with fine particles (Geldart A), the emulsion phase has low permeability, causing excess gas to remain mostly in the bubbles. Consequently, bubbles rise faster than the gas velocity in the emulsion phase, $u_{b} > \frac{u_{mf}}{\varepsilon_{mf}}$.
 
-In this exercise, you are asked to model a catalytic fluidized bed. The
-particles are catalytically active, so conversion takes place in the
-emulsion phase, while most gas is transported by the bubbles. The
-balances for a concentration of gas species $i$ in the two phases $b$
-and $e$ can be written as:
+In this exercise, you are tasked with modeling a catalytic fluidized bed. The particles are catalytically active, so conversion occurs in the emulsion phase, while most gas is transported by the bubbles. The balances for the concentration of gas species $i$ in the two phases, $b$ (bubble) and $e$ (emulsion), are:
 
-$${\delta\ \frac{\partial c_{b,i}}{\partial t} + \delta\ u_{b}\frac{\partial c_{b,i}}{\partial z} = - \delta\ K_{be}\left( c_{b,i} - c_{e,i} \right)
-}{(1 - \delta)\ \frac{\partial c_{e,i}}{\partial t} + (1 - \delta)\ u_{e}\frac{\partial c_{e,i}}{\partial z} = \delta\ K_{be}\left( c_{b,i} - c_{e,i} \right) + (1 - \delta)\ r_{e,i}}$$
+$$
+\begin{align*}
+\delta \frac{\partial c_{b,i}}{\partial t} + \delta u_{b} \frac{\partial c_{b,i}}{\partial z} &= -\delta K_{be} \left( c_{b,i} - c_{e,i} \right), \\
+(1 - \delta) \frac{\partial c_{e,i}}{\partial t} + (1 - \delta) u_{e} \frac{\partial c_{e,i}}{\partial z} &= \delta K_{be} \left( c_{b,i} - c_{e,i} \right) + (1 - \delta) r_{e,i}.
+\end{align*}
+$$
 
-We assume that the bubble fraction and the velocities are constant over
-the height. Note, that if this were not the case one should be really
-careful about the placement inside or outside of the spatial derivative.
-The parameter $\delta$ denotes the bubble hold-up. For a specified
-overall superficial gas velocity, $u_{0}$, a total balance for the
-volumetric flow rate gives:
+We assume that the bubble fraction and velocities are constant over the height. Note that if this were not the case, one should carefully consider the placement of terms inside or outside the spatial derivative. The parameter $\delta$ denotes the bubble hold-up. For a specified overall superficial gas velocity, $u_{0}$, a total balance for the volumetric flow rate gives:
 
-$$u_{0} = \delta\ u_{b} + (1 - \delta)\ u_{e},$$
+$$
+u_{0} = \delta u_{b} + (1 - \delta) u_{e},
+$$
 
-with $u_{b}$ and $u_{e}$ the bubble rise velocity and the superficial
-gas velocity in the emulsion phase, respectively.
+where $u_{b}$ and $u_{e}$ are the bubble rise velocity and the superficial gas velocity in the emulsion phase, respectively.
 
-We have a reaction rate $r_{i}$ only in the emulsion phase. Note that
-this is an apparent reaction rate that includes potential mass-transfer
-resistances for transport between (emulsion) gas and particle. The case
-considered is that of a first order reaction of one species,
+The reaction rate $r_{e}$ occurs only in the emulsion phase. This is an apparent reaction rate that includes potential mass-transfer resistances for transport between the emulsion gas and particles. For a first-order reaction of one species, we have:
 
-$$r_{e} = - K_{r}\ c_{e}$$
+$$
+r_{e} = -K_{r} c_{e}.
+$$
 
-In this type of model it is conventional to use volumetrically defined
-mass-transfer coefficients, based on the bubble volume. This explains
-the $\delta$ appearing in-front of $K_{be}$.
+In this type of model, it is conventional to use volumetrically defined mass-transfer coefficients based on the bubble volume. This explains the $\delta$ appearing in front of $K_{be}$.
 
-  -------------------------------------------------------------------------------------------------
-  Quantity                                                        Value
-  --------------------------------------------------------------- ---------------------------------
-  $$\mathbf{d}_{\mathbf{b}}$$                                     $$0.04\ m$$
+:::note  
+The following parameter values are provided:
+:::
 
-  $$\mathbf{K}_{\mathbf{be}}$$                                    $$1.2\ s^{- 1}$$
+| Quantity                          | Value                          |
+|-----------------------------------|--------------------------------|
+| $d_{b}$                           | $0.04~\mathrm{m}$             |
+| $K_{be}$                          | $1.2~\mathrm{s^{-1}}$         |
+| $K_{r}$                           | $10.0~\mathrm{s^{-1}}$        |
+| $u_{0}$                           | $0.1~\mathrm{m~s^{-1}}$       |
+| $u_{e} = u_{mf}$                  | $0.006~\mathrm{m~s^{-1}}$     |
 
-  $$\mathbf{K}_{\mathbf{r}}$$                                     $$10.0\ \ s^{- 1}$$
+In the standard text by Kunii and Levenspiel, many correlations for transport coefficients are provided. These are based on theoretical considerations mixed with empirical findings. For example, the bubble rise velocity in a fine-particle fluidized bed is given by:
 
-  $$\mathbf{u}_{\mathbf{0}}$$                                     $$0.1\ \frac{m}{s}$$
+$$
+u_{b} = u_{0} - u_{mf} + u_{br}, \quad \text{with } u_{br} = 0.711 \sqrt{g d_{b}},
+$$
 
-  $$\mathbf{u}_{\mathbf{e}}\mathbf{=}\mathbf{u}_{\mathbf{mf}}$$   $$0.006\ \frac{m}{s}$$
-  -------------------------------------------------------------------------------------------------
-
-In, the standard text of Kunii and Levenspiel, one can find many
-correlations for transport coefficients. These are based on theoretical
-consideration mixed with empirical findings. For example, for the bubble
-rise velocity in a fine-particle fluidized bed, we have:
-
-$$u_{b} = u_{0} - u_{mf} + u_{br},\ with\ u_{br} = 0.711\sqrt{g\ d_{b}},$$
-
-where $d_{b}$ is the bubble diameter and $g$ the gravitational constant.
-In the table we provide numerical values for other key quantities.
+where $d_{b}$ is the bubble diameter and $g$ is the gravitational constant.
 
 **Questions**:
 
-a)  Using pymrm functions implement the model for a fine-particle
-    fluidized bed.
+1. Using `pymrm` functions, implement the model for a fine-particle fluidized bed.
+2. Compute the conversion as a function of height.
+3. Investigate the influence of parameters $K_{r}$, $u_{0}$, and $d_{b}$.
 
-b)  Compute the conversion as function of height.
-
-c)  Investigate the influence of parameters, $k_{r}$, $u_{0}$, and
-    $d_{b}$.
-
-As an aside: For larger particles, Geldart B, the emulsion phase is more
-permeable. Here excess gas uses the bubbles as a low-resistance shortcut
-through the bed. Therefore, reactant gas tries to find a low resistance
-path through emulsion and then through bubble etc. In this case the rise
-velocity of bubbles is lower than that of the gas in the emulsion phase.
+:::note  
+For larger particles (Geldart B), the emulsion phase is more permeable. Excess gas uses the bubbles as a low-resistance shortcut through the bed. In this case, the rise velocity of bubbles is lower than that of the gas in the emulsion phase.
+:::

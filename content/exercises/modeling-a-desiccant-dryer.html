@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>4.6. Modeling a desiccant dryer &#8212; Multiphase Reactor Modeling using PyMRM</title>
+    <title>4.6. Modeling a Desiccant Dryer &#8212; Multiphase Reactor Modeling using PyMRM</title>
   
   
   
@@ -16,22 +16,20 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -39,11 +37,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=482b656a" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
@@ -67,11 +64,10 @@
     <link rel="icon" href="../../_static/logo.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="5. 2D reactor models" href="2d-reactor-models.html" />
-    <link rel="prev" title="4.5. The Westerterp wave-model for axial dispersion in packed beds" href="the-westerterp-wave-model-for-axial-dispersion-in-packed-beds.html" />
+    <link rel="next" title="5. 2D Reactor Models" href="2d-reactor-models.html" />
+    <link rel="prev" title="4.5. The Westerterp Wave-Model for Axial Dispersion in Packed Beds" href="the-westerterp-wave-model-for-axial-dispersion-in-packed-beds.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -87,8 +83,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../../search.html"
       method="get">
@@ -96,6 +103,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -103,8 +111,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -120,8 +128,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -151,17 +158,21 @@
     
     
     <img src="../../_static/logo.png" class="logo__image only-light" alt="Multiphase Reactor Modeling using PyMRM - Home"/>
-    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Multiphase Reactor Modeling using PyMRM - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Multiphase Reactor Modeling using PyMRM - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -298,14 +309,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -466,19 +472,25 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+  </button>
+`);
+</script>
+
 </div></div>
       
     </div>
@@ -489,19 +501,11 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Modeling a desiccant dryer</h1>
+    <h1>Modeling a Desiccant Dryer</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adsorbent-rho-s-930-c-p-s-1340-f-ds-0-8">4.6.1. Adsorbent   <span class="math notranslate nohighlight">\(\rho_{s} = 930\)</span>                                                                $<span class="math notranslate nohighlight">\(C_{p,s} = 1340\)</span><span class="math notranslate nohighlight">\(                                                    \)</span><span class="math notranslate nohighlight">\(f_{ds} = 0.8\)</span>$</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -512,80 +516,76 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="modeling-a-desiccant-dryer">
-<h1><span class="section-number">4.6. </span>Modeling a desiccant dryer<a class="headerlink" href="#modeling-a-desiccant-dryer" title="Link to this heading">#</a></h1>
-<p>A typical rotating drum desiccant dryer consists of air channels coated
-by desiccant material. The drum rotates through different air streams in
-order to dry a process stream and next be regenerated.</p>
-<p>The flow of a (humid) gas and simultaneously adsorption of water through
-a channel can be described by transport equations for mass and heat.</p>
-<p>This process can be described by a homogeneous model, where mass and
-heat transfer resistances between the gas and adsorbent are neglected.
-Here there is one PDE for humidity in both phases, and also one PDE for
-temperature:</p>
+<h1><span class="section-number">4.6. </span>Modeling a Desiccant Dryer<a class="headerlink" href="#modeling-a-desiccant-dryer" title="Link to this heading">#</a></h1>
+<p>A typical rotating drum desiccant dryer consists of air channels coated with desiccant material. The drum rotates through different air streams to dry a process stream and then be regenerated.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="content/exercises/media/desiccant_wheel.png"><img alt="content/exercises/media/desiccant_wheel.png" src="content/exercises/media/desiccant_wheel.png" style="width: 40%;" />
+</a>
+</figure>
+<p>The flow of a (humid) gas and the simultaneous adsorption of water through a channel can be described by transport equations for mass and heat. This process can be modeled using a homogeneous approach, where mass and heat transfer resistances between the gas and adsorbent are neglected. In this case, there is one PDE for humidity in both phases and one PDE for temperature:</p>
 <div class="math notranslate nohighlight">
-\[{\frac{\partial}{\partial t}\left( \varepsilon\ \rho_{g}w_{g} + (1 - \varepsilon)\ f_{ds}\ \rho_{s}W_{ds} \right) + \frac{\partial}{\partial x}\left( v\ \rho_{g}\ w_{g} \right) = 0
-}{\frac{\partial}{\partial t}\left( \left\lbrack \varepsilon\ \rho_{g}C_{p,g} + (1 - \varepsilon)\ \rho_{s}C_{p,s} \right\rbrack\ T - (1 - \varepsilon)\ f_{ds}\ \rho_{s}W_{ds}\ H_{sor} \right) + \frac{\partial}{\partial x}\left( v\ \rho_{g}C_{p,g}T \right) = 0}\]</div>
-<p>In these equations <span class="math notranslate nohighlight">\(w_{g}\)</span> is the weight fraction of water in the air
-stream and <span class="math notranslate nohighlight">\(W_{ds}\)</span> the weight of adsorbed water per kg desiccant (a
-fraction <span class="math notranslate nohighlight">\(f_{ds}\)</span> is used because there is also some inert solid
-material). The first equation expresses a mass balance where the
-accumulation of water both in air and desiccant is balanced by the
-transport of water by the air stream. The superficial gas velocity is
-<span class="math notranslate nohighlight">\(v = 1.5\ \frac{m}{s}\)</span>. The length of a channel is <span class="math notranslate nohighlight">\(L = 0.2\ m\)</span>.</p>
-<p>In the enthalpy balance the accumulation term has two contribution, one
-due to heat capacity and next one due to the (lower) enthalpy of
-adsorbed water. Here <span class="math notranslate nohighlight">\(H_{sor}\)</span> is the enthalpy of sorption. This will
-cause heat to be created when water is adsorbed. Enthalpy is transported
-along the channel by the gas flow.</p>
+\[\begin{split}
+\begin{align*}
+\frac{\partial}{\partial t} \left( \varepsilon \rho_{g} w_{g} + (1 - \varepsilon) f_{ds} \rho_{s} W_{ds} \right) + \frac{\partial}{\partial x} \left( v \rho_{g} w_{g} \right) &amp;= 0, \\
+\frac{\partial}{\partial t} \left( \left[ \varepsilon \rho_{g} C_{p,g} + (1 - \varepsilon) \rho_{s} C_{p,s} \right] T - (1 - \varepsilon) f_{ds} \rho_{s} W_{ds} H_{sor} \right) + \frac{\partial}{\partial x} \left( v \rho_{g} C_{p,g} T \right) &amp;= 0.
+\end{align*}
+\end{split}\]</div>
+<p>In these equations, <span class="math notranslate nohighlight">\(w_{g}\)</span> is the weight fraction of water in the air stream, and <span class="math notranslate nohighlight">\(W_{ds}\)</span> is the weight of adsorbed water per kilogram of desiccant (a fraction <span class="math notranslate nohighlight">\(f_{ds}\)</span> is used because there is also some inert solid material). The first equation expresses a mass balance where the accumulation of water in both the air and desiccant is balanced by the transport of water by the air stream. The superficial gas velocity is <span class="math notranslate nohighlight">\(v = 1.5~\mathrm{m~s^{-1}}\)</span>, and the length of a channel is <span class="math notranslate nohighlight">\(L = 0.2~\mathrm{m}\)</span>.</p>
+<p>In the enthalpy balance, the accumulation term has two contributions: one due to heat capacity and another due to the (lower) enthalpy of adsorbed water. Here, <span class="math notranslate nohighlight">\(H_{sor}\)</span> is the enthalpy of sorption, which causes heat to be generated when water is adsorbed. Enthalpy is transported along the channel by the gas flow.</p>
 <p>The material properties are:</p>
-<hr class="docutils" />
-<p>Material    Densities                                                                       Heat capac.                                                           Volume fractions
-<span class="math notranslate nohighlight">\(\mathbf{\lbrack}\frac{\mathbf{kg}}{\mathbf{m}^{\mathbf{3}}}\mathbf{\rbrack}\)</span>   <span class="math notranslate nohighlight">\(\mathbf{\lbrack}\frac{\mathbf{J}}{\mathbf{kg\ K}}\mathbf{\rbrack}\)</span></p>
-<hr class="docutils" />
-<p>Air         $<span class="math notranslate nohighlight">\(\rho_{g} = 1.2\)</span><span class="math notranslate nohighlight">\(                                                              \)</span><span class="math notranslate nohighlight">\(C_{p,g} = 1872\)</span><span class="math notranslate nohighlight">\(                                                    \)</span><span class="math notranslate nohighlight">\(\varepsilon = 0.8\)</span>$</p>
-<section id="adsorbent-rho-s-930-c-p-s-1340-f-ds-0-8">
-<h2><span class="section-number">4.6.1. </span>Adsorbent   <span class="math notranslate nohighlight">\(\rho_{s} = 930\)</span>                                                                $<span class="math notranslate nohighlight">\(C_{p,s} = 1340\)</span><span class="math notranslate nohighlight">\(                                                    \)</span><span class="math notranslate nohighlight">\(f_{ds} = 0.8\)</span>$<a class="headerlink" href="#adsorbent-rho-s-930-c-p-s-1340-f-ds-0-8" title="Link to this heading">#</a></h2>
-<p>Locally the water in the air stream is assumed to be in equilibrium with
-the adsorbed amount of gas. The amount of adsorbed water is related to
-the relative humidity <span class="math notranslate nohighlight">\(\phi_{w}\)</span> is described by the following
-adsorption isotherm: <span class="math notranslate nohighlight">\(W_{ds} = 0.30\ \phi_{w}^{0.75}\)</span>, with
-<span class="math notranslate nohighlight">\(\phi_{w} = \frac{p}{p_{sat}}\frac{w_{g}}{0.64 + 0.36w_{g}}\ \)</span>and
-<span class="math notranslate nohighlight">\(p_{sat} = \exp\left( 23.20 - \frac{3816}{(T - 46.13)} \right)\)</span>, with K
-the unit of temperature and Pa the unit of pressure. <span class="math notranslate nohighlight">\(p_{sat}\)</span> is the
-saturation pressure of water at the temperature <span class="math notranslate nohighlight">\(T\)</span> and <span class="math notranslate nohighlight">\(p\)</span> the total
-pressure in the channel. In our case <span class="math notranslate nohighlight">\(p = 1\ bar\)</span>. The heat of sorption
-per kilogram desiccant is</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}H_{sor}\left\lbrack \frac{kJ}{kg} \right\rbrack = \left\{ \begin{matrix}
-2850 - 13.4 \cdot 10^{3}\ (W - 0.05), &amp; W \leq 0.05 \\
-2850 - 1.40 \cdot 10^{3}\ (W - 0.05), &amp; W &gt; 0.05
-\end{matrix} \right.\ \end{split}\]</div>
-<p><strong>Questions</strong>:</p>
-<p>a)  Implement the model for water weight fraction in air, <span class="math notranslate nohighlight">\(w_{g}\)</span> and
-temperature, <span class="math notranslate nohighlight">\(T\)</span> as function of position <span class="math notranslate nohighlight">\(x\)</span> and time <span class="math notranslate nohighlight">\(t\)</span>. Suggested
-approach:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>a.  Use a coupled formulation where you solve $w_{g}$ and $T$
-    simultaneously as component 0 and 1 of a NumPy array.
-
-b.  Evaluate the convection term explicitly using first order upwind
-    (that can be extended later to e.g. min-mod).
-
-c.  The non-linear accumulation term can be treated using
-    Newton-Raphson (using newton from the pymrm package). Compute
-    the Jacobian of the accumulation term numerically (using
-    numjac_local).
-</pre></div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Material</p></th>
+<th class="head"><p>Densities (<span class="math notranslate nohighlight">\(\mathrm{kg~m^{-3}}\)</span>)</p></th>
+<th class="head"><p>Heat Capacities (<span class="math notranslate nohighlight">\(\mathrm{J~kg^{-1}~K^{-1}}\)</span>)</p></th>
+<th class="head"><p>Volume Fractions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Air</p></td>
+<td><p><span class="math notranslate nohighlight">\(\rho_{g} = 1.2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(C_{p,g} = 1872\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\varepsilon = 0.8\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Adsorbent</p></td>
+<td><p><span class="math notranslate nohighlight">\(\rho_{s} = 930\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(C_{p,s} = 1340\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(f_{ds} = 0.8\)</span></p></td>
+</tr>
+</tbody>
+</table>
 </div>
-<p>b)  Model adsorption of a humid stream with <span class="math notranslate nohighlight">\(w_{g,\ in} = 0.015\)</span> and
-<span class="math notranslate nohighlight">\(T_{in} = 307.7\ K\)</span>.</p>
-<p>c)  Advanced (optional): Simulate, up to cyclic stationary state, of
-drying and regeneration, as if a drum is rotating through both
-theses streams. For the regeneration stage the stream enters form
-the other side. Both stages take 90 seconds, with the inlet
-conditions of the humid stream: <span class="math notranslate nohighlight">\(w_{g,\ in} = 0.015\)</span> and
-<span class="math notranslate nohighlight">\(T_{in} = 307.7\ K\)</span> and the regeneration air stream:
-<span class="math notranslate nohighlight">\(w_{g,\ in} = 0.018\)</span> and <span class="math notranslate nohighlight">\(T_{in} = 393.2\ K\)</span>.</p>
-</section>
+<p>Locally, the water in the air stream is assumed to be in equilibrium with the adsorbed amount of gas. The amount of adsorbed water is related to the relative humidity <span class="math notranslate nohighlight">\(\phi_{w}\)</span> and is described by the following adsorption isotherm:</p>
+<div class="math notranslate nohighlight">
+\[
+W_{ds} = 0.30 \phi_{w}^{0.75},
+\]</div>
+<p>where:</p>
+<div class="math notranslate nohighlight">
+\[
+\phi_{w} = \frac{p}{p_{sat}} \frac{w_{g}}{0.64 + 0.36 w_{g}}, \quad p_{sat} = \exp\left( 23.20 - \frac{3816}{T - 46.13} \right).
+\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(p_{sat}\)</span> is the saturation pressure of water at temperature <span class="math notranslate nohighlight">\(T\)</span>, and <span class="math notranslate nohighlight">\(p\)</span> is the total pressure in the channel. In this case, <span class="math notranslate nohighlight">\(p = 1~\mathrm{bar}\)</span>. The heat of sorption per kilogram of desiccant is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+H_{sor}~\mathrm{[kJ~kg^{-1}]} =
+\begin{cases}
+2850 - 13.4 \cdot 10^{3} (W - 0.05), &amp; W \leq 0.05, \\
+2850 - 1.40 \cdot 10^{3} (W - 0.05), &amp; W &gt; 0.05.
+\end{cases}
+\end{split}\]</div>
+<p><strong>Questions</strong>:</p>
+<ol class="arabic simple">
+<li><p>Implement the model for the water weight fraction in air, <span class="math notranslate nohighlight">\(w_{g}\)</span>, and temperature, <span class="math notranslate nohighlight">\(T\)</span>, as functions of position <span class="math notranslate nohighlight">\(x\)</span> and time <span class="math notranslate nohighlight">\(t\)</span>. Suggested approach:</p>
+<ul class="simple">
+<li><p>Use a coupled formulation where you solve <span class="math notranslate nohighlight">\(w_{g}\)</span> and <span class="math notranslate nohighlight">\(T\)</span> simultaneously as components 0 and 1 of a NumPy array.</p></li>
+<li><p>Evaluate the convection term explicitly using first-order upwind (which can later be extended to, e.g., min-mod).</p></li>
+<li><p>Treat the non-linear accumulation term using Newton-Raphson (using <code class="docutils literal notranslate"><span class="pre">newton</span></code> from the <code class="docutils literal notranslate"><span class="pre">pymrm</span></code> package). Compute the Jacobian of the accumulation term numerically (using <code class="docutils literal notranslate"><span class="pre">numjac</span></code>).</p></li>
+</ul>
+</li>
+<li><p>Model the adsorption of a humid stream with <span class="math notranslate nohighlight">\(w_{g,\mathrm{in}} = 0.015\)</span> and <span class="math notranslate nohighlight">\(T_{\mathrm{in}} = 307.7~\mathrm{K}\)</span>.</p></li>
+<li><p><strong>Advanced (optional)</strong>: Simulate up to a cyclic stationary state of drying and regeneration, as if a drum is rotating through both streams. For the regeneration stage, the stream enters from the other side. Both stages take 90 seconds, with the inlet conditions of the humid stream: <span class="math notranslate nohighlight">\(w_{g,\mathrm{in}} = 0.015\)</span> and <span class="math notranslate nohighlight">\(T_{\mathrm{in}} = 307.7~\mathrm{K}\)</span>, and the regeneration air stream: <span class="math notranslate nohighlight">\(w_{g,\mathrm{in}} = 0.018\)</span> and <span class="math notranslate nohighlight">\(T_{\mathrm{in}} = 393.2~\mathrm{K}\)</span>.</p></li>
+</ol>
 </section>
 
     <script type="text/x-thebe-config">
@@ -624,7 +624,7 @@ conditions of the humid stream: <span class="math notranslate nohighlight">\(w_{
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">4.5. </span>The Westerterp wave-model for axial dispersion in packed beds</p>
+        <p class="prev-next-title"><span class="section-number">4.5. </span>The Westerterp Wave-Model for Axial Dispersion in Packed Beds</p>
       </div>
     </a>
     <a class="right-next"
@@ -632,7 +632,7 @@ conditions of the humid stream: <span class="math notranslate nohighlight">\(w_{
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">5. </span>2D reactor models</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>2D Reactor Models</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -642,22 +642,6 @@ conditions of the humid stream: <span class="math notranslate nohighlight">\(w_{
             </div>
             
             
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adsorbent-rho-s-930-c-p-s-1340-f-ds-0-8">4.6.1. Adsorbent   <span class="math notranslate nohighlight">\(\rho_{s} = 930\)</span>                                                                $<span class="math notranslate nohighlight">\(C_{p,s} = 1340\)</span><span class="math notranslate nohighlight">\(                                                    \)</span><span class="math notranslate nohighlight">\(f_{ds} = 0.8\)</span>$</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
@@ -702,8 +686,8 @@ By E.A.J.F. Peters and M. van Sint Annaland
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

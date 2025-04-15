@@ -1,18 +1,17 @@
-# Diffusion-reaction in a cylindrical pore
+# Diffusion-Reaction in a Cylindrical Pore
 
-Simulate diffusion into a cylindrical dead-end pore with infinitely fast
-reaction on the wall. The pore has radius $R = 1\ \mu m$ and length
-$L = 5\mu m$. The diffusion coefficient in both radial and axial
-direction is $D = 10^{- 5}\ \frac{m^{2}}{s}.$
+Simulate diffusion into a cylindrical dead-end pore with an infinitely fast reaction on the wall. The pore has a radius $R = 1~\mathrm{\mu m}$ and a length $L = 5~\mathrm{\mu m}$. The diffusion coefficient in both radial and axial directions is $D = 10^{-5}~\mathrm{m^{2}~s^{-1}}$.
 
-**Questions:**
+**Questions**:
 
-a)  Provide the governing PDE for the two-dimensional diffusion in the
-    pore.
+1. Provide the governing PDE for the two-dimensional diffusion in the pore.
 
-b)  What are the proper boundary conditions?
+2. What are the proper boundary conditions?
 
-c)  Perform the spatial discretization of this (axial symmetric) 2D
-    problem to obtain a matrix-vector equation.
+3. Perform the spatial discretization of this (axially symmetric) 2D problem to obtain a matrix-vector equation.
 
-d)  Provide a Python implementation.
+4. Provide a Python implementation.
+
+:::note  
+Ensure that the implementation is consistent with the governing equations and boundary conditions.
+:::

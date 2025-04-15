@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>6.1. Ternary diffusion with Maxwell-Stefan equations &#8212; Multiphase Reactor Modeling using PyMRM</title>
+    <title>6.1. Ternary Diffusion with Maxwell-Stefan Equations &#8212; Multiphase Reactor Modeling using PyMRM</title>
   
   
   
@@ -16,22 +16,20 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -39,11 +37,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=482b656a" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
@@ -67,11 +64,10 @@
     <link rel="icon" href="../../_static/logo.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="6.2. Dehydrogenation of ethanol" href="dehydrogenation-of-ethanol.html" />
-    <link rel="prev" title="6. Generalized Maxwell-Stefan equations" href="generalized-maxwell-stefan-equations.html" />
+    <link rel="next" title="6.2. Dehydrogenation of Ethanol" href="dehydrogenation-of-ethanol.html" />
+    <link rel="prev" title="6. Generalized Maxwell-Stefan Equations" href="generalized-maxwell-stefan-equations.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -87,8 +83,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../../search.html"
       method="get">
@@ -96,6 +103,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -103,8 +111,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -120,8 +128,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -151,17 +158,21 @@
     
     
     <img src="../../_static/logo.png" class="logo__image only-light" alt="Multiphase Reactor Modeling using PyMRM - Home"/>
-    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Multiphase Reactor Modeling using PyMRM - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Multiphase Reactor Modeling using PyMRM - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -298,14 +309,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -466,16 +472,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 
 </div></div>
       
@@ -487,7 +501,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Ternary diffusion with Maxwell-Stefan equations</h1>
+    <h1>Ternary Diffusion with Maxwell-Stefan Equations</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -502,56 +516,43 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="ternary-diffusion-with-maxwell-stefan-equations">
-<h1><span class="section-number">6.1. </span>Ternary diffusion with Maxwell-Stefan equations<a class="headerlink" href="#ternary-diffusion-with-maxwell-stefan-equations" title="Link to this heading">#</a></h1>
-<p>Consider the two-bulb diffusion experiment where bulb A contains a 50-50
-molar-% <span class="math notranslate nohighlight">\(N_{2}\)</span> and <span class="math notranslate nohighlight">\({CO}_{2}\)</span> mixture and bulb B a 50-50 molar-%
-<span class="math notranslate nohighlight">\(N_{2}\)</span> and <span class="math notranslate nohighlight">\(H_{2}\)</span> mixture. The bulbs are connected by a capillary with
-length <span class="math notranslate nohighlight">\(\delta = 0.086\ m\)</span>. We will consider the diffusion of the three
-gasses.</p>
-<p><img alt="A diagram of a blue circle with text Description automaticallygenerated" src="../../_images/image10.png" />{width=”5.532772309711286in”
-height=”1.0947233158355205in”}</p>
-<p>Let’s label the three components as 1: <span class="math notranslate nohighlight">\(H_{2}\)</span>, 2: <span class="math notranslate nohighlight">\(N_{2}\)</span> and 3:
-<span class="math notranslate nohighlight">\({CO}_{2}\)</span>. The binary Maxwell-Stefan diffusivities are
-<span class="math notranslate nohighlight">\(Đ_{12} = 83.6 \cdot 10^{- 6}\ \frac{m^{2}}{s}\)</span>,
-<span class="math notranslate nohighlight">\(Đ_{13} = 68 \cdot 10^{- 6}\ \frac{m^{2}}{s}\)</span> and
-<span class="math notranslate nohighlight">\(Đ_{23} = 16.8 \cdot 10^{- 6}\ \frac{m^{2}}{s}\)</span>. The pressure and
-temperature are <span class="math notranslate nohighlight">\(P = 1.01 \cdot 10^{5}\ Pa\)</span> and <span class="math notranslate nohighlight">\(T = 308\ K\)</span>,
-respectively.</p>
-<p>The Maxwell-Stefan equations for the first two components can be written
-as:</p>
+<h1><span class="section-number">6.1. </span>Ternary Diffusion with Maxwell-Stefan Equations<a class="headerlink" href="#ternary-diffusion-with-maxwell-stefan-equations" title="Link to this heading">#</a></h1>
+<p>Consider the two-bulb diffusion experiment where bulb A contains a 50-50 molar-% <span class="math notranslate nohighlight">\(N_{2}\)</span> and <span class="math notranslate nohighlight">\(CO_{2}\)</span> mixture, and bulb B contains a 50-50 molar-% <span class="math notranslate nohighlight">\(N_{2}\)</span> and <span class="math notranslate nohighlight">\(H_{2}\)</span> mixture. The bulbs are connected by a capillary with length <span class="math notranslate nohighlight">\(\delta = 0.086~\mathrm{m}\)</span>. We will consider the diffusion of the three gases.</p>
+<figure class="align-left">
+<a class="reference internal image-reference" href="../../_images/image10.png"><img alt="../../_images/image10.png" src="../../_images/image10.png" style="width: 60%;" />
+</a>
+</figure>
+<p>Let’s label the three components as 1: <span class="math notranslate nohighlight">\(H_{2}\)</span>, 2: <span class="math notranslate nohighlight">\(N_{2}\)</span>, and 3: <span class="math notranslate nohighlight">\(CO_{2}\)</span>. The binary Maxwell-Stefan diffusivities are:<br />
+<span class="math notranslate nohighlight">\(D_{12} = 83.6 \cdot 10^{-6}~\mathrm{m^{2}~s^{-1}}\)</span>,<br />
+<span class="math notranslate nohighlight">\(D_{13} = 68 \cdot 10^{-6}~\mathrm{m^{2}~s^{-1}}\)</span>,<br />
+<span class="math notranslate nohighlight">\(D_{23} = 16.8 \cdot 10^{-6}~\mathrm{m^{2}~s^{-1}}\)</span>.</p>
+<p>The pressure and temperature are <span class="math notranslate nohighlight">\(P = 1.01 \cdot 10^{5}~\mathrm{Pa}\)</span> and <span class="math notranslate nohighlight">\(T = 308~\mathrm{K}\)</span>, respectively.</p>
+<p>The Maxwell-Stefan equations for the first two components can be written as:</p>
 <div class="math notranslate nohighlight">
-\[{\frac{dx_{1}}{dz} = \frac{x_{1}N_{2} - x_{2}N_{1}}{c_{tot}\ Đ_{12}\ } + \frac{x_{1}N_{3} - x_{3}N_{1}}{c_{tot}\ Đ_{13}\ }
-}{\frac{dx_{2}}{dz} = \frac{x_{2}N_{1} - x_{1}N_{2}}{c_{tot}\ Đ_{12}\ } + \frac{x_{2}N_{3} - x_{3}N_{2}}{c_{tot}\ Đ_{23}\ }}\]</div>
-<p>Using the constraint <span class="math notranslate nohighlight">\(x_{3} = 1 - x_{1} - x_{2}\)</span> and the bootstrap
-<span class="math notranslate nohighlight">\(N_{1} + N_{2} + N_{3} = 0\)</span> the mole fraction and molar flux of the
-third component can be eliminated from the set of equation.</p>
+\[\begin{split}
+\begin{align*}
+\frac{dx_{1}}{dz} &amp;= \frac{x_{1} N_{2} - x_{2} N_{1}}{c_{tot} D_{12}} + \frac{x_{1} N_{3} - x_{3} N_{1}}{c_{tot} D_{13}}, \\
+\frac{dx_{2}}{dz} &amp;= \frac{x_{2} N_{1} - x_{1} N_{2}}{c_{tot} D_{12}} + \frac{x_{2} N_{3} - x_{3} N_{2}}{c_{tot} D_{23}}.
+\end{align*}
+\end{split}\]</div>
+<p>Using the constraint <span class="math notranslate nohighlight">\(x_{3} = 1 - x_{1} - x_{2}\)</span> and the bootstrap <span class="math notranslate nohighlight">\(N_{1} + N_{2} + N_{3} = 0\)</span>, the mole fraction and molar flux of the third component can be eliminated from the set of equations.</p>
 <p><strong>Questions</strong>:</p>
-<p>a)  Implement and numerically the ODE for the components <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(2\)</span>
-using the boundary conditions at <span class="math notranslate nohighlight">\(z = 0\)</span>: <span class="math notranslate nohighlight">\(x_{1} = 0\)</span> and
-<span class="math notranslate nohighlight">\(x_{2} = 0.5\)</span>. Use a shooting method to compute <span class="math notranslate nohighlight">\(N_{1}\)</span> and <span class="math notranslate nohighlight">\(N_{2}\)</span>
-from the boundary conditions at <span class="math notranslate nohighlight">\(z = \delta\)</span>: : <span class="math notranslate nohighlight">\(x_{1} = 0.5\)</span> and
-<span class="math notranslate nohighlight">\(x_{2} = 0.5\)</span>.</p>
-<p><strong>Hints: In Python you can use SciPy’s solve_ivp to solve the ODE and
-SciPy’s root (or newton from pymrm) to obtain</strong>
-<span class="math notranslate nohighlight">\(\mathbf{N}_{\mathbf{1}}\)</span> <strong>and</strong> <span class="math notranslate nohighlight">\(\mathbf{N}_{\mathbf{2}}\)</span> <strong>such that
-the boundary conditions at</strong> <span class="math notranslate nohighlight">\(\mathbf{z = \delta}\)</span> <strong>are obeyed.</strong></p>
-<p>b)  Linearize the Maxwell-Stefan equations and compute the fluxes by
-solving the set of two linear equations.</p>
-<p>c)  Use the method of Toor, Steward and Prober to solve the ternary
-Maxwell-Stefan diffusion problem.</p>
-<p>d)  Numerically solve the problem as a boundary value problem to compute
-the fluxes and compositions in the capillary (e.g. using the pymrm
-building blocks).</p>
-<p>e)  Consider a time-dependent problem where the concentrations in the
-bulb evolve. The bulb volumes are
-<span class="math notranslate nohighlight">\(V_{A} = 77.99 \cdot 10^{- 6}\ m^{3}\)</span>,
-<span class="math notranslate nohighlight">\(V_{B} = 78.63 \cdot 10^{- 6}\ m^{3}\)</span>. The capillary has
-cross-sectional area <span class="math notranslate nohighlight">\(A_{d} = 3.87{\cdot 10}^{- 5}\ m^{2}\)</span> and
-length <span class="math notranslate nohighlight">\(d = 0.086\ m\)</span>. Assume, constant pressures is maintained in
-the bulbs and ideal gas-law, such that <span class="math notranslate nohighlight">\(c_{tot}\)</span> is equal and
-constant in time throughout the system and <span class="math notranslate nohighlight">\(N_{tot} = 0\)</span>. Assume
-pseudo-steady state in the capillary and use a linearization to
-compute the flux as function of composition in the bulbs.</p>
+<ol class="arabic">
+<li><p>Implement and numerically solve the ODEs for components 1 and 2 using the boundary conditions at <span class="math notranslate nohighlight">\(z = 0\)</span>: <span class="math notranslate nohighlight">\(x_{1} = 0\)</span> and <span class="math notranslate nohighlight">\(x_{2} = 0.5\)</span>. Use a shooting method to compute <span class="math notranslate nohighlight">\(N_{1}\)</span> and <span class="math notranslate nohighlight">\(N_{2}\)</span> from the boundary conditions at <span class="math notranslate nohighlight">\(z = \delta\)</span>: <span class="math notranslate nohighlight">\(x_{1} = 0.5\)</span> and <span class="math notranslate nohighlight">\(x_{2} = 0.5\)</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In Python, you can use SciPy’s <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code> to solve the ODEs and SciPy’s <code class="docutils literal notranslate"><span class="pre">root</span></code> (or <code class="docutils literal notranslate"><span class="pre">newton</span></code> from <code class="docutils literal notranslate"><span class="pre">pymrm</span></code>) to obtain <span class="math notranslate nohighlight">\(N_{1}\)</span> and <span class="math notranslate nohighlight">\(N_{2}\)</span> such that the boundary conditions at <span class="math notranslate nohighlight">\(z = \delta\)</span> are obeyed.</p>
+</div>
+</li>
+<li><p>Linearize the Maxwell-Stefan equations and compute the fluxes by solving the set of two linear equations.</p></li>
+<li><p>Use the method of Toor, Steward, and Prober to solve the ternary Maxwell-Stefan diffusion problem.</p></li>
+<li><p>Numerically solve the problem as a boundary value problem to compute the fluxes and compositions in the capillary (e.g., using the <code class="docutils literal notranslate"><span class="pre">pymrm</span></code> building blocks).</p></li>
+<li><p>Consider a time-dependent problem where the concentrations in the bulbs evolve. The bulb volumes are:<br />
+<span class="math notranslate nohighlight">\(V_{A} = 77.99 \cdot 10^{-6}~\mathrm{m^{3}}\)</span>,<br />
+<span class="math notranslate nohighlight">\(V_{B} = 78.63 \cdot 10^{-6}~\mathrm{m^{3}}\)</span>.</p>
+<p>The capillary has a cross-sectional area <span class="math notranslate nohighlight">\(A_{d} = 3.87 \cdot 10^{-5}~\mathrm{m^{2}}\)</span> and length <span class="math notranslate nohighlight">\(d = 0.086~\mathrm{m}\)</span>. Assume constant pressure is maintained in the bulbs and the ideal gas law, such that <span class="math notranslate nohighlight">\(c_{tot}\)</span> is equal and constant in time throughout the system and <span class="math notranslate nohighlight">\(N_{tot} = 0\)</span>. Assume pseudo-steady state in the capillary and use a linearization to compute the flux as a function of composition in the bulbs.</p>
+</li>
+</ol>
 </section>
 
     <script type="text/x-thebe-config">
@@ -590,7 +591,7 @@ compute the flux as function of composition in the bulbs.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">6. </span>Generalized Maxwell-Stefan equations</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Generalized Maxwell-Stefan Equations</p>
       </div>
     </a>
     <a class="right-next"
@@ -598,7 +599,7 @@ compute the flux as function of composition in the bulbs.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">6.2. </span>Dehydrogenation of ethanol</p>
+        <p class="prev-next-title"><span class="section-number">6.2. </span>Dehydrogenation of Ethanol</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -652,8 +653,8 @@ By E.A.J.F. Peters and M. van Sint Annaland
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

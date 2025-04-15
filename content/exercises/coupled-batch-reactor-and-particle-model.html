@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>7.1. Coupled batch reactor and particle model &#8212; Multiphase Reactor Modeling using PyMRM</title>
+    <title>7.1. Coupled Batch Reactor and Particle Model &#8212; Multiphase Reactor Modeling using PyMRM</title>
   
   
   
@@ -16,22 +16,20 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -39,11 +37,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=482b656a" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
@@ -67,11 +64,10 @@
     <link rel="icon" href="../../_static/logo.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="7.2. Particle model coupled to column model" href="particle-model-coupled-to-column-model.html" />
-    <link rel="prev" title="7. Advanced reactor modeling" href="advanced-reactor-modeling.html" />
+    <link rel="next" title="7.2. Particle Model Coupled to Column Model" href="particle-model-coupled-to-column-model.html" />
+    <link rel="prev" title="7. Advanced Reactor Modeling" href="advanced-reactor-modeling.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -87,8 +83,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../../search.html"
       method="get">
@@ -96,6 +103,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -103,8 +111,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -120,8 +128,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -151,17 +158,21 @@
     
     
     <img src="../../_static/logo.png" class="logo__image only-light" alt="Multiphase Reactor Modeling using PyMRM - Home"/>
-    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Multiphase Reactor Modeling using PyMRM - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Multiphase Reactor Modeling using PyMRM - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -298,14 +309,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -466,16 +472,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 
 </div></div>
       
@@ -487,7 +501,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Coupled batch reactor and particle model</h1>
+    <h1>Coupled Batch Reactor and Particle Model</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -502,32 +516,36 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="coupled-batch-reactor-and-particle-model">
-<h1><span class="section-number">7.1. </span>Coupled batch reactor and particle model<a class="headerlink" href="#coupled-batch-reactor-and-particle-model" title="Link to this heading">#</a></h1>
-<p>Consider both a batch model and particle model. Inside a particle a
-diffusion-reaction equation is solved in a spherical symmetric geometry:</p>
+<h1><span class="section-number">7.1. </span>Coupled Batch Reactor and Particle Model<a class="headerlink" href="#coupled-batch-reactor-and-particle-model" title="Link to this heading">#</a></h1>
+<p>Consider both a batch reactor model and a particle model. Inside a particle, a diffusion-reaction equation is solved in a spherically symmetric geometry:</p>
 <div class="math notranslate nohighlight">
-\[\frac{\partial c_{s}}{\partial t} = div\left( D\ grad\left( c_{s} \right) \right) + r\]</div>
-<p>with boundary condition</p>
+\[
+\frac{\partial c_{s}}{\partial t} = \mathrm{div}\left( D \, \mathrm{grad}\left( c_{s} \right) \right) + r,
+\]</div>
+<p>with the boundary condition:</p>
 <div class="math notranslate nohighlight">
-\[- D\left. \ \frac{\partial c_{s}}{\partial r} \right|_{R} = k_{m}\left( c_{s}(R) - c_{f} \right)\]</div>
-<p>This modeled is coupled to a balance of a batch reactor:</p>
+\[
+- D \left. \frac{\partial c_{s}}{\partial r} \right|_{R} = k_{m} \left( c_{s}(R) - c_{f} \right).
+\]</div>
+<p>This model is coupled to a balance of a batch reactor:</p>
 <div class="math notranslate nohighlight">
-\[\varepsilon_{b}\frac{dc_{f}}{dt} = {\ r}_{app}^{}\]</div>
-<p>Where the apparent reaction rate can be obtained from the particle model
-as</p>
+\[
+\varepsilon_{b} \frac{dc_{f}}{dt} = r_{\mathrm{app}},
+\]</div>
+<p>where the apparent reaction rate can be obtained from the particle model as:</p>
 <div class="math notranslate nohighlight">
-\[r_{app}^{}(x) = - a\ D\left. \ \frac{\partial c_{s}}{\partial r} \right|_{R},\ with\ a = \frac{3\left( 1 - \varepsilon_{b} \right)}{R}\]</div>
+\[
+r_{\mathrm{app}}(x) = - a D \left. \frac{\partial c_{s}}{\partial r} \right|_{R}, \quad a = \frac{3 \left( 1 - \varepsilon_{b} \right)}{R}.
+\]</div>
 <p><strong>Questions</strong>:</p>
-<p>a)  Make separate implementations for the particle and reactor model.</p>
-<p>b)  Verify both implementations. (Think of good critical test cases).</p>
-<p>c)  Combine the two models such that the particle model can provide the
-apparent reaction rate for the batch reactor. Use an explicit
-coupling where, within a time step, you call the models
-sequentially.</p>
-<p>d)  Verify the explicit coupling.</p>
-<p>e)  Provide a implicitly coupled implementation using a ‘Schur
-compliment’ strategy.</p>
-<p>f)  Verify the implicit coupling.</p>
+<ol class="arabic simple">
+<li><p>Make separate implementations for the particle and reactor models.</p></li>
+<li><p>Verify both implementations. (Think of good critical test cases.)</p></li>
+<li><p>Combine the two models such that the particle model can provide the apparent reaction rate for the batch reactor. Use an explicit coupling where, within a time step, you call the models sequentially.</p></li>
+<li><p>Verify the explicit coupling.</p></li>
+<li><p>Provide an implicitly coupled implementation using a “Schur complement” strategy.</p></li>
+<li><p>Verify the implicit coupling.</p></li>
+</ol>
 </section>
 
     <script type="text/x-thebe-config">
@@ -566,7 +584,7 @@ compliment’ strategy.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">7. </span>Advanced reactor modeling</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Advanced Reactor Modeling</p>
       </div>
     </a>
     <a class="right-next"
@@ -574,7 +592,7 @@ compliment’ strategy.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">7.2. </span>Particle model coupled to column model</p>
+        <p class="prev-next-title"><span class="section-number">7.2. </span>Particle Model Coupled to Column Model</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -628,8 +646,8 @@ By E.A.J.F. Peters and M. van Sint Annaland
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

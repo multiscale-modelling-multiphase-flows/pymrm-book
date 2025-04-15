@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>4.2. Reactor model for heterogeneous bubble columns &#8212; Multiphase Reactor Modeling using PyMRM</title>
+    <title>4.2. Reactor Model for Heterogeneous Bubble Columns &#8212; Multiphase Reactor Modeling using PyMRM</title>
   
   
   
@@ -16,22 +16,20 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -39,11 +37,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=482b656a" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
@@ -67,11 +64,10 @@
     <link rel="icon" href="../../_static/logo.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="4.3. Kunii and Levenspiel model for a ‘fine particle’ fluidized bed" href="kunii-and-levenspiel-model-for-a-fine-particle-fluidized-bed.html" />
-    <link rel="prev" title="4.1. Counter-current column processes" href="counter-current-column-processes.html" />
+    <link rel="next" title="4.3. Kunii and Levenspiel Model for a ‘Fine Particle’ Fluidized Bed" href="kunii-and-levenspiel-model-for-a-fine-particle-fluidized-bed.html" />
+    <link rel="prev" title="4.1. Counter-Current Column Processes" href="counter-current-column-processes.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -87,8 +83,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../../search.html"
       method="get">
@@ -96,6 +103,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -103,8 +111,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -120,8 +128,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -151,17 +158,21 @@
     
     
     <img src="../../_static/logo.png" class="logo__image only-light" alt="Multiphase Reactor Modeling using PyMRM - Home"/>
-    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Multiphase Reactor Modeling using PyMRM - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Multiphase Reactor Modeling using PyMRM - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -298,14 +309,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -466,19 +472,25 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+  </button>
+`);
+</script>
+
 </div></div>
       
     </div>
@@ -489,20 +501,11 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Reactor model for heterogeneous bubble columns</h1>
+    <h1>Reactor Model for Heterogeneous Bubble Columns</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mass-transfer-coeff-left-k-l-a-right-b-0-2-left-k-l-a-right-df-1-2-mathbf-s-mathbf-1">4.2.1. Mass transfer coeff.,                 $<span class="math notranslate nohighlight">\(\left( k_{l}a \right)_{b} = 0.2\)</span><span class="math notranslate nohighlight">\(   \)</span><span class="math notranslate nohighlight">\(\left( k_{l}a \right)_{df} = 1.2\)</span><span class="math notranslate nohighlight">\(   \-
-  \[\)</span>\mathbf{s}^{\mathbf{- 1}}$]</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -513,62 +516,62 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="reactor-model-for-heterogeneous-bubble-columns">
-<h1><span class="section-number">4.2. </span>Reactor model for heterogeneous bubble columns<a class="headerlink" href="#reactor-model-for-heterogeneous-bubble-columns" title="Link to this heading">#</a></h1>
-<p>In this exercise you are asked to model the mass-transfer in a slurry
-bubble column as proposed by Maretto and Krishna, Catalysis Today 52
-(1999) 279-289. In this model the column is described by three phases,
-two bubble phases, namely, a large and small bubble phase, and a slurry
-phase. Large bubbles transport gas in a plug flow fashion, and small
-bubbles have a more turbulent flow pattern that is described in the
-model as well-mixed. From the bubble phases, gas can dissolve in the
-slurry phase. This is liquid with suspended particles. Catalytic
-conversion take place in the particles.</p>
-<p><img alt="" src="../../_images/image2.emf" />{width=”3.4330708661417324in”
-height=”3.7401574803149606in”}Here we consider the balances of the
-phases, where subscript <span class="math notranslate nohighlight">\(b\)</span> labels the large bubbles, <em>df</em>, the small
-bubbles and <em>s</em> the slurry:</p>
+<h1><span class="section-number">4.2. </span>Reactor Model for Heterogeneous Bubble Columns<a class="headerlink" href="#reactor-model-for-heterogeneous-bubble-columns" title="Link to this heading">#</a></h1>
+<p>In this exercise, you are tasked with modeling mass transfer in a slurry bubble column as proposed by Maretto and Krishna (<em>Catalysis Today</em>, 52 (1999) 279-289). The column is described by three phases: two bubble phases (large and small) and a slurry phase. Large bubbles transport gas in a plug flow manner, while small bubbles exhibit a more turbulent flow pattern, modeled as well-mixed. Gas can dissolve from the bubble phases into the slurry phase, which consists of liquid with suspended catalyst particles. Catalytic conversion occurs within the particles.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="content/exercises/media/image2.svg"><img alt="content/exercises/media/image2.svg" src="content/exercises/media/image2.svg" style="width: 40%;" />
+</a>
+</figure>
+<p>The balances for the phases, where subscript <span class="math notranslate nohighlight">\(b\)</span> refers to large bubbles, <span class="math notranslate nohighlight">\(df\)</span> to small bubbles, and <span class="math notranslate nohighlight">\(s\)</span> to the slurry, are given as:</p>
 <div class="math notranslate nohighlight">
-\[\varepsilon_{b}\ \frac{\partial c_{b,i}}{\partial t} + \frac{\partial}{\partial z}\left( U_{b}\ c_{b,i} - \varepsilon_{b}E_{b}\frac{\partial c_{b,i}}{\partial z} \right) = - \left( k_{l}a \right)_{b,i}\left( \frac{c_{b,i}}{m_{i}} - c_{sl,i} \right)\]</div>
-<div class="math notranslate nohighlight">
-\[\left( 1 - \varepsilon_{b} \right)\varepsilon_{df}\ \frac{\partial c_{df,i}}{\partial t} + \frac{\partial}{\partial z}\left( U_{df}\ c_{df,i} - \left( 1 - \varepsilon_{b} \right)\varepsilon_{df}\ E_{df}\frac{\partial c_{df,i}}{\partial z} \right) = - \left( k_{l}a \right)_{df,i}\left( \frac{c_{df,i}}{m_{i}} - c_{sl,i} \right)\]</div>
-<div class="math notranslate nohighlight">
-\[\left( 1 - \varepsilon_{b} \right)\left( 1 - \varepsilon_{df} \right)\ \frac{\partial c_{sl,i}}{\partial t} + \frac{\partial}{\partial z}\left( - \left( 1 - \varepsilon_{b} \right)\left( 1 - \varepsilon_{df} \right)E_{s}\frac{\partial c_{sl,i}}{\partial z} \right) = {\left( k_{l}a \right)_{b,i}\left( \frac{c_{b,i}}{m_{i}} - c_{sl,i} \right) + \left( k_{l}a \right)}_{df,i}\left( \frac{c_{df,i}}{m_{i}} - c_{sl,i} \right) + \left( 1 - \varepsilon_{b} \right)\left( 1 - \varepsilon_{df} \right)\varepsilon_{s}\ r_{i}\]</div>
-<p>Although only the steady state is of interest, solving the equations
-time-dependently might help to find this steady state. Similarly, the
-dispersion coefficient are numerical parameters, since we are interested
-in limit values. The bubble phase is modelled as plug-flow, so
-<span class="math notranslate nohighlight">\(E_{b} = 0\)</span>. For the small-bubble and slurry phases a well-mixed state
-is assumed. This can be achieved by choosing <span class="math notranslate nohighlight">\(E_{df}\)</span> and <span class="math notranslate nohighlight">\(E_{s}\)</span> large.
-They should be large enough to have almost no axial profiles for these
-phases. Note that, there might arise numerical problems when values are
-chosen very large. The optimal choice can best be determined by a
-trial-and-error procedure.</p>
-<p>In the work of Maretto and Krishna the Fischer-Tropsch reaction is
-considered, where CO and <span class="math notranslate nohighlight">\(H_{2}\)</span> are aided by the catalyst particles in
-the slurry to form hydrocarbons. Hold-ups, superficial velocities and
-mass transfer coefficients follow from correlations. Here we are mostly
-interested as an exercise to implement the model and investigate its
-behavior depending on where the main resistance to mass transfer lies.</p>
+\[\begin{split}
+\begin{align*}
+\varepsilon_{b} \frac{\partial c_{b,i}}{\partial t} + \frac{\partial}{\partial z} \left( U_{b} c_{b,i} - \varepsilon_{b} E_{b} \frac{\partial c_{b,i}}{\partial z} \right) &amp;= - \left( k_{l} a \right)_{b,i} \left( \frac{c_{b,i}}{m_{i}} - c_{sl,i} \right), \\
+\left( 1 - \varepsilon_{b} \right) \varepsilon_{df} \frac{\partial c_{df,i}}{\partial t} + \frac{\partial}{\partial z} \left( U_{df} c_{df,i} - \left( 1 - \varepsilon_{b} \right) \varepsilon_{df} E_{df} \frac{\partial c_{df,i}}{\partial z} \right) &amp;= - \left( k_{l} a \right)_{df,i} \left( \frac{c_{df,i}}{m_{i}} - c_{sl,i} \right), \\
+\left( 1 - \varepsilon_{b} \right) \left( 1 - \varepsilon_{df} \right) \frac{\partial c_{sl,i}}{\partial t} + \frac{\partial}{\partial z} \left( - \left( 1 - \varepsilon_{b} \right) \left( 1 - \varepsilon_{df} \right) E_{s} \frac{\partial c_{sl,i}}{\partial z} \right) &amp;= \left( k_{l} a \right)_{b,i} \left( \frac{c_{b,i}}{m_{i}} - c_{sl,i} \right) \\
+&amp;\quad + \left( k_{l} a \right)_{df,i} \left( \frac{c_{df,i}}{m_{i}} - c_{sl,i} \right) \\
+&amp;\quad + \left( 1 - \varepsilon_{b} \right) \left( 1 - \varepsilon_{df} \right) \varepsilon_{s} r_{i}.
+\end{align*}
+\end{split}\]</div>
+<p>Although only the steady state is of interest, solving the equations time-dependently might help in finding this steady state. The dispersion coefficients are numerical parameters, as we are interested in their limiting values. The large bubble phase is modeled as plug flow, so <span class="math notranslate nohighlight">\(E_{b} = 0\)</span>. For the small bubble and slurry phases, a well-mixed state is assumed. This can be achieved by choosing <span class="math notranslate nohighlight">\(E_{df}\)</span> and <span class="math notranslate nohighlight">\(E_{s}\)</span> sufficiently large. However, excessively large values may cause numerical issues, and the optimal choice can be determined through trial and error.</p>
+<p>In the work of Maretto and Krishna, the Fischer-Tropsch reaction is considered, where CO and <span class="math notranslate nohighlight">\(H_{2}\)</span> react with the catalyst particles in the slurry to form hydrocarbons. Hold-ups, superficial velocities, and mass transfer coefficients are derived from correlations. Here, the focus is on implementing the model and investigating its behavior depending on the primary resistance to mass transfer.</p>
 <p><strong>Questions</strong>:</p>
-<p>a)  Implement the slurry bubble column model for one inert tracer
-species.</p>
-<hr class="docutils" />
-<p>Quantity                              Large bubble                          Small bubble                           Slurry</p>
-<hr class="docutils" />
-<p>Holdup                                $<span class="math notranslate nohighlight">\(\varepsilon_{b} = 0.096\)</span><span class="math notranslate nohighlight">\(           \)</span><span class="math notranslate nohighlight">\(\varepsilon_{df} = 0.135\)</span><span class="math notranslate nohighlight">\(           \)</span><span class="math notranslate nohighlight">\(\varepsilon_{s} = 0.30\)</span>$</p>
-<p>Superficial velocity                  $<span class="math notranslate nohighlight">\(U_{b} = 0.255\)</span><span class="math notranslate nohighlight">\(                     \)</span><span class="math notranslate nohighlight">\(U_{df} = 0.045\)</span><span class="math notranslate nohighlight">\(                     0
-  \[\)</span>\frac{\mathbf{m}}{\mathbf{s}}$]</p>
-<section id="mass-transfer-coeff-left-k-l-a-right-b-0-2-left-k-l-a-right-df-1-2-mathbf-s-mathbf-1">
-<h2><span class="section-number">4.2.1. </span>Mass transfer coeff.,                 $<span class="math notranslate nohighlight">\(\left( k_{l}a \right)_{b} = 0.2\)</span><span class="math notranslate nohighlight">\(   \)</span><span class="math notranslate nohighlight">\(\left( k_{l}a \right)_{df} = 1.2\)</span><span class="math notranslate nohighlight">\(   \-
-  \[\)</span>\mathbf{s}^{\mathbf{- 1}}$]<a class="headerlink" href="#mass-transfer-coeff-left-k-l-a-right-b-0-2-left-k-l-a-right-df-1-2-mathbf-s-mathbf-1" title="Link to this heading">#</a></h2>
-<p>b)  Determine the cumulative residence distribution for a tracer species
-introduced in the gas phase. Assume values:</p>
-<p>For the distribution coefficient take <span class="math notranslate nohighlight">\(m = 3\)</span>. Vary the height of the
-column (up to 30m)</p>
-<p>c)  Assume that the species is reactive and undergoes a first order
-reaction at the catalyst particle. Perform a parameter study for the
-reaction rate coefficient <span class="math notranslate nohighlight">\(k\)</span> of the first order reaction.</p>
-</section>
+<ol class="arabic">
+<li><p>Implement the slurry bubble column model for one inert tracer species.</p>
+<div class="note docutils">
+<p>Use the following parameter values:</p>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Quantity</p></th>
+<th class="head"><p>Large Bubble (<span class="math notranslate nohighlight">\(b\)</span>)</p></th>
+<th class="head"><p>Small Bubble (<span class="math notranslate nohighlight">\(df\)</span>)</p></th>
+<th class="head"><p>Slurry (<span class="math notranslate nohighlight">\(s\)</span>)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Holdup</p></td>
+<td><p><span class="math notranslate nohighlight">\(\varepsilon_{b} = 0.096\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\varepsilon_{df} = 0.135\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\varepsilon_{s} = 0.30\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Superficial Velocity</p></td>
+<td><p><span class="math notranslate nohighlight">\(U_{b} = 0.255~\mathrm{m~s^{-1}}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(U_{df} = 0.045~\mathrm{m~s^{-1}}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0~\mathrm{m~s^{-1}}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Mass Transfer Coefficient</p></td>
+<td><p><span class="math notranslate nohighlight">\(\left( k_{l} a \right)_{b} = 0.2~\mathrm{s^{-1}}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\left( k_{l} a \right)_{df} = 1.2~\mathrm{s^{-1}}\)</span></p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li><p>Determine the cumulative residence time distribution for a tracer species introduced in the gas phase. Assume <span class="math notranslate nohighlight">\(m = 3\)</span> for the distribution coefficient and vary the column height up to <span class="math notranslate nohighlight">\(30~\mathrm{m}\)</span>.</p></li>
+<li><p>Assume the species is reactive and undergoes a first-order reaction at the catalyst particles. Perform a parameter study for the reaction rate coefficient <span class="math notranslate nohighlight">\(k\)</span> of the first-order reaction.</p></li>
+</ol>
 </section>
 
     <script type="text/x-thebe-config">
@@ -607,7 +610,7 @@ reaction rate coefficient <span class="math notranslate nohighlight">\(k\)</span
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">4.1. </span>Counter-current column processes</p>
+        <p class="prev-next-title"><span class="section-number">4.1. </span>Counter-Current Column Processes</p>
       </div>
     </a>
     <a class="right-next"
@@ -615,7 +618,7 @@ reaction rate coefficient <span class="math notranslate nohighlight">\(k\)</span
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">4.3. </span>Kunii and Levenspiel model for a ‘fine particle’ fluidized bed</p>
+        <p class="prev-next-title"><span class="section-number">4.3. </span>Kunii and Levenspiel Model for a ‘Fine Particle’ Fluidized Bed</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -625,23 +628,6 @@ reaction rate coefficient <span class="math notranslate nohighlight">\(k\)</span
             </div>
             
             
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mass-transfer-coeff-left-k-l-a-right-b-0-2-left-k-l-a-right-df-1-2-mathbf-s-mathbf-1">4.2.1. Mass transfer coeff.,                 $<span class="math notranslate nohighlight">\(\left( k_{l}a \right)_{b} = 0.2\)</span><span class="math notranslate nohighlight">\(   \)</span><span class="math notranslate nohighlight">\(\left( k_{l}a \right)_{df} = 1.2\)</span><span class="math notranslate nohighlight">\(   \-
-  \[\)</span>\mathbf{s}^{\mathbf{- 1}}$]</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
@@ -686,8 +672,8 @@ By E.A.J.F. Peters and M. van Sint Annaland
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

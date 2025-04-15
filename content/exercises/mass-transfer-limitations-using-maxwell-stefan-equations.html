@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>6.3. Mass transfer limitations using Maxwell-Stefan equations &#8212; Multiphase Reactor Modeling using PyMRM</title>
+    <title>6.3. Mass Transfer Limitations Using Maxwell-Stefan Equations &#8212; Multiphase Reactor Modeling using PyMRM</title>
   
   
   
@@ -16,22 +16,20 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -39,11 +37,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=482b656a" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
@@ -67,11 +64,10 @@
     <link rel="icon" href="../../_static/logo.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="7. Advanced reactor modeling" href="advanced-reactor-modeling.html" />
-    <link rel="prev" title="6.2. Dehydrogenation of ethanol" href="dehydrogenation-of-ethanol.html" />
+    <link rel="next" title="7. Advanced Reactor Modeling" href="advanced-reactor-modeling.html" />
+    <link rel="prev" title="6.2. Dehydrogenation of Ethanol" href="dehydrogenation-of-ethanol.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -87,8 +83,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../../search.html"
       method="get">
@@ -96,6 +103,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -103,8 +111,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -120,8 +128,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -151,17 +158,21 @@
     
     
     <img src="../../_static/logo.png" class="logo__image only-light" alt="Multiphase Reactor Modeling using PyMRM - Home"/>
-    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Multiphase Reactor Modeling using PyMRM - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Multiphase Reactor Modeling using PyMRM - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -298,14 +309,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -466,16 +472,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 
 </div></div>
       
@@ -487,7 +501,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Mass transfer limitations using Maxwell-Stefan equations</h1>
+    <h1>Mass Transfer Limitations Using Maxwell-Stefan Equations</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -502,86 +516,43 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="mass-transfer-limitations-using-maxwell-stefan-equations">
-<h1><span class="section-number">6.3. </span>Mass transfer limitations using Maxwell-Stefan equations<a class="headerlink" href="#mass-transfer-limitations-using-maxwell-stefan-equations" title="Link to this heading">#</a></h1>
-<p>We consider the same exothermal catalytic fixed bed 1D column process as
-in previous exercise 1.3. In this exercise you will investigate the
-influence of external mass transfer limitations.</p>
-<p>In a fixed bed catalyst tube of length <span class="math notranslate nohighlight">\(L = 0.5\ m\)</span> the following
-exothermal reaction takes place in catalytic particles</p>
-<p>$<span class="math notranslate nohighlight">\(A \rightarrow B + C,\ \ \ \ \ \ \ r = k_{r}\ c_{A},\ \ with\ k_{r} = k_{0}\exp\left\lbrack - \frac{E_{a}}{RT} \right\rbrack,\ \ {- r}_{A} = r_{B} = r_{C} = r
-\)</span><span class="math notranslate nohighlight">\(where \)</span>k_{0} = 1.0\ 10^{9}\ s^{- 1}<span class="math notranslate nohighlight">\(, *E~a~*=50 kJ/mol. The reaction
-is exothermic with \)</span>- \Delta H_{r} = 15\ kJ/mol<span class="math notranslate nohighlight">\( at the reference
-temperature of 293 K. The molar heat capacities of the gases equal 100,
-60 and 40 J/(mol K), for \)</span>A<span class="math notranslate nohighlight">\(, \)</span>B<span class="math notranslate nohighlight">\( and \)</span>C<span class="math notranslate nohighlight">\(, respectively. The reactor
-operates adiabatically. The inlet gas stream consists of pure A and is
-at a pressure of 1 bar and a temperature 293 K. The interstitial inlet
-gas velocity \)</span>v$ equals 2.0 m/s.</p>
-<p>In the earlier tutorials the effect of external mass transfer
-limitations from the gas bulk to the active sites on the catalyst
-surface were neglected, which allowed for a homogeneous reaction rate
-source term if also intra-particle resistances are small. Now, let’s
-assume that the catalyst particles are spherical with a uniform diameter
-of 3.0 mm (bed porosity of 0.4), and that the mass transfer coefficients
-<span class="math notranslate nohighlight">\(k_{AB} = 0.005\ m/s\)</span>, <span class="math notranslate nohighlight">\(k_{BC} = k_{AC} = 0.020\ m/s\)</span> are independent of
-the operating conditions (simplification!).</p>
-<p><strong>Remarks</strong></p>
+<h1><span class="section-number">6.3. </span>Mass Transfer Limitations Using Maxwell-Stefan Equations<a class="headerlink" href="#mass-transfer-limitations-using-maxwell-stefan-equations" title="Link to this heading">#</a></h1>
+<p>We consider the same exothermal catalytic fixed bed 1D column process as in previous Exercise 1.3. In this exercise, you will investigate the influence of external mass transfer limitations.</p>
+<p>In a fixed bed catalyst tube of length <span class="math notranslate nohighlight">\(L = 0.5~\mathrm{m}\)</span>, the following exothermal reaction takes place in catalytic particles:</p>
+<div class="math notranslate nohighlight">
+\[
+A \rightarrow B + C, \quad r = k_{r} c_{A}, \quad k_{r} = k_{0} \exp\left[ - \frac{E_{a}}{RT} \right], \quad -r_{A} = r_{B} = r_{C} = r,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(k_{0} = 1.0 \cdot 10^{9}~\mathrm{s^{-1}}\)</span>, <span class="math notranslate nohighlight">\(E_{a} = 50~\mathrm{kJ~mol^{-1}}\)</span>. The reaction is exothermic with <span class="math notranslate nohighlight">\(-\Delta H_{r} = 15~\mathrm{kJ~mol^{-1}}\)</span> at the reference temperature of <span class="math notranslate nohighlight">\(293~\mathrm{K}\)</span>. The molar heat capacities of the gases are <span class="math notranslate nohighlight">\(100\)</span>, <span class="math notranslate nohighlight">\(60\)</span>, and <span class="math notranslate nohighlight">\(40~\mathrm{J~mol^{-1}~K^{-1}}\)</span> for <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span>, and <span class="math notranslate nohighlight">\(C\)</span>, respectively. The reactor operates adiabatically. The inlet gas stream consists of pure <span class="math notranslate nohighlight">\(A\)</span> and is at a pressure of <span class="math notranslate nohighlight">\(1~\mathrm{bar}\)</span> and a temperature of <span class="math notranslate nohighlight">\(293~\mathrm{K}\)</span>. The interstitial inlet gas velocity <span class="math notranslate nohighlight">\(v\)</span> equals <span class="math notranslate nohighlight">\(2.0~\mathrm{m~s^{-1}}\)</span>.</p>
+<p>In earlier exercises, the effect of external mass transfer limitations from the gas bulk to the active sites on the catalyst surface was neglected, allowing for a homogeneous reaction rate source term if intra-particle resistances were also small. Now, let’s assume that the catalyst particles are spherical with a uniform diameter of <span class="math notranslate nohighlight">\(3.0~\mathrm{mm}\)</span> (bed porosity of <span class="math notranslate nohighlight">\(0.4\)</span>), and that the mass transfer coefficients are:<br />
+<span class="math notranslate nohighlight">\(k_{AB} = 0.005~\mathrm{m~s^{-1}}\)</span>, <span class="math notranslate nohighlight">\(k_{BC} = k_{AC} = 0.020~\mathrm{m~s^{-1}}\)</span>.<br />
+These coefficients are assumed to be independent of the operating conditions (simplification).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <ul class="simple">
-<li><p><strong>In this tutorial we consider 3 species only, i.e., there is no
-fourth inert species. Note, that because the reaction is
-non-equimolar this would mean in practice that the superficial
-velocity increases along the reactor length. This effect is
-neglected in this exercise.</strong></p></li>
-<li><p><strong>Note that there is a ambiguity in the different exercises on the
-exact definition of the reaction rate, i.e., is it per m^3^-reactor,
-solid or fluid? For the purpose if the current exercise make a
-convenient choice and make sure your equations are consistent with
-this choice. Make sure that when you evaluate the influence of mass
-transfer resistances you compare similar situations, i.e., with the
-same definitions of the reaction rate.</strong></p></li>
+<li><p>In this exercises, we considered three species only, i.e., there is no fourth inert species. Note that because the reaction is non-equimolar, this would mean in practice that the superficial velocity increases along the reactor length. This effect is neglected in this exercise.</p></li>
+<li><p>Note that there is ambiguity in the different exercises on the exact definition of the reaction rate, i.e., is it per <span class="math notranslate nohighlight">\(\mathrm{m^{3}}\)</span> of reactor, solid, or fluid? For the purpose of the current exercise, make a convenient choice and ensure your equations are consistent with this choice. When evaluating the influence of mass transfer resistances, compare similar situations, i.e., with the same definitions of the reaction rate.</p></li>
 </ul>
+</div>
 <p><strong>Questions</strong>:</p>
-<p>a)  Show with a simple estimation whether external mass transfer
-limitations could be important and should be included in the
-computations.</p>
-<p>b)  Formulate the (simplified) equations to account for external mass
-transfer limitations using the Maxwell-Stefan approach. Make the
-assumption of linearization of the concentration profiles.</p>
-<p>c)  Implement the formulated heterogeneous model to account for external
-mass transfer limitations using the linearized Maxwell-Stefan
-equations and calculate the axial profiles of the reactant
-concentration and bed temperature. Assume there are no internal mass
-transfer limitation.</p>
-<blockquote>
-<div><p><strong>Hint: For each species there are now two type of concentrations,
-namely the concentrations in the bulk of the fluid and the fluid
-concentrations at the particle surface. There are two approaches to
-introduce these surface concentrations:</strong></p>
-</div></blockquote>
-<p>i.  <strong>Only consider these in the reaction term of the column model and
-eliminate these from the set of equations, such that it returns the
-apparent reaction rate as function of the bulk fluid concentrations
-only.</strong></p>
-<p>ii. <strong>Extend the number of variables of unknowns in the column model
-with the surface concentrations. Solve the set of equations for the
-full set of variables simultaneously. The equations for the surface
-concentrations are algebraic.</strong></p>
-<blockquote>
-<div><p><strong>Choose one of the approaches and at the end of the exercise return
-and attempt the other one.</strong></p>
-</div></blockquote>
-<p>d)  Verify that the profiles coincide with the results obtained with the
-homogeneous reaction rate expressions in case the mass transfer
-coefficients are increased a thousand fold. Compare the axial
-profiles of the reactant concentration with and without mass
-transfer limitations and explain the observed differences.</p>
-<p>e)  Advanced: Formulate the equations to adequately account for external
-mass transfer limitations using the Maxwell-Stefan approach. Assume
-that the ideal gas law is valid and use the (exact) matrix method.</p>
-<p>f)  Advanced: Implement the formulated heterogeneous model with the
-Maxwell-Stefan equations using the exact matrix method. Compare the
-results with the linearized solutions.</p>
-<p>g)  Advanced (optional): Combine the (linearized) Maxwell-Stefan model
-with the particle-model implementation.</p>
+<ol class="arabic">
+<li><p>Show with a simple estimation whether external mass transfer limitations could be important and should be included in the computations.</p></li>
+<li><p>Formulate the (simplified) equations to account for external mass transfer limitations using the Maxwell-Stefan approach. Make the assumption of linearization of the concentration profiles.</p></li>
+<li><p>Implement the formulated heterogeneous model to account for external mass transfer limitations using the linearized Maxwell-Stefan equations and calculate the axial profiles of the reactant concentration and bed temperature. Assume there are no internal mass transfer limitations.</p>
+<div class="note docutils">
+<p>For each species, there are now two types of concentrations, namely the concentrations in the bulk of the fluid and the fluid concentrations at the particle surface. There are two approaches to introduce these surface concentrations:</p>
+<ol class="arabic simple">
+<li><p>Only consider these in the reaction term of the column model and eliminate these from the set of equations, such that it returns the apparent reaction rate as a function of the bulk fluid concentrations only.</p></li>
+<li><p>Extend the number of variables of unknowns in the column model with the surface concentrations. Solve the set of equations for the full set of variables simultaneously. The equations for the surface concentrations are algebraic.<br />
+Choose one of the approaches and at the end of the exercise, return and attempt the other one.</p></li>
+</ol>
+</div>
+</li>
+<li><p>Verify that the profiles coincide with the results obtained with the homogeneous reaction rate expressions in case the mass transfer coefficients are increased a thousandfold. Compare the axial profiles of the reactant concentration with and without mass transfer limitations and explain the observed differences.</p></li>
+<li><p><strong>Advanced</strong>: Formulate the equations to adequately account for external mass transfer limitations using the Maxwell-Stefan approach. Assume that the ideal gas law is valid and use the (exact) matrix method.</p></li>
+<li><p><strong>Advanced</strong>: Implement the formulated heterogeneous model with the Maxwell-Stefan equations using the exact matrix method. Compare the results with the linearized solutions.</p></li>
+<li><p><strong>Advanced (optional)</strong>: Combine the (linearized) Maxwell-Stefan model with the particle-model implementation.</p></li>
+</ol>
 </section>
 
     <script type="text/x-thebe-config">
@@ -620,7 +591,7 @@ with the particle-model implementation.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">6.2. </span>Dehydrogenation of ethanol</p>
+        <p class="prev-next-title"><span class="section-number">6.2. </span>Dehydrogenation of Ethanol</p>
       </div>
     </a>
     <a class="right-next"
@@ -628,7 +599,7 @@ with the particle-model implementation.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">7. </span>Advanced reactor modeling</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Advanced Reactor Modeling</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -682,8 +653,8 @@ By E.A.J.F. Peters and M. van Sint Annaland
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

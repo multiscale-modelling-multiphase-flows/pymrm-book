@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>4.5. The Westerterp wave-model for axial dispersion in packed beds &#8212; Multiphase Reactor Modeling using PyMRM</title>
+    <title>4.5. The Westerterp Wave-Model for Axial Dispersion in Packed Beds &#8212; Multiphase Reactor Modeling using PyMRM</title>
   
   
   
@@ -16,22 +16,20 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -39,11 +37,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=482b656a" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
@@ -67,11 +64,10 @@
     <link rel="icon" href="../../_static/logo.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="4.6. Modeling a desiccant dryer" href="modeling-a-desiccant-dryer.html" />
-    <link rel="prev" title="4.4. Computing residence time distributions" href="computing-residence-time-distributions.html" />
+    <link rel="next" title="4.6. Modeling a Desiccant Dryer" href="modeling-a-desiccant-dryer.html" />
+    <link rel="prev" title="4.4. Computing Residence Time Distributions" href="computing-residence-time-distributions.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -87,8 +83,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../../search.html"
       method="get">
@@ -96,6 +103,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -103,8 +111,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -120,8 +128,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -151,17 +158,21 @@
     
     
     <img src="../../_static/logo.png" class="logo__image only-light" alt="Multiphase Reactor Modeling using PyMRM - Home"/>
-    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Multiphase Reactor Modeling using PyMRM - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Multiphase Reactor Modeling using PyMRM - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -298,14 +309,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -466,16 +472,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 
 </div></div>
       
@@ -487,7 +501,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>The Westerterp wave-model for axial dispersion in packed beds</h1>
+    <h1>The Westerterp Wave-Model for Axial Dispersion in Packed Beds</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -502,38 +516,36 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="the-westerterp-wave-model-for-axial-dispersion-in-packed-beds">
-<h1><span class="section-number">4.5. </span>The Westerterp wave-model for axial dispersion in packed beds<a class="headerlink" href="#the-westerterp-wave-model-for-axial-dispersion-in-packed-beds" title="Link to this heading">#</a></h1>
-<p>Flow profiles in a tube, combined with diffusion in the radial direction
-can cause dispersion of a solute. The reason is that solute particles
-experience different flow velocities depending on their radial position
-within the tube. Particles near the center move faster, while those near
-the walls move slower. This difference in velocity causes the solute to
-spread along the length of the tube. This phenomenon is called Taylor
-dispersion. This is explicitly modeled in exercise 5.7.</p>
-<p>In 1D models of a tubular reactor, this dispersion is often
-mathematically modelled as a diffusive term. This axial dispersion
-coefficient for a parabolic velocity profile is:</p>
+<h1><span class="section-number">4.5. </span>The Westerterp Wave-Model for Axial Dispersion in Packed Beds<a class="headerlink" href="#the-westerterp-wave-model-for-axial-dispersion-in-packed-beds" title="Link to this heading">#</a></h1>
+<p>Flow profiles in a tube, combined with diffusion in the radial direction, can cause dispersion of a solute. Solute particles experience different flow velocities depending on their radial position within the tube: particles near the center move faster, while those near the walls move slower. This difference in velocity causes the solute to spread along the length of the tube, a phenomenon known as Taylor dispersion. This is explicitly modeled in Exercise 5.7.</p>
+<p>In 1D models of a tubular reactor, this dispersion is often mathematically modeled as a diffusive term. The axial dispersion coefficient for a parabolic velocity profile is:</p>
 <div class="math notranslate nohighlight">
-\[D_{ax} = D + \frac{v^{2}R^{2}}{48\ D},\]</div>
-<p>with <span class="math notranslate nohighlight">\(D\)</span> the molecular diffusion coefficient, <span class="math notranslate nohighlight">\(v\)</span> the average velocity
-in the tube and <span class="math notranslate nohighlight">\(R\)</span> its radius.</p>
-<p>Modelling dispersion using a diffusion term has been criticized. An
-alternative approach was proposed by Westerterp et al., AIChE Journal 41
-(1995) 2013–2028. In this approach Taylor dispersion can be modeled in
-a 1D model as two phases that have different velocities and mass
-transfer in between:</p>
+\[
+D_{ax} = D + \frac{v^{2} R^{2}}{48 D},
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(D\)</span> is the molecular diffusion coefficient, <span class="math notranslate nohighlight">\(v\)</span> is the average velocity in the tube, and <span class="math notranslate nohighlight">\(R\)</span> is its radius.</p>
+<p>Modeling dispersion using a diffusion term has been criticized. An alternative approach was proposed by Westerterp et al. (<em>AIChE Journal</em>, 41 (1995) 2013–2028). In this approach, Taylor dispersion is modeled in a 1D framework as two phases with different velocities and mass transfer between them:</p>
 <div class="math notranslate nohighlight">
-\[{\varepsilon_{1}\frac{\partial c_{1}}{\partial t} + \varepsilon_{1}v_{1}\frac{\partial c_{1}}{\partial z} - \varepsilon_{1}D\frac{\partial^{2}c_{1}}{\partial z^{2}} = \frac{1}{\tau}\ \left( c_{2} - c_{1} \right)
-}{\varepsilon_{2}\frac{\partial c_{2}}{\partial t} + \varepsilon_{2}v_{2}\frac{\partial c_{2}}{\partial z} - \varepsilon_{2}D\frac{\partial^{2}c_{2}}{\partial z^{2}} = - \frac{1}{\tau}\ \left( c_{2} - c_{1} \right),\ \ with}\]</div>
+\[\begin{split}
+\begin{align*}
+\varepsilon_{1} \frac{\partial c_{1}}{\partial t} + \varepsilon_{1} v_{1} \frac{\partial c_{1}}{\partial z} - \varepsilon_{1} D \frac{\partial^{2} c_{1}}{\partial z^{2}} &amp;= \frac{1}{\tau} \left( c_{2} - c_{1} \right), \\
+\varepsilon_{2} \frac{\partial c_{2}}{\partial t} + \varepsilon_{2} v_{2} \frac{\partial c_{2}}{\partial z} - \varepsilon_{2} D \frac{\partial^{2} c_{2}}{\partial z^{2}} &amp;= -\frac{1}{\tau} \left( c_{2} - c_{1} \right),
+\end{align*}
+\end{split}\]</div>
+<p>with:</p>
 <div class="math notranslate nohighlight">
-\[\varepsilon_{1} = \text{0.37493},\ \varepsilon_{2} = \text{0.6250}\text{7},\ v_{1} = \text{1.83395}\ v,v_{2} = \text{0.4997}\text{8}\ v,\ \tau = \text{0.213}\text{10}\frac{R^{2}}{D}\]</div>
+\[
+\varepsilon_{1} = 0.37493, \quad \varepsilon_{2} = 0.62507, \quad v_{1} = 1.83395 v, \quad v_{2} = 0.49978 v, \quad \tau = 0.21310 \frac{R^{2}}{D}.
+\]</div>
 <p><strong>Questions</strong>:</p>
-<p>a)  Implement a 1D diffusion-convection model, where the diffusion term
-models Taylor dispersion.</p>
-<p>b)  Implement the two-phases model of Taylor dispersion.</p>
-<p>c)  Determine the residence time distributions for the two models for a
-range of dimensionless Péclet numbers, <span class="math notranslate nohighlight">\(Pe = \frac{vR}{D}\)</span> and
-aspect ratios <span class="math notranslate nohighlight">\(\frac{L}{R}\)</span>.</p>
+<ol class="arabic simple">
+<li><p>Implement a 1D diffusion-convection model where the diffusion term models Taylor dispersion.</p></li>
+<li><p>Implement the two-phase model of Taylor dispersion.</p></li>
+<li><p>Determine the residence time distributions for the two models for a range of dimensionless Péclet numbers, <span class="math notranslate nohighlight">\(Pe = \frac{v R}{D}\)</span>, and aspect ratios <span class="math notranslate nohighlight">\(\frac{L}{R}\)</span>.</p></li>
+</ol>
+<div class="note docutils">
+<p>Ensure that all numerical implementations are consistent with the provided equations and parameter values.</p>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -572,7 +584,7 @@ aspect ratios <span class="math notranslate nohighlight">\(\frac{L}{R}\)</span>.
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">4.4. </span>Computing residence time distributions</p>
+        <p class="prev-next-title"><span class="section-number">4.4. </span>Computing Residence Time Distributions</p>
       </div>
     </a>
     <a class="right-next"
@@ -580,7 +592,7 @@ aspect ratios <span class="math notranslate nohighlight">\(\frac{L}{R}\)</span>.
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">4.6. </span>Modeling a desiccant dryer</p>
+        <p class="prev-next-title"><span class="section-number">4.6. </span>Modeling a Desiccant Dryer</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -634,8 +646,8 @@ By E.A.J.F. Peters and M. van Sint Annaland
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>4.4. Computing residence time distributions &#8212; Multiphase Reactor Modeling using PyMRM</title>
+    <title>4.4. Computing Residence Time Distributions &#8212; Multiphase Reactor Modeling using PyMRM</title>
   
   
   
@@ -16,22 +16,20 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -39,11 +37,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=482b656a" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
@@ -67,11 +64,10 @@
     <link rel="icon" href="../../_static/logo.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="4.5. The Westerterp wave-model for axial dispersion in packed beds" href="the-westerterp-wave-model-for-axial-dispersion-in-packed-beds.html" />
-    <link rel="prev" title="4.3. Kunii and Levenspiel model for a ‘fine particle’ fluidized bed" href="kunii-and-levenspiel-model-for-a-fine-particle-fluidized-bed.html" />
+    <link rel="next" title="4.5. The Westerterp Wave-Model for Axial Dispersion in Packed Beds" href="the-westerterp-wave-model-for-axial-dispersion-in-packed-beds.html" />
+    <link rel="prev" title="4.3. Kunii and Levenspiel Model for a ‘Fine Particle’ Fluidized Bed" href="kunii-and-levenspiel-model-for-a-fine-particle-fluidized-bed.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -87,8 +83,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../../search.html"
       method="get">
@@ -96,6 +103,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -103,8 +111,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -120,8 +128,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -151,17 +158,21 @@
     
     
     <img src="../../_static/logo.png" class="logo__image only-light" alt="Multiphase Reactor Modeling using PyMRM - Home"/>
-    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Multiphase Reactor Modeling using PyMRM - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Multiphase Reactor Modeling using PyMRM - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -298,14 +309,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -466,16 +472,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 
 </div></div>
       
@@ -487,7 +501,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Computing residence time distributions</h1>
+    <h1>Computing Residence Time Distributions</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -502,45 +516,28 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="computing-residence-time-distributions">
-<h1><span class="section-number">4.4. </span>Computing residence time distributions<a class="headerlink" href="#computing-residence-time-distributions" title="Link to this heading">#</a></h1>
-<p>An important characterization of flow patterns and mixing
-characteristics in a chemical reactor are residence time distributions.
-The cumulative residence time distribution, <span class="math notranslate nohighlight">\(F(t)\)</span>, can be obtained by
-measuring the total flow of a non-reactive tracer component at the
-outlet, starting with an empty reactor at <span class="math notranslate nohighlight">\(t = 0\)</span> and suppling a
-constant inlet tracer flux.</p>
+<h1><span class="section-number">4.4. </span>Computing Residence Time Distributions<a class="headerlink" href="#computing-residence-time-distributions" title="Link to this heading">#</a></h1>
+<p>An important characterization of flow patterns and mixing characteristics in a chemical reactor is the residence time distribution. The cumulative residence time distribution, <span class="math notranslate nohighlight">\(F(t)\)</span>, can be obtained by measuring the total flow of a non-reactive tracer component at the outlet, starting with an empty reactor at <span class="math notranslate nohighlight">\(t = 0\)</span> and supplying a constant inlet tracer flux.</p>
 <p><strong>Questions</strong>:</p>
-<p>a)  Write a routine to output the total outlet flux for a multiphase
-model.</p>
-<p>b)  Implement the 1D 1-component unsteady convection-dispersion
-equation. Use the Danckwerts boundary condition for inflow and
-Neumann boundary condition at outflow. Implement the dispersive term
-implicitly. For the convective term you can either choose implicit,
-explicit, upwind with or without TVD.</p>
-<p>c)  Investigate the accumulative residence time distribution produced by
-this model using the written routine. That is, supply a
-concentration step at the input and measure the fluxes that leave
-the reactor. Plot the flux that leaves the reactor as function of
-time, properly normalized such that you get the accumulative
-residence time distribution, <span class="math notranslate nohighlight">\(F(t)\)</span>.</p>
-<p>The analytical solution, for not too large axial dispersion, is given by</p>
+<ol class="arabic">
+<li><p>Write a routine to output the total outlet flux for a multiphase model.</p></li>
+<li><p>Implement the 1D, 1-component unsteady convection-dispersion equation. Use the Danckwerts boundary condition for inflow and the Neumann boundary condition at outflow. Implement the dispersive term implicitly. For the convective term, you can choose implicit, explicit, or upwind with or without TVD.</p></li>
+<li><p>Investigate the cumulative residence time distribution produced by this model using the written routine. Supply a concentration step at the input and measure the fluxes that leave the reactor. Plot the flux that leaves the reactor as a function of time, properly normalized to obtain the cumulative residence time distribution, <span class="math notranslate nohighlight">\(F(t)\)</span>.</p>
+<p>The analytical solution, for not too large axial dispersion, is given by:</p>
 <div class="math notranslate nohighlight">
-\[F(t) = \frac{1}{2}\ {erfc}\left( \frac{L - v\ t}{2\sqrt{D_{ax}t}} \right)\]</div>
-<p>For very large axial diffusion, <span class="math notranslate nohighlight">\(D_{ax} \rightarrow \infty\)</span>, the
-behavior should be CISTR and you have</p>
+\[
+   F(t) = \frac{1}{2} \mathrm{erfc}\left( \frac{L - v t}{2\sqrt{D_{ax} t}} \right)
+   \]</div>
+<p>For very large axial diffusion, <span class="math notranslate nohighlight">\(D_{ax} \to \infty\)</span>, the behavior should be CISTR, and you have:</p>
 <div class="math notranslate nohighlight">
-\[F(t) = 1 - \exp\left( - \frac{v\ t}{L} \right)\]</div>
-<p>Compare numerical results with the analytical solution. Investigate both
-physical and numerical aspects (i.e. time step and grid size
-dependencies).</p>
-<p>d)  Model a system with a moving and stagnant phase that exchange mass.
-In the moving phase both convection and dispersion takes place. One
-could think of a trickle bed where liquid trickles down, but some
-liquid close to the packing is stagnant due to capillary forces.
-Investigate the effect on the residence time distribution due to
-mass transfer to and from the stagnant liquid.</p>
-<p>e)  Use the routine to determine the residence time distribution in the
-next exercise, and for other multiphase models.</p>
+\[
+   F(t) = 1 - \exp\left( -\frac{v t}{L} \right)
+   \]</div>
+<p>Compare numerical results with the analytical solution. Investigate both physical and numerical aspects (e.g., time step and grid size dependencies).</p>
+</li>
+<li><p>Model a system with a moving and stagnant phase that exchange mass. In the moving phase, both convection and dispersion take place. One example is a trickle bed where liquid trickles down, but some liquid close to the packing is stagnant due to capillary forces. Investigate the effect on the residence time distribution due to mass transfer to and from the stagnant liquid.</p></li>
+<li><p>Use the routine to determine the residence time distribution for multiphase reactor models.</p></li>
+</ol>
 </section>
 
     <script type="text/x-thebe-config">
@@ -579,7 +576,7 @@ next exercise, and for other multiphase models.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">4.3. </span>Kunii and Levenspiel model for a ‘fine particle’ fluidized bed</p>
+        <p class="prev-next-title"><span class="section-number">4.3. </span>Kunii and Levenspiel Model for a ‘Fine Particle’ Fluidized Bed</p>
       </div>
     </a>
     <a class="right-next"
@@ -587,7 +584,7 @@ next exercise, and for other multiphase models.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">4.5. </span>The Westerterp wave-model for axial dispersion in packed beds</p>
+        <p class="prev-next-title"><span class="section-number">4.5. </span>The Westerterp Wave-Model for Axial Dispersion in Packed Beds</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -641,8 +638,8 @@ By E.A.J.F. Peters and M. van Sint Annaland
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
