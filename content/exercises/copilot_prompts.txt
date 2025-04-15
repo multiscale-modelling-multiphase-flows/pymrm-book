@@ -6,4 +6,5 @@ For equations that should be aligned use the align* environment
 For tables typeset these correctly with solid borders for all cells
 For operators div and grad use mathrm fonts. Do not susbstitute by nabla operator.
 For MyST instructions use the ::: directives
-Replace occurances of numjac_loc by numjac, and py_mrm by pymrm
+In the text, replace any occurances of numjac_loc by numjac, and py_mrm by pymrm
+Improve language

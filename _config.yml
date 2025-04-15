@@ -68,3 +68,4 @@ sphinx:
 # MyST Notebook settings
 myst_nb:
   execute: false
+
