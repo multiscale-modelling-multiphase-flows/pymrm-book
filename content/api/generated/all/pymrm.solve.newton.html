@@ -254,7 +254,6 @@
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="../../alphabetical_overview.html">All Functions and Classes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="pymrm.convect.clam.html">pymrm.convect.clam</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.convect.construct_convflux_upwind.html">pymrm.convect.construct_convflux_upwind</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pymrm.convect.construct_convflux_upwind_bc.html">pymrm.convect.construct_convflux_upwind_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.convect.construct_convflux_upwind_int.html">pymrm.convect.construct_convflux_upwind_int</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.convect.minmod.html">pymrm.convect.minmod</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.convect.muscl.html">pymrm.convect.muscl</a></li>
@@ -266,7 +265,6 @@
 <li class="toctree-l3"><a class="reference internal" href="pymrm.grid.generate_grid.html">pymrm.grid.generate_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.grid.non_uniform_grid.html">pymrm.grid.non_uniform_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.helpers.construct_coefficient_matrix.html">pymrm.helpers.construct_coefficient_matrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pymrm.helpers.unwrap_bc.html">pymrm.helpers.unwrap_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.interpolate.create_staggered_array.html">pymrm.interpolate.create_staggered_array</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.interpolate.interp_cntr_to_stagg.html">pymrm.interpolate.interp_cntr_to_stagg</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.interpolate.interp_cntr_to_stagg_tvd.html">pymrm.interpolate.interp_cntr_to_stagg_tvd</a></li>
@@ -527,25 +525,49 @@ document.write(`
 <h1>pymrm.solve.newton<a class="headerlink" href="#pymrm-solve-newton" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="pymrm.solve.newton">
-<span class="sig-prename descclassname"><span class="pre">pymrm.solve.</span></span><span class="sig-name descname"><span class="pre">newton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_guess</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.49012e-08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solver</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pymrm/solve.html#newton"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymrm.solve.newton" title="Link to this definition">#</a></dt>
-<dd><p>Perform Newton-Raphson iterations to solve nonlinear systems.</p>
+<span class="sig-prename descclassname"><span class="pre">pymrm.solve.</span></span><span class="sig-name descname"><span class="pre">newton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_guess</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.49012e-08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxfev</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solver</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pymrm/solve.html#newton"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymrm.solve.newton" title="Link to this definition">#</a></dt>
+<dd><p>Perform Newton-Raphson iterations to solve nonlinear systems of equations.</p>
+<p>This method iteratively refines an initial guess to find the root of a system
+of nonlinear equations. It supports various linear solvers for handling the
+Jacobian matrix.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>function</strong> (<em>callable</em>) – Function returning the residual and Jacobian.</p></li>
-<li><p><strong>initial_guess</strong> (<em>ndarray</em>) – Initial guess for the solution.</p></li>
-<li><p><strong>args</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Additional arguments for the function.</p></li>
-<li><p><strong>tolerance</strong> (<em>float</em><em>, </em><em>optional</em>) – Convergence criterion. Default is 1.49012e-08.</p></li>
-<li><p><strong>max_iterations</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum iterations allowed. Default is 100.</p></li>
-<li><p><strong>solver</strong> (<em>str</em><em>, </em><em>optional</em>) – Linear solver to use (‘spsolve’, ‘cg’, ‘bicgstab’).</p></li>
-<li><p><strong>callback</strong> (<em>callable</em><em>, </em><em>optional</em>) – Function called after each iteration.</p></li>
+<li><p><strong>function</strong> (<em>callable</em>) – A function that takes the current solution estimate
+and additional arguments, and returns a tuple containing the residual
+vector and the Jacobian matrix.</p></li>
+<li><p><strong>initial_guess</strong> (<em>ndarray</em>) – Initial guess for the solution vector.</p></li>
+<li><p><strong>args</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Additional arguments to pass to the <cite>function</cite>.
+Default is an empty tuple.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>optional</em>) – Convergence tolerance for the solution. Iterations
+stop when the infinity norm of the update vector is less than <cite>tol</cite>.
+Default is 1.49012e-08.</p></li>
+<li><p><strong>maxfev</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum number of iterations allowed. Default is 100.</p></li>
+<li><p><strong>solver</strong> (<em>str</em><em>, </em><em>optional</em>) – Linear solver to use for solving the Jacobian system.
+Options are ‘spsolve’, ‘cg’, or ‘bicgstab’. If not specified, ‘spsolve’
+is used for small systems (n &lt; 50000), and ‘bicgstab’ for larger systems.</p></li>
+<li><p><strong>callback</strong> (<em>callable</em><em>, </em><em>optional</em>) – A function called after each iteration with
+the current solution estimate and residual vector as arguments.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Contains the solution, success status, and diagnostic info.</p>
+<dd class="field-even"><p><dl class="simple">
+<dt>An object containing the following fields:</dt><dd><ul class="simple">
+<li><p>x (ndarray): The solution vector.</p></li>
+<li><p>success (bool): Whether the solver converged.</p></li>
+<li><p>nit (int): Number of iterations performed.</p></li>
+<li><p>fun (ndarray): The residual vector at the solution.</p></li>
+<li><p>message (str): A message describing the termination status.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>OptimizeResult</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If an unsupported solver method is specified.</p>
 </dd>
 </dl>
 </dd></dl>

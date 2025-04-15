@@ -254,7 +254,6 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../content/api/alphabetical_overview.html">All Functions and Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.convect.clam.html">pymrm.convect.clam</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.convect.construct_convflux_upwind.html">pymrm.convect.construct_convflux_upwind</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.convect.construct_convflux_upwind_bc.html">pymrm.convect.construct_convflux_upwind_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.convect.construct_convflux_upwind_int.html">pymrm.convect.construct_convflux_upwind_int</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.convect.minmod.html">pymrm.convect.minmod</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.convect.muscl.html">pymrm.convect.muscl</a></li>
@@ -266,7 +265,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.grid.generate_grid.html">pymrm.grid.generate_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.grid.non_uniform_grid.html">pymrm.grid.non_uniform_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.helpers.construct_coefficient_matrix.html">pymrm.helpers.construct_coefficient_matrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.helpers.unwrap_bc.html">pymrm.helpers.unwrap_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.interpolate.create_staggered_array.html">pymrm.interpolate.create_staggered_array</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.interpolate.interp_cntr_to_stagg.html">pymrm.interpolate.interp_cntr_to_stagg</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.interpolate.interp_cntr_to_stagg_tvd.html">pymrm.interpolate.interp_cntr_to_stagg_tvd</a></li>
@@ -511,9 +509,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-and-easy-with-vs-code">Quick and Easy with VS Code</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-installing-python">Step 1: Installing Python</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-setting-up-a-virtual-environment">Step 2: Setting Up a Virtual Environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-installing-required-packages">Step 3: Installing Required Packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-installing-required-packages">Step 3: Installing Required Packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-from-pypi">Installing from PyPi</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-verifying-the-installation">Step 4: Verifying the Installation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
@@ -530,6 +532,18 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="installation-guide">
 <h1>Installation Guide<a class="headerlink" href="#installation-guide" title="Link to this heading">#</a></h1>
 <p>In the Multiphase Reactor Modeling class, we will use Python for computations. We will utilize standard packages such as NumPy and SciPy, along with our own package: PyMRM.</p>
+<section id="quick-and-easy-with-vs-code">
+<h2>Quick and Easy with VS Code<a class="headerlink" href="#quick-and-easy-with-vs-code" title="Link to this heading">#</a></h2>
+<p>Here a quick and easy way to get the setup up and running:</p>
+<ol class="arabic simple">
+<li><p>First download the appropriate VS Code version <a class="reference external" href="https://code.visualstudio.com/">here</a>, if you don’t have it already</p></li>
+<li><p>Create a folder in which you want to work and open it in VS Code</p></li>
+<li><p>Create a Python file in this folder, e.g. “<a class="reference external" href="http://test.py">test.py</a>”. If VS Code does not detect the Python plugin, it will ask you if you want to install it. Follow the instructions.</p></li>
+<li><p>In the search/command bar at the top of VS Code type “&gt;Python: Select Interpreter”, or hit <code class="docutils literal notranslate"><span class="pre">CTRL+P</span></code> and chose Python: Select Interpreter</p></li>
+<li><p>Choose the option “+ Create Virtual Environment” and choose the type “Venv” or “Conda” depending on your preferences</p></li>
+<li><p>In the terminal (Terminal &gt; New Terminal) you can now install pymrm either as described in Step 3 below</p></li>
+</ol>
+</section>
 <section id="step-1-installing-python">
 <h2>Step 1: Installing Python<a class="headerlink" href="#step-1-installing-python" title="Link to this heading">#</a></h2>
 <ol class="arabic">
@@ -562,7 +576,7 @@ document.write(`
 <li><p>Open a terminal or command prompt.</p></li>
 <li><p>Navigate to your project directory.</p></li>
 <li><p>Run the following command to create a virtual environment:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
 </pre></div>
 </div>
 </li>
@@ -571,12 +585,12 @@ document.write(`
 <li><p><strong>Activate the Virtual Environment</strong>:</p>
 <ul>
 <li><p>On Windows:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>venv<span class="se">\S</span>cripts<span class="se">\a</span>ctivate
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>.venv<span class="se">\S</span>cripts<span class="se">\a</span>ctivate
 </pre></div>
 </div>
 </li>
 <li><p>On macOS and Linux:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>venv/bin/activate
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
 </pre></div>
 </div>
 </li>
@@ -596,11 +610,18 @@ document.write(`
 </section>
 <section id="step-3-installing-required-packages">
 <h2>Step 3: Installing Required Packages<a class="headerlink" href="#step-3-installing-required-packages" title="Link to this heading">#</a></h2>
+<p><strong>IMPORTANT:</strong> For installation from PyPI, follow the instructions further down! For installation
+from a local repository simply change to the root folder of the repository and type</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>.
+</pre></div>
+</div>
+<section id="installing-from-pypi">
+<h3>Installing from PyPi<a class="headerlink" href="#installing-from-pypi" title="Link to this heading">#</a></h3>
 <ol class="arabic">
 <li><p><strong>Upgrade pip</strong>:</p>
 <ul>
 <li><p>Run the following command to upgrade pip to the latest version:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
 </pre></div>
 </div>
 </li>
@@ -639,6 +660,7 @@ document.write(`
 </ul>
 </li>
 </ol>
+</section>
 </section>
 <section id="step-4-verifying-the-installation">
 <h2>Step 4: Verifying the Installation<a class="headerlink" href="#step-4-verifying-the-installation" title="Link to this heading">#</a></h2>
@@ -743,9 +765,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-and-easy-with-vs-code">Quick and Easy with VS Code</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-installing-python">Step 1: Installing Python</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-setting-up-a-virtual-environment">Step 2: Setting Up a Virtual Environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-installing-required-packages">Step 3: Installing Required Packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-installing-required-packages">Step 3: Installing Required Packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-from-pypi">Installing from PyPi</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-verifying-the-installation">Step 4: Verifying the Installation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>

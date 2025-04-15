@@ -253,7 +253,6 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="content/api/alphabetical_overview.html">All Functions and Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="content/api/generated/all/pymrm.convect.clam.html">pymrm.convect.clam</a></li>
 <li class="toctree-l3"><a class="reference internal" href="content/api/generated/all/pymrm.convect.construct_convflux_upwind.html">pymrm.convect.construct_convflux_upwind</a></li>
-<li class="toctree-l3"><a class="reference internal" href="content/api/generated/all/pymrm.convect.construct_convflux_upwind_bc.html">pymrm.convect.construct_convflux_upwind_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="content/api/generated/all/pymrm.convect.construct_convflux_upwind_int.html">pymrm.convect.construct_convflux_upwind_int</a></li>
 <li class="toctree-l3"><a class="reference internal" href="content/api/generated/all/pymrm.convect.minmod.html">pymrm.convect.minmod</a></li>
 <li class="toctree-l3"><a class="reference internal" href="content/api/generated/all/pymrm.convect.muscl.html">pymrm.convect.muscl</a></li>
@@ -265,7 +264,6 @@
 <li class="toctree-l3"><a class="reference internal" href="content/api/generated/all/pymrm.grid.generate_grid.html">pymrm.grid.generate_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="content/api/generated/all/pymrm.grid.non_uniform_grid.html">pymrm.grid.non_uniform_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="content/api/generated/all/pymrm.helpers.construct_coefficient_matrix.html">pymrm.helpers.construct_coefficient_matrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="content/api/generated/all/pymrm.helpers.unwrap_bc.html">pymrm.helpers.unwrap_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="content/api/generated/all/pymrm.interpolate.create_staggered_array.html">pymrm.interpolate.create_staggered_array</a></li>
 <li class="toctree-l3"><a class="reference internal" href="content/api/generated/all/pymrm.interpolate.interp_cntr_to_stagg.html">pymrm.interpolate.interp_cntr_to_stagg</a></li>
 <li class="toctree-l3"><a class="reference internal" href="content/api/generated/all/pymrm.interpolate.interp_cntr_to_stagg_tvd.html">pymrm.interpolate.interp_cntr_to_stagg_tvd</a></li>
@@ -460,7 +458,9 @@ document.write(`
  | <a href="#N"><strong>N</strong></a>
  | <a href="#O"><strong>O</strong></a>
  | <a href="#P"><strong>P</strong></a>
+ | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
  | <a href="#U"><strong>U</strong></a>
  | <a href="#V"><strong>V</strong></a>
  
@@ -476,41 +476,95 @@ document.write(`
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="content/api/generated/all/pymrm.convect.clam.html#pymrm.convect.clam">clam() (in module pymrm.convect)</a>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.clam">clam() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="content/api/generated/all/pymrm.convect.clam.html#pymrm.convect.clam">(in module pymrm.convect)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.convect.clam">[1]</a>
 </li>
-      <li><a href="content/api/generated/all/pymrm.solve.clip_approach.html#pymrm.solve.clip_approach">clip_approach() (in module pymrm.solve)</a>
+      </ul></li>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.clip_approach">clip_approach() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="content/api/generated/all/pymrm.solve.clip_approach.html#pymrm.solve.clip_approach">(in module pymrm.solve)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.solve.clip_approach">[1]</a>
 </li>
-      <li><a href="content/api/generated/all/pymrm.numjac.colgroup.html#pymrm.numjac.colgroup">colgroup() (in module pymrm.numjac)</a>
+      </ul></li>
+      <li><a href="content/api/generated/all/pymrm.numjac.colgroup.html#pymrm.numjac.colgroup">colgroup() (in module pymrm.numjac)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.numjac.colgroup">[1]</a>
 </li>
-      <li><a href="content/api/generated/all/pymrm.numjac.compute_df2.html#pymrm.numjac.compute_df2">compute_df2() (in module pymrm.numjac)</a>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.compute_boundary_values">compute_boundary_values() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.interpolate.compute_boundary_values">(in module pymrm.interpolate)</a>
 </li>
-      <li><a href="content/api/generated/all/pymrm.helpers.construct_coefficient_matrix.html#pymrm.helpers.construct_coefficient_matrix">construct_coefficient_matrix() (in module pymrm.helpers)</a>
+      </ul></li>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.numjac.compute_df">compute_df() (in module pymrm.numjac)</a>
 </li>
-      <li><a href="content/api/generated/all/pymrm.convect.construct_convflux_upwind.html#pymrm.convect.construct_convflux_upwind">construct_convflux_upwind() (in module pymrm.convect)</a>
+      <li><a href="content/api/generated/all/pymrm.numjac.compute_df2.html#pymrm.numjac.compute_df2">compute_df2() (in module pymrm.numjac)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.numjac.compute_df2">[1]</a>
 </li>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.construct_coefficient_matrix">construct_coefficient_matrix() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="content/api/generated/all/pymrm.helpers.construct_coefficient_matrix.html#pymrm.helpers.construct_coefficient_matrix">(in module pymrm.helpers)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.helpers.construct_coefficient_matrix">[1]</a>
+</li>
+      </ul></li>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.construct_convflux_bc">construct_convflux_bc() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.convect.construct_convflux_bc">(in module pymrm.convect)</a>
+</li>
+      </ul></li>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.construct_convflux_upwind">construct_convflux_upwind() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="content/api/generated/all/pymrm.convect.construct_convflux_upwind.html#pymrm.convect.construct_convflux_upwind">(in module pymrm.convect)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.convect.construct_convflux_upwind">[1]</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="content/api/generated/all/pymrm.convect.construct_convflux_upwind_bc.html#pymrm.convect.construct_convflux_upwind_bc">construct_convflux_upwind_bc() (in module pymrm.convect)</a>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.construct_convflux_upwind_int">construct_convflux_upwind_int() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="content/api/generated/all/pymrm.convect.construct_convflux_upwind_int.html#pymrm.convect.construct_convflux_upwind_int">(in module pymrm.convect)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.convect.construct_convflux_upwind_int">[1]</a>
 </li>
-      <li><a href="content/api/generated/all/pymrm.convect.construct_convflux_upwind_int.html#pymrm.convect.construct_convflux_upwind_int">construct_convflux_upwind_int() (in module pymrm.convect)</a>
+      </ul></li>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.construct_div">construct_div() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="content/api/generated/all/pymrm.operators.construct_div.html#pymrm.operators.construct_div">(in module pymrm.operators)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.operators.construct_div">[1]</a>
 </li>
-      <li><a href="content/api/generated/all/pymrm.operators.construct_div.html#pymrm.operators.construct_div">construct_div() (in module pymrm.operators)</a>
+      </ul></li>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.construct_grad">construct_grad() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="content/api/generated/all/pymrm.operators.construct_grad.html#pymrm.operators.construct_grad">(in module pymrm.operators)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.operators.construct_grad">[1]</a>
 </li>
-      <li><a href="content/api/generated/all/pymrm.operators.construct_grad.html#pymrm.operators.construct_grad">construct_grad() (in module pymrm.operators)</a>
+      </ul></li>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.construct_grad_bc">construct_grad_bc() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="content/api/generated/all/pymrm.operators.construct_grad_bc.html#pymrm.operators.construct_grad_bc">(in module pymrm.operators)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.operators.construct_grad_bc">[1]</a>
 </li>
-      <li><a href="content/api/generated/all/pymrm.operators.construct_grad_bc.html#pymrm.operators.construct_grad_bc">construct_grad_bc() (in module pymrm.operators)</a>
+      </ul></li>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.construct_grad_int">construct_grad_int() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="content/api/generated/all/pymrm.operators.construct_grad_int.html#pymrm.operators.construct_grad_int">(in module pymrm.operators)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.operators.construct_grad_int">[1]</a>
 </li>
-      <li><a href="content/api/generated/all/pymrm.operators.construct_grad_int.html#pymrm.operators.construct_grad_int">construct_grad_int() (in module pymrm.operators)</a>
+      </ul></li>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.construct_interface_matrices">construct_interface_matrices() (in module pymrm)</a>
 </li>
-      <li><a href="content/api/generated/all/pymrm.interpolate.create_staggered_array.html#pymrm.interpolate.create_staggered_array">create_staggered_array() (in module pymrm.interpolate)</a>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.create_staggered_array">create_staggered_array() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="content/api/generated/all/pymrm.interpolate.create_staggered_array.html#pymrm.interpolate.create_staggered_array">(in module pymrm.interpolate)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.interpolate.create_staggered_array">[1]</a>
 </li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
 <h2 id="E">E</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="content/api/generated/all/pymrm.numjac.expand_dependencies.html#pymrm.numjac.expand_dependencies">expand_dependencies() (in module pymrm.numjac)</a>
+      <li><a href="content/api/generated/all/pymrm.numjac.expand_dependencies.html#pymrm.numjac.expand_dependencies">expand_dependencies() (in module pymrm.numjac)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.numjac.expand_dependencies">[1]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -518,11 +572,17 @@ document.write(`
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="content/api/generated/all/pymrm.grid.generate_grid.html#pymrm.grid.generate_grid">generate_grid() (in module pymrm.grid)</a>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.generate_grid">generate_grid() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="content/api/generated/all/pymrm.grid.generate_grid.html#pymrm.grid.generate_grid">(in module pymrm.grid)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.grid.generate_grid">[1]</a>
 </li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="content/api/generated/all/pymrm.numjac.generate_sparsity_pattern.html#pymrm.numjac.generate_sparsity_pattern">generate_sparsity_pattern() (in module pymrm.numjac)</a>
+      <li><a href="content/api/generated/all/pymrm.numjac.generate_sparsity_pattern.html#pymrm.numjac.generate_sparsity_pattern">generate_sparsity_pattern() (in module pymrm.numjac)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.numjac.generate_sparsity_pattern">[1]</a>
+</li>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.numjac.group_columns_by_non_overlap_numba">group_columns_by_non_overlap_numba() (in module pymrm.numjac)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -530,13 +590,33 @@ document.write(`
 <h2 id="I">I</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="content/api/generated/all/pymrm.interpolate.interp_cntr_to_stagg.html#pymrm.interpolate.interp_cntr_to_stagg">interp_cntr_to_stagg() (in module pymrm.interpolate)</a>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.NumJac.init_stencil">init_stencil() (pymrm.NumJac method)</a>
+
+      <ul>
+        <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.numjac.NumJac.init_stencil">(pymrm.numjac.NumJac method)</a>
 </li>
+      </ul></li>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.interp_cntr_to_stagg">interp_cntr_to_stagg() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="content/api/generated/all/pymrm.interpolate.interp_cntr_to_stagg.html#pymrm.interpolate.interp_cntr_to_stagg">(in module pymrm.interpolate)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.interpolate.interp_cntr_to_stagg">[1]</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="content/api/generated/all/pymrm.interpolate.interp_cntr_to_stagg_tvd.html#pymrm.interpolate.interp_cntr_to_stagg_tvd">interp_cntr_to_stagg_tvd() (in module pymrm.interpolate)</a>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.interp_cntr_to_stagg_tvd">interp_cntr_to_stagg_tvd() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="content/api/generated/all/pymrm.interpolate.interp_cntr_to_stagg_tvd.html#pymrm.interpolate.interp_cntr_to_stagg_tvd">(in module pymrm.interpolate)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.interpolate.interp_cntr_to_stagg_tvd">[1]</a>
 </li>
-      <li><a href="content/api/generated/all/pymrm.interpolate.interp_stagg_to_cntr.html#pymrm.interpolate.interp_stagg_to_cntr">interp_stagg_to_cntr() (in module pymrm.interpolate)</a>
+      </ul></li>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.interp_stagg_to_cntr">interp_stagg_to_cntr() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="content/api/generated/all/pymrm.interpolate.interp_stagg_to_cntr.html#pymrm.interpolate.interp_stagg_to_cntr">(in module pymrm.interpolate)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.interpolate.interp_stagg_to_cntr">[1]</a>
+</li>
+      </ul></li>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.numjac.iterate_over_entries">iterate_over_entries() (in module pymrm.numjac)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -544,116 +624,188 @@ document.write(`
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="content/api/generated/all/pymrm.convect.minmod.html#pymrm.convect.minmod">minmod() (in module pymrm.convect)</a>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.minmod">minmod() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="content/api/generated/all/pymrm.convect.minmod.html#pymrm.convect.minmod">(in module pymrm.convect)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.convect.minmod">[1]</a>
 </li>
+      </ul></li>
       <li>
     module
 
       <ul>
-        <li><a href="content/api/overview/pymrm.convect.html#module-pymrm.convect">pymrm.convect</a>
+        <li><a href="pymrm/docs/sphinx/pymrm.html#module-pymrm">pymrm</a>
 </li>
-        <li><a href="content/api/overview/pymrm.grid.html#module-pymrm.grid">pymrm.grid</a>
+        <li><a href="content/api/overview/pymrm.convect.html#module-pymrm.convect">pymrm.convect</a>, <a href="pymrm/docs/sphinx/pymrm.html#module-pymrm.convect">[1]</a>
 </li>
-        <li><a href="content/api/overview/pymrm.interpolate.html#module-pymrm.interpolate">pymrm.interpolate</a>
+        <li><a href="content/api/overview/pymrm.grid.html#module-pymrm.grid">pymrm.grid</a>, <a href="pymrm/docs/sphinx/pymrm.html#module-pymrm.grid">[1]</a>
 </li>
-        <li><a href="content/api/overview/pymrm.numjac.html#module-pymrm.numjac">pymrm.numjac</a>
+        <li><a href="pymrm/docs/sphinx/pymrm.html#module-pymrm.helpers">pymrm.helpers</a>
 </li>
-        <li><a href="content/api/overview/pymrm.operators.html#module-pymrm.operators">pymrm.operators</a>
+        <li><a href="content/api/overview/pymrm.interpolate.html#module-pymrm.interpolate">pymrm.interpolate</a>, <a href="pymrm/docs/sphinx/pymrm.html#module-pymrm.interpolate">[1]</a>
 </li>
-        <li><a href="content/api/overview/pymrm.solve.html#module-pymrm.solve">pymrm.solve</a>
+        <li><a href="content/api/overview/pymrm.numjac.html#module-pymrm.numjac">pymrm.numjac</a>, <a href="pymrm/docs/sphinx/pymrm.html#module-pymrm.numjac">[1]</a>
+</li>
+        <li><a href="content/api/overview/pymrm.operators.html#module-pymrm.operators">pymrm.operators</a>, <a href="pymrm/docs/sphinx/pymrm.html#module-pymrm.operators">[1]</a>
+</li>
+        <li><a href="content/api/overview/pymrm.solve.html#module-pymrm.solve">pymrm.solve</a>, <a href="pymrm/docs/sphinx/pymrm.html#module-pymrm.solve">[1]</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="content/api/generated/all/pymrm.convect.muscl.html#pymrm.convect.muscl">muscl() (in module pymrm.convect)</a>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.muscl">muscl() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="content/api/generated/all/pymrm.convect.muscl.html#pymrm.convect.muscl">(in module pymrm.convect)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.convect.muscl">[1]</a>
 </li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
 <h2 id="N">N</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="content/api/generated/all/pymrm.solve.newton.html#pymrm.solve.newton">newton() (in module pymrm.solve)</a>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.newton">newton() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="content/api/generated/all/pymrm.solve.newton.html#pymrm.solve.newton">(in module pymrm.solve)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.solve.newton">[1]</a>
 </li>
+      </ul></li>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.non_uniform_grid">non_uniform_grid() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="content/api/generated/all/pymrm.grid.non_uniform_grid.html#pymrm.grid.non_uniform_grid">(in module pymrm.grid)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.grid.non_uniform_grid">[1]</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="content/api/generated/all/pymrm.grid.non_uniform_grid.html#pymrm.grid.non_uniform_grid">non_uniform_grid() (in module pymrm.grid)</a>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.NumJac">NumJac (class in pymrm)</a>
+
+      <ul>
+        <li><a href="content/api/generated/all/pymrm.numjac.NumJac.html#pymrm.numjac.NumJac">(class in pymrm.numjac)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.numjac.NumJac">[1]</a>
 </li>
-      <li><a href="content/api/generated/all/pymrm.numjac.NumJac.html#pymrm.numjac.NumJac">NumJac (class in pymrm.numjac)</a>
-</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
 <h2 id="O">O</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="content/api/generated/all/pymrm.convect.osher.html#pymrm.convect.osher">osher() (in module pymrm.convect)</a>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.osher">osher() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="content/api/generated/all/pymrm.convect.osher.html#pymrm.convect.osher">(in module pymrm.convect)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.convect.osher">[1]</a>
 </li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="content/api/generated/all/pymrm.numjac.precompute_perturbations.html#pymrm.numjac.precompute_perturbations">precompute_perturbations() (in module pymrm.numjac)</a>
+      <li><a href="content/api/generated/all/pymrm.numjac.precompute_perturbations.html#pymrm.numjac.precompute_perturbations">precompute_perturbations() (in module pymrm.numjac)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.numjac.precompute_perturbations">[1]</a>
 </li>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.numjac.precompute_perturbations_numba">precompute_perturbations_numba() (in module pymrm.numjac)</a>
+</li>
+      <li>
+    pymrm
+
+      <ul>
+        <li><a href="pymrm/docs/sphinx/pymrm.html#module-pymrm">module</a>
+</li>
+      </ul></li>
       <li>
     pymrm.convect
 
       <ul>
-        <li><a href="content/api/overview/pymrm.convect.html#module-pymrm.convect">module</a>
+        <li><a href="content/api/overview/pymrm.convect.html#module-pymrm.convect">module</a>, <a href="pymrm/docs/sphinx/pymrm.html#module-pymrm.convect">[1]</a>
 </li>
       </ul></li>
       <li>
     pymrm.grid
 
       <ul>
-        <li><a href="content/api/overview/pymrm.grid.html#module-pymrm.grid">module</a>
+        <li><a href="content/api/overview/pymrm.grid.html#module-pymrm.grid">module</a>, <a href="pymrm/docs/sphinx/pymrm.html#module-pymrm.grid">[1]</a>
 </li>
       </ul></li>
       <li>
-    pymrm.interpolate
+    pymrm.helpers
 
       <ul>
-        <li><a href="content/api/overview/pymrm.interpolate.html#module-pymrm.interpolate">module</a>
+        <li><a href="pymrm/docs/sphinx/pymrm.html#module-pymrm.helpers">module</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li>
+    pymrm.interpolate
+
+      <ul>
+        <li><a href="content/api/overview/pymrm.interpolate.html#module-pymrm.interpolate">module</a>, <a href="pymrm/docs/sphinx/pymrm.html#module-pymrm.interpolate">[1]</a>
+</li>
+      </ul></li>
+      <li>
     pymrm.numjac
 
       <ul>
-        <li><a href="content/api/overview/pymrm.numjac.html#module-pymrm.numjac">module</a>
+        <li><a href="content/api/overview/pymrm.numjac.html#module-pymrm.numjac">module</a>, <a href="pymrm/docs/sphinx/pymrm.html#module-pymrm.numjac">[1]</a>
 </li>
       </ul></li>
       <li>
     pymrm.operators
 
       <ul>
-        <li><a href="content/api/overview/pymrm.operators.html#module-pymrm.operators">module</a>
+        <li><a href="content/api/overview/pymrm.operators.html#module-pymrm.operators">module</a>, <a href="pymrm/docs/sphinx/pymrm.html#module-pymrm.operators">[1]</a>
 </li>
       </ul></li>
       <li>
     pymrm.solve
 
       <ul>
-        <li><a href="content/api/overview/pymrm.solve.html#module-pymrm.solve">module</a>
+        <li><a href="content/api/overview/pymrm.solve.html#module-pymrm.solve">module</a>, <a href="pymrm/docs/sphinx/pymrm.html#module-pymrm.solve">[1]</a>
 </li>
       </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.numjac.ravel_index_numba">ravel_index_numba() (in module pymrm.numjac)</a>
+</li>
   </ul></td>
 </tr></table>
 
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="content/api/generated/all/pymrm.convect.smart.html#pymrm.convect.smart">smart() (in module pymrm.convect)</a>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.smart">smart() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="content/api/generated/all/pymrm.convect.smart.html#pymrm.convect.smart">(in module pymrm.convect)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.convect.smart">[1]</a>
 </li>
+      </ul></li>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.stencil_block_diagonals">stencil_block_diagonals() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="content/api/generated/all/pymrm.numjac.stencil_block_diagonals.html#pymrm.numjac.stencil_block_diagonals">(in module pymrm.numjac)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.numjac.stencil_block_diagonals">[1]</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="content/api/generated/all/pymrm.numjac.stencil_block_diagonals.html#pymrm.numjac.stencil_block_diagonals">stencil_block_diagonals() (in module pymrm.numjac)</a>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.stoic">stoic() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="content/api/generated/all/pymrm.convect.stoic.html#pymrm.convect.stoic">(in module pymrm.convect)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.convect.stoic">[1]</a>
 </li>
-      <li><a href="content/api/generated/all/pymrm.convect.stoic.html#pymrm.convect.stoic">stoic() (in module pymrm.convect)</a>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.translate_indices_to_larger_array">translate_indices_to_larger_array() (in module pymrm)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -661,20 +813,32 @@ document.write(`
 <h2 id="U">U</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="content/api/generated/all/pymrm.helpers.unwrap_bc.html#pymrm.helpers.unwrap_bc">unwrap_bc() (in module pymrm.helpers)</a>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.numjac.unravel_index_numba">unravel_index_numba() (in module pymrm.numjac)</a>
+</li>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.helpers.unwrap_bc_coeff">unwrap_bc_coeff() (in module pymrm.helpers)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="content/api/generated/all/pymrm.convect.upwind.html#pymrm.convect.upwind">upwind() (in module pymrm.convect)</a>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.update_csc_array_indices">update_csc_array_indices() (in module pymrm)</a>
 </li>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.upwind">upwind() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="content/api/generated/all/pymrm.convect.upwind.html#pymrm.convect.upwind">(in module pymrm.convect)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.convect.upwind">[1]</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
 <h2 id="V">V</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="content/api/generated/all/pymrm.convect.vanleer.html#pymrm.convect.vanleer">vanleer() (in module pymrm.convect)</a>
+      <li><a href="pymrm/docs/sphinx/pymrm.html#pymrm.vanleer">vanleer() (in module pymrm)</a>
+
+      <ul>
+        <li><a href="content/api/generated/all/pymrm.convect.vanleer.html#pymrm.convect.vanleer">(in module pymrm.convect)</a>, <a href="pymrm/docs/sphinx/pymrm.html#pymrm.convect.vanleer">[1]</a>
 </li>
+      </ul></li>
   </ul></td>
 </tr></table>
 

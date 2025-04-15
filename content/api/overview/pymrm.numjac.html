@@ -254,7 +254,6 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../alphabetical_overview.html">All Functions and Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.convect.clam.html">pymrm.convect.clam</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.convect.construct_convflux_upwind.html">pymrm.convect.construct_convflux_upwind</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.convect.construct_convflux_upwind_bc.html">pymrm.convect.construct_convflux_upwind_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.convect.construct_convflux_upwind_int.html">pymrm.convect.construct_convflux_upwind_int</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.convect.minmod.html">pymrm.convect.minmod</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.convect.muscl.html">pymrm.convect.muscl</a></li>
@@ -266,7 +265,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.grid.generate_grid.html">pymrm.grid.generate_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.grid.non_uniform_grid.html">pymrm.grid.non_uniform_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.helpers.construct_coefficient_matrix.html">pymrm.helpers.construct_coefficient_matrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.helpers.unwrap_bc.html">pymrm.helpers.unwrap_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.interpolate.create_staggered_array.html">pymrm.interpolate.create_staggered_array</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.interpolate.interp_cntr_to_stagg.html">pymrm.interpolate.interp_cntr_to_stagg</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.interpolate.interp_cntr_to_stagg_tvd.html">pymrm.interpolate.interp_cntr_to_stagg_tvd</a></li>
@@ -515,43 +513,57 @@ document.write(`
                   
   <section id="module-pymrm.numjac">
 <span id="pymrm-numjac"></span><h1>pymrm.numjac<a class="headerlink" href="#module-pymrm.numjac" title="Link to this heading">#</a></h1>
+<p>numjac.py</p>
+<p>This module provides utilities for computing numerical Jacobians for multidimensional arrays.
+It includes functions for generating sparsity patterns, grouping columns by non-overlapping rows,
+and precomputing perturbations for efficient Jacobian computation.</p>
+<p>Key Features:
+- Expand dependencies into a uniform list of tuples in PyMRM dependency notation.
+- Generate sparsity patterns for stencil-based numerical Jacobians.
+- Group columns of sparse matrices by non-overlapping rows for efficient computation.
+- Precompute perturbed values and compute differences in function values for Jacobian estimation.
+- A <cite>NumJac</cite> class for encapsulating numerical Jacobian computation with customizable stencils.</p>
+<p>Dependencies:
+- NumPy
+- SciPy
+- Numba</p>
 <p class="rubric">Functions</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../generated/all/pymrm.numjac.colgroup.html#pymrm.numjac.colgroup" title="pymrm.numjac.colgroup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">colgroup</span></code></a>(*args[, shape, try_reorder])</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.colgroup" title="pymrm.numjac.colgroup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">colgroup</span></code></a>(*args[, shape, try_reorder])</p></td>
+<td><p>Group columns of a sparse matrix by non-overlapping rows.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_df</span></code>(f_value, perturbed_values, num_gr)</p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.compute_df" title="pymrm.numjac.compute_df"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_df</span></code></a>(f_value, perturbed_values, num_gr)</p></td>
+<td><p>Compute the difference in function values for perturbed inputs.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../generated/all/pymrm.numjac.compute_df2.html#pymrm.numjac.compute_df2" title="pymrm.numjac.compute_df2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_df2</span></code></a>(f, f_value, c_values, num_gr)</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.compute_df2" title="pymrm.numjac.compute_df2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_df2</span></code></a>(f, f_value, c_values, num_gr)</p></td>
+<td><p>Compute the difference in function values for perturbed inputs by evaluating the function.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../generated/all/pymrm.numjac.expand_dependencies.html#pymrm.numjac.expand_dependencies" title="pymrm.numjac.expand_dependencies"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expand_dependencies</span></code></a>(shape_in, shape_out, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.expand_dependencies" title="pymrm.numjac.expand_dependencies"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expand_dependencies</span></code></a>(shape_in, shape_out, ...)</p></td>
 <td><p>Expand a given set of dependencies into a uniform list of tuples in the PyMRM dependency notation, fully expanded.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../generated/all/pymrm.numjac.generate_sparsity_pattern.html#pymrm.numjac.generate_sparsity_pattern" title="pymrm.numjac.generate_sparsity_pattern"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_sparsity_pattern</span></code></a>(shape_in, ...)</p></td>
-<td><p>Generate row and column indices for the sparse matrix representation of a given stencil pattern.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.generate_sparsity_pattern" title="pymrm.numjac.generate_sparsity_pattern"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_sparsity_pattern</span></code></a>(shape_in, ...)</p></td>
+<td><p>Generate row and column indices for the sparse matrix representation of a stencil pattern.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">group_columns_by_non_overlap_numba</span></code>(indptr, ...)</p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.group_columns_by_non_overlap_numba" title="pymrm.numjac.group_columns_by_non_overlap_numba"><code class="xref py py-obj docutils literal notranslate"><span class="pre">group_columns_by_non_overlap_numba</span></code></a>(indptr, ...)</p></td>
+<td><p>Group columns of a sparse matrix by non-overlapping rows.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">iterate_over_entries</span></code>(shape_in, shape_out, ...)</p></td>
-<td><p>Iterate over all valid relative entries defined by shape_rel and fill row_indices and col_indices. This function: - Interprets shape_rel as the size of the relative axes. - For each combination of relative indices (idx_rel), computes the absolute positions (idx_out, idx_in)   by adding idx_rel to idx_out and idx_in and applying periodicity. - Stores the computed flat indices in row_indices and col_indices.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.iterate_over_entries" title="pymrm.numjac.iterate_over_entries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iterate_over_entries</span></code></a>(shape_in, shape_out, ...)</p></td>
+<td><p>Iterate over all valid relative entries defined by shape_rel and fill row_indices and col_indices.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../generated/all/pymrm.numjac.precompute_perturbations.html#pymrm.numjac.precompute_perturbations" title="pymrm.numjac.precompute_perturbations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">precompute_perturbations</span></code></a>(c, dc, num_gr, gr)</p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.precompute_perturbations" title="pymrm.numjac.precompute_perturbations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">precompute_perturbations</span></code></a>(c, dc, num_gr, gr)</p></td>
+<td><p>Precompute perturbed values of the input array for numerical Jacobian computation.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">precompute_perturbations_numba</span></code>(c, dc, num_gr, gr)</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.precompute_perturbations_numba" title="pymrm.numjac.precompute_perturbations_numba"><code class="xref py py-obj docutils literal notranslate"><span class="pre">precompute_perturbations_numba</span></code></a>(c, dc, num_gr, gr)</p></td>
+<td><p>Precompute perturbed values of the input array using Numba for numerical Jacobian computation.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ravel_index_numba</span></code>(shape, index)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.ravel_index_numba" title="pymrm.numjac.ravel_index_numba"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ravel_index_numba</span></code></a>(shape, index)</p></td>
 <td><p>Convert a multidimensional index to a flat index.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../generated/all/pymrm.numjac.stencil_block_diagonals.html#pymrm.numjac.stencil_block_diagonals" title="pymrm.numjac.stencil_block_diagonals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stencil_block_diagonals</span></code></a>([ndims, ...])</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.stencil_block_diagonals" title="pymrm.numjac.stencil_block_diagonals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stencil_block_diagonals</span></code></a>([ndims, ...])</p></td>
+<td><p>Generate a stencil pattern for block diagonals.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">unravel_index_numba</span></code>(lin_idx, shape)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.unravel_index_numba" title="pymrm.numjac.unravel_index_numba"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unravel_index_numba</span></code></a>(lin_idx, shape)</p></td>
 <td><p>Convert a flat (linear) index to a multidimensional index.</p></td>
 </tr>
 </tbody>
@@ -560,8 +572,8 @@ document.write(`
 <p class="rubric">Classes</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../generated/all/pymrm.numjac.NumJac.html#pymrm.numjac.NumJac" title="pymrm.numjac.NumJac"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NumJac</span></code></a>([shape, shape_in, shape_out, ...])</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.NumJac" title="pymrm.numjac.NumJac"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NumJac</span></code></a>([shape, shape_in, shape_out, ...])</p></td>
+<td><p>Class for computing numerical Jacobians for multidimensional arrays.</p></td>
 </tr>
 </tbody>
 </table>

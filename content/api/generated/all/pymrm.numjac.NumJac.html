@@ -254,7 +254,6 @@
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="../../alphabetical_overview.html">All Functions and Classes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="pymrm.convect.clam.html">pymrm.convect.clam</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.convect.construct_convflux_upwind.html">pymrm.convect.construct_convflux_upwind</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pymrm.convect.construct_convflux_upwind_bc.html">pymrm.convect.construct_convflux_upwind_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.convect.construct_convflux_upwind_int.html">pymrm.convect.construct_convflux_upwind_int</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.convect.minmod.html">pymrm.convect.minmod</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.convect.muscl.html">pymrm.convect.muscl</a></li>
@@ -266,7 +265,6 @@
 <li class="toctree-l3"><a class="reference internal" href="pymrm.grid.generate_grid.html">pymrm.grid.generate_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.grid.non_uniform_grid.html">pymrm.grid.non_uniform_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.helpers.construct_coefficient_matrix.html">pymrm.helpers.construct_coefficient_matrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pymrm.helpers.unwrap_bc.html">pymrm.helpers.unwrap_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.interpolate.create_staggered_array.html">pymrm.interpolate.create_staggered_array</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.interpolate.interp_cntr_to_stagg.html">pymrm.interpolate.interp_cntr_to_stagg</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.interpolate.interp_cntr_to_stagg_tvd.html">pymrm.interpolate.interp_cntr_to_stagg_tvd</a></li>
@@ -531,26 +529,27 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="pymrm.numjac.NumJac">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pymrm.numjac.</span></span><span class="sig-name descname"><span class="pre">NumJac</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape_in=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape_out=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stencil=&lt;function</span> <span class="pre">stencil_block_diagonals&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps_jac=1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pymrm/numjac.html#NumJac"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymrm.numjac.NumJac" title="Link to this definition">#</a></dt>
-<dd><dl class="py method">
+<dd><p>Class for computing numerical Jacobians for multidimensional arrays.</p>
+<p>Attributes:
+- shape_in (tuple): Shape of the input array.
+- shape_out (tuple): Shape of the output array.
+- eps_jac (float): Perturbation size for numerical Jacobian.
+- dependencies (list): Stencil pattern in PyMRM dependency notation.
+- rows (np.ndarray): Row indices for the sparse Jacobian.
+- cols (np.ndarray): Column indices for the sparse Jacobian.
+- gr (np.ndarray): Group array for column grouping.
+- num_gr (int): Number of groups.</p>
+<dl class="py method">
 <dt class="sig sig-object py" id="pymrm.numjac.NumJac.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape_in=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape_out=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stencil=&lt;function</span> <span class="pre">stencil_block_diagonals&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps_jac=1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pymrm/numjac.html#NumJac.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymrm.numjac.NumJac.__init__" title="Link to this definition">#</a></dt>
 <dd><p>Initialize the NumJac class.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>shape</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Shape of the multidimensional array (used when shape_in == shape_out).</p></li>
-<li><p><strong>shape_in</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Shape of the input array (used when shape != shape_out).</p></li>
-<li><p><strong>shape_out</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Shape of the output array (used when shape != shape_out).</p></li>
-<li><p><strong>stencil</strong> (<em>callable</em><em>, </em><em>optional</em>) – Function to generate the stencil. Default is None.</p></li>
-<li><p><strong>eps_jac</strong> (<em>float</em><em>, </em><em>optional</em>) – Perturbation size for numerical Jacobian. Default is 1e-6.</p></li>
-<li><p><strong>*args</strong> – Additional positional arguments passed to the stencil function.</p></li>
-<li><p><strong>**kwargs</strong> – Additional keyword arguments passed to the stencil function.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If both <cite>shape</cite> and <cite>shape_in</cite>/<cite>shape_out</cite> are specified or if inputs are inconsistent.</p>
-</dd>
-</dl>
+<p>Parameters:
+- shape (tuple, optional): Shape of the multidimensional array (used when shape_in == shape_out).
+- shape_in (tuple, optional): Shape of the input array (used when shape != shape_out).
+- shape_out (tuple, optional): Shape of the output array (used when shape != shape_out).
+- stencil (callable, optional): Function to generate the stencil. Default is stencil_block_diagonals.
+- eps_jac (float, optional): Perturbation size for numerical Jacobian. Default is 1e-6.
+- <a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs: Additional keyword arguments passed to the stencil function.</p>
 </dd></dl>
 
 <p class="rubric">Methods</p>
@@ -559,7 +558,7 @@ document.write(`
 <tr class="row-odd"><td><p><a class="reference internal" href="#pymrm.numjac.NumJac.__init__" title="pymrm.numjac.NumJac.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([shape, shape_in, shape_out, ...])</p></td>
 <td><p>Initialize the NumJac class.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">init_stencil</span></code>(stencil, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.NumJac.init_stencil" title="pymrm.numjac.NumJac.init_stencil"><code class="xref py py-obj docutils literal notranslate"><span class="pre">init_stencil</span></code></a>(stencil, **kwargs)</p></td>
 <td><p>Initialize the stencil pattern.</p></td>
 </tr>
 </tbody>

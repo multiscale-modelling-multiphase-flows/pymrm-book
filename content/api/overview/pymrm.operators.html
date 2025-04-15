@@ -254,7 +254,6 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../alphabetical_overview.html">All Functions and Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.convect.clam.html">pymrm.convect.clam</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.convect.construct_convflux_upwind.html">pymrm.convect.construct_convflux_upwind</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.convect.construct_convflux_upwind_bc.html">pymrm.convect.construct_convflux_upwind_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.convect.construct_convflux_upwind_int.html">pymrm.convect.construct_convflux_upwind_int</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.convect.minmod.html">pymrm.convect.minmod</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.convect.muscl.html">pymrm.convect.muscl</a></li>
@@ -266,7 +265,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.grid.generate_grid.html">pymrm.grid.generate_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.grid.non_uniform_grid.html">pymrm.grid.non_uniform_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.helpers.construct_coefficient_matrix.html">pymrm.helpers.construct_coefficient_matrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.helpers.unwrap_bc.html">pymrm.helpers.unwrap_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.interpolate.create_staggered_array.html">pymrm.interpolate.create_staggered_array</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.interpolate.interp_cntr_to_stagg.html">pymrm.interpolate.interp_cntr_to_stagg</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.interpolate.interp_cntr_to_stagg_tvd.html">pymrm.interpolate.interp_cntr_to_stagg_tvd</a></li>
@@ -516,8 +514,10 @@ document.write(`
   <section id="module-pymrm.operators">
 <span id="pymrm-operators"></span><h1>pymrm.operators<a class="headerlink" href="#module-pymrm.operators" title="Link to this heading">#</a></h1>
 <p>Operators Submodule for pymrm</p>
-<p>This submodule provides numerical operators for spatial discretization, including gradient and divergence operatorss.
-These operators are essential for constructing finite difference and finite volume schemes used in multiphase reactor modeling.</p>
+<p>This submodule provides numerical operators for spatial discretization,
+including gradient and divergence operators.
+These operators are essential for constructing finite difference
+and finite volume schemes used in multiphase reactor modeling.</p>
 <p>Functions:
 - construct_grad: Constructs the gradient matrix for spatial differentiation.
 - construct_grad_int: Constructs the gradient matrix for internal faces.
@@ -527,20 +527,20 @@ These operators are essential for constructing finite difference and finite volu
 - numpy
 - scipy.sparse
 - pymrm.grid (for optional grid generation)
-- pymrm.helper (for boundary condition handling)</p>
+- pymrm.helpers (for boundary condition handling)</p>
 <p class="rubric">Functions</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../generated/all/pymrm.operators.construct_div.html#pymrm.operators.construct_div" title="pymrm.operators.construct_div"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_div</span></code></a>(shape, x_f[, nu, axis])</p></td>
-<td><p>Construct the divergence matrix.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.operators.construct_div" title="pymrm.operators.construct_div"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_div</span></code></a>(shape, x_f[, nu, axis])</p></td>
+<td><p>Construct the divergence matrix for flux calculations.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../generated/all/pymrm.operators.construct_grad.html#pymrm.operators.construct_grad" title="pymrm.operators.construct_grad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_grad</span></code></a>(shape, x_f[, x_c, bc, axis])</p></td>
-<td><p>Construct the gradient matrix.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.operators.construct_grad" title="pymrm.operators.construct_grad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_grad</span></code></a>(shape, x_f[, x_c, bc, axis, ...])</p></td>
+<td><p>Construct the gradient matrix for spatial differentiation.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../generated/all/pymrm.operators.construct_grad_bc.html#pymrm.operators.construct_grad_bc" title="pymrm.operators.construct_grad_bc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_grad_bc</span></code></a>(shape, x_f[, x_c, bc, axis])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.operators.construct_grad_bc" title="pymrm.operators.construct_grad_bc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_grad_bc</span></code></a>(shape, x_f[, x_c, bc, ...])</p></td>
 <td><p>Construct the gradient matrix for boundary faces.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../generated/all/pymrm.operators.construct_grad_int.html#pymrm.operators.construct_grad_int" title="pymrm.operators.construct_grad_int"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_grad_int</span></code></a>(shape, x_f[, x_c, axis])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.operators.construct_grad_int" title="pymrm.operators.construct_grad_int"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_grad_int</span></code></a>(shape, x_f[, x_c, axis])</p></td>
 <td><p>Construct the gradient matrix for internal faces.</p></td>
 </tr>
 </tbody>

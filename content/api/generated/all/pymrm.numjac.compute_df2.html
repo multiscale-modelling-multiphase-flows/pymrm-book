@@ -254,7 +254,6 @@
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="../../alphabetical_overview.html">All Functions and Classes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="pymrm.convect.clam.html">pymrm.convect.clam</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.convect.construct_convflux_upwind.html">pymrm.convect.construct_convflux_upwind</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pymrm.convect.construct_convflux_upwind_bc.html">pymrm.convect.construct_convflux_upwind_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.convect.construct_convflux_upwind_int.html">pymrm.convect.construct_convflux_upwind_int</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.convect.minmod.html">pymrm.convect.minmod</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.convect.muscl.html">pymrm.convect.muscl</a></li>
@@ -266,7 +265,6 @@
 <li class="toctree-l3"><a class="reference internal" href="pymrm.grid.generate_grid.html">pymrm.grid.generate_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.grid.non_uniform_grid.html">pymrm.grid.non_uniform_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.helpers.construct_coefficient_matrix.html">pymrm.helpers.construct_coefficient_matrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pymrm.helpers.unwrap_bc.html">pymrm.helpers.unwrap_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.interpolate.create_staggered_array.html">pymrm.interpolate.create_staggered_array</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.interpolate.interp_cntr_to_stagg.html">pymrm.interpolate.interp_cntr_to_stagg</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.interpolate.interp_cntr_to_stagg_tvd.html">pymrm.interpolate.interp_cntr_to_stagg_tvd</a></li>
@@ -528,7 +526,15 @@ document.write(`
 <dl class="py function">
 <dt class="sig sig-object py" id="pymrm.numjac.compute_df2">
 <span class="sig-prename descclassname"><span class="pre">pymrm.numjac.</span></span><span class="sig-name descname"><span class="pre">compute_df2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_gr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pymrm/numjac.html#compute_df2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymrm.numjac.compute_df2" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Compute the difference in function values for perturbed inputs by evaluating the function.</p>
+<p>Parameters:
+- f (callable): Function to evaluate.
+- f_value (np.ndarray): Original function value.
+- c_values (np.ndarray): Perturbed input values.
+- num_gr (int): Number of groups.</p>
+<p>Returns:
+- np.ndarray: Differences in function values.</p>
+</dd></dl>
 
 </section>
 

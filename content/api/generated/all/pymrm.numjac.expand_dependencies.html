@@ -254,7 +254,6 @@
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="../../alphabetical_overview.html">All Functions and Classes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="pymrm.convect.clam.html">pymrm.convect.clam</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.convect.construct_convflux_upwind.html">pymrm.convect.construct_convflux_upwind</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pymrm.convect.construct_convflux_upwind_bc.html">pymrm.convect.construct_convflux_upwind_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.convect.construct_convflux_upwind_int.html">pymrm.convect.construct_convflux_upwind_int</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.convect.minmod.html">pymrm.convect.minmod</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.convect.muscl.html">pymrm.convect.muscl</a></li>
@@ -266,7 +265,6 @@
 <li class="toctree-l3"><a class="reference internal" href="pymrm.grid.generate_grid.html">pymrm.grid.generate_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.grid.non_uniform_grid.html">pymrm.grid.non_uniform_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.helpers.construct_coefficient_matrix.html">pymrm.helpers.construct_coefficient_matrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pymrm.helpers.unwrap_bc.html">pymrm.helpers.unwrap_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.interpolate.create_staggered_array.html">pymrm.interpolate.create_staggered_array</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.interpolate.interp_cntr_to_stagg.html">pymrm.interpolate.interp_cntr_to_stagg</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.interpolate.interp_cntr_to_stagg_tvd.html">pymrm.interpolate.interp_cntr_to_stagg_tvd</a></li>
@@ -530,24 +528,12 @@ document.write(`
 <span class="sig-prename descclassname"><span class="pre">pymrm.numjac.</span></span><span class="sig-name descname"><span class="pre">expand_dependencies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependencies</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pymrm/numjac.html#expand_dependencies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymrm.numjac.expand_dependencies" title="Link to this definition">#</a></dt>
 <dd><p>Expand a given set of dependencies into a uniform list of tuples in the
 PyMRM dependency notation, fully expanded.</p>
-<section id="pymrm-dependency-notation">
-<h2>PyMRM Dependency Notation:<a class="headerlink" href="#pymrm-dependency-notation" title="Link to this heading">#</a></h2>
-<p>(index_in, index_out, fixed_axes_list, periodic_axes_list)</p>
-<ul class="simple">
-<li><p>index_in: A tuple representing the position in the input (field) array that contributes
-to the value at index_out.</p></li>
-<li><p>index_out: A tuple representing the position in the output (function) array,
-or None if no reference is needed (e.g., simple stencil).</p></li>
-<li><p>fixed_axes_list: A list of axis indices that are considered fixed.</p></li>
-<li><p>periodic_axes_list: A list of axis indices that are considered periodic.</p></li>
-</ul>
-</section>
-<section id="returns">
-<h2>Returns:<a class="headerlink" href="#returns" title="Link to this heading">#</a></h2>
-<p>:
-A list of tuples in the form (index_in, index_out, fixed_axes_list, periodic_axes_list)
-with all indices fully expanded into integers.</p>
-</section>
+<p>Parameters:
+- shape_in (tuple): Shape of the input array.
+- shape_out (tuple): Shape of the output array.
+- dependencies (list or tuple): List of dependencies in PyMRM dependency notation.</p>
+<p>Returns:
+- list: Fully expanded list of dependencies in the form (index_in, index_out, fixed_axes_list, periodic_axes_list).</p>
 </dd></dl>
 
 </section>

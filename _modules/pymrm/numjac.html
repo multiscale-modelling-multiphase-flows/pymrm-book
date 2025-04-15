@@ -253,7 +253,6 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../content/api/alphabetical_overview.html">All Functions and Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.convect.clam.html">pymrm.convect.clam</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.convect.construct_convflux_upwind.html">pymrm.convect.construct_convflux_upwind</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.convect.construct_convflux_upwind_bc.html">pymrm.convect.construct_convflux_upwind_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.convect.construct_convflux_upwind_int.html">pymrm.convect.construct_convflux_upwind_int</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.convect.minmod.html">pymrm.convect.minmod</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.convect.muscl.html">pymrm.convect.muscl</a></li>
@@ -265,7 +264,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.grid.generate_grid.html">pymrm.grid.generate_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.grid.non_uniform_grid.html">pymrm.grid.non_uniform_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.helpers.construct_coefficient_matrix.html">pymrm.helpers.construct_coefficient_matrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.helpers.unwrap_bc.html">pymrm.helpers.unwrap_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.interpolate.create_staggered_array.html">pymrm.interpolate.create_staggered_array</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.interpolate.interp_cntr_to_stagg.html">pymrm.interpolate.interp_cntr_to_stagg</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.interpolate.interp_cntr_to_stagg_tvd.html">pymrm.interpolate.interp_cntr_to_stagg_tvd</a></li>
@@ -448,36 +446,47 @@ document.write(`
                 <article class="bd-article">
                   
   <h1>Source code for pymrm.numjac</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">numjac.py</span>
+
+<span class="sd">This module provides utilities for computing numerical Jacobians for multidimensional arrays.</span>
+<span class="sd">It includes functions for generating sparsity patterns, grouping columns by non-overlapping rows,</span>
+<span class="sd">and precomputing perturbations for efficient Jacobian computation.</span>
+
+<span class="sd">Key Features:</span>
+<span class="sd">- Expand dependencies into a uniform list of tuples in PyMRM dependency notation.</span>
+<span class="sd">- Generate sparsity patterns for stencil-based numerical Jacobians.</span>
+<span class="sd">- Group columns of sparse matrices by non-overlapping rows for efficient computation.</span>
+<span class="sd">- Precompute perturbed values and compute differences in function values for Jacobian estimation.</span>
+<span class="sd">- A `NumJac` class for encapsulating numerical Jacobian computation with customizable stencils.</span>
+
+<span class="sd">Dependencies:</span>
+<span class="sd">- NumPy</span>
+<span class="sd">- SciPy</span>
+<span class="sd">- Numba</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.sparse</span><span class="w"> </span><span class="kn">import</span> <span class="n">csc_array</span><span class="p">,</span> <span class="n">sparray</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.sparse.csgraph</span><span class="w"> </span><span class="kn">import</span> <span class="n">reverse_cuthill_mckee</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">njit</span><span class="p">,</span> <span class="n">prange</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <div class="viewcode-block" id="expand_dependencies">
-<a class="viewcode-back" href="../../content/api/generated/all/pymrm.numjac.expand_dependencies.html#pymrm.numjac.expand_dependencies">[docs]</a>
+<a class="viewcode-back" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.expand_dependencies">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">expand_dependencies</span><span class="p">(</span><span class="n">shape_in</span><span class="p">,</span> <span class="n">shape_out</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Expand a given set of dependencies into a uniform list of tuples in the </span>
 <span class="sd">    PyMRM dependency notation, fully expanded.</span>
 
-<span class="sd">    PyMRM Dependency Notation:</span>
-<span class="sd">    --------------------------</span>
-<span class="sd">    (index_in, index_out, fixed_axes_list, periodic_axes_list)</span>
-
-<span class="sd">    - index_in: A tuple representing the position in the input (field) array that contributes</span>
-<span class="sd">      to the value at index_out.</span>
-<span class="sd">    - index_out: A tuple representing the position in the output (function) array,</span>
-<span class="sd">      or None if no reference is needed (e.g., simple stencil).</span>
-<span class="sd">    - fixed_axes_list: A list of axis indices that are considered fixed.</span>
-<span class="sd">    - periodic_axes_list: A list of axis indices that are considered periodic.</span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    - shape_in (tuple): Shape of the input array.</span>
+<span class="sd">    - shape_out (tuple): Shape of the output array.</span>
+<span class="sd">    - dependencies (list or tuple): List of dependencies in PyMRM dependency notation.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">    --------</span>
-<span class="sd">    A list of tuples in the form (index_in, index_out, fixed_axes_list, periodic_axes_list)</span>
-<span class="sd">    with all indices fully expanded into integers.</span>
+<span class="sd">    - list: Fully expanded list of dependencies in the form (index_in, index_out, fixed_axes_list, periodic_axes_list).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="c1"># Helper functions</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">slice_to_list</span><span class="p">(</span><span class="n">slc</span><span class="p">,</span> <span class="n">dim_size</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="o">*</span><span class="n">slc</span><span class="o">.</span><span class="n">indices</span><span class="p">(</span><span class="n">dim_size</span><span class="p">)))</span>
@@ -518,6 +527,13 @@ document.write(`
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Expand a single index tuple. The index can contain ints, slices, lists, or ranges.</span>
 <span class="sd">        Returns a list of fully expanded tuples, or [None] if idx is None.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">        - idx (tuple): Index tuple to expand.</span>
+<span class="sd">        - shape (tuple): Shape of the array.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">        - list: Expanded list of tuples.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Index must be a tuple or None.&quot;</span><span class="p">)</span>
@@ -590,45 +606,66 @@ document.write(`
     <span class="k">return</span> <span class="n">expanded_deps</span></div>
 
 
+<div class="viewcode-block" id="ravel_index_numba">
+<a class="viewcode-back" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.ravel_index_numba">[docs]</a>
 <span class="nd">@njit</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">ravel_index_numba</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
-    <span class="s2">&quot;Convert a multidimensional index to a flat index.&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert a multidimensional index to a flat index.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - shape (tuple): Shape of the multidimensional array.</span>
+<span class="sd">    - index (tuple): Multidimensional index.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - int: Flat (linear) index.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">lin_idx</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">shape</span><span class="p">)):</span>
         <span class="n">lin_idx</span> <span class="o">=</span> <span class="n">lin_idx</span> <span class="o">*</span> <span class="n">shape</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">lin_idx</span>
+    <span class="k">return</span> <span class="n">lin_idx</span></div>
 
+
+<div class="viewcode-block" id="unravel_index_numba">
+<a class="viewcode-back" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.unravel_index_numba">[docs]</a>
 <span class="nd">@njit</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">unravel_index_numba</span><span class="p">(</span><span class="n">lin_idx</span><span class="p">,</span> <span class="n">shape</span><span class="p">):</span>
-    <span class="s2">&quot;Convert a flat (linear) index to a multidimensional index.&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert a flat (linear) index to a multidimensional index.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - lin_idx (int): Flat index.</span>
+<span class="sd">    - shape (tuple): Shape of the multidimensional array.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - np.ndarray: Multidimensional index.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">shape</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
         <span class="n">idx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">lin_idx</span> <span class="o">%</span> <span class="n">shape</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
         <span class="n">lin_idx</span> <span class="o">//=</span> <span class="n">shape</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">idx</span>
+    <span class="k">return</span> <span class="n">idx</span></div>
 
+
+<div class="viewcode-block" id="iterate_over_entries">
+<a class="viewcode-back" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.iterate_over_entries">[docs]</a>
 <span class="nd">@njit</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">iterate_over_entries</span><span class="p">(</span><span class="n">shape_in</span><span class="p">,</span> <span class="n">shape_out</span><span class="p">,</span> <span class="n">shape_rel</span><span class="p">,</span> <span class="n">idx_in</span><span class="p">,</span> <span class="n">idx_out</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">col_indices</span><span class="p">,</span> <span class="n">entry_idx</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Iterate over all valid relative entries defined by shape_rel and fill row_indices and col_indices.</span>
-<span class="sd">    This function:</span>
-<span class="sd">    - Interprets shape_rel as the size of the relative axes.</span>
-<span class="sd">    - For each combination of relative indices (idx_rel), computes the absolute positions (idx_out, idx_in)</span>
-<span class="sd">      by adding idx_rel to idx_out and idx_in and applying periodicity.</span>
-<span class="sd">    - Stores the computed flat indices in row_indices and col_indices.</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        shape_in (np.ndarray): The full shape of the multidimensional input (field) array.</span>
-<span class="sd">        shape_out (np.ndarray): The full shape of the multidimensional output (function) array.</span>
-<span class="sd">        shape_rel (np.ndarray): Shape array representing the size of relative axes.</span>
-<span class="sd">        idx_in (np.ndarray): Input position array (adjusted for relative indexing).</span>
-<span class="sd">        idx_out (np.ndarray): Output position array (adjusted for relative indexing).</span>
-<span class="sd">        row_indices (np.ndarray): Preallocated array for row indices.</span>
-<span class="sd">        col_indices (np.ndarray): Preallocated array for column indices.</span>
-<span class="sd">        entry_idx (int): Starting index in the row_indices/col_indices arrays to place data.</span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    - shape_in (np.ndarray): Shape of the input array.</span>
+<span class="sd">    - shape_out (np.ndarray): Shape of the output array.</span>
+<span class="sd">    - shape_rel (np.ndarray): Shape of the relative axes.</span>
+<span class="sd">    - idx_in (np.ndarray): Input position array.</span>
+<span class="sd">    - idx_out (np.ndarray): Output position array.</span>
+<span class="sd">    - row_indices (np.ndarray): Preallocated array for row indices.</span>
+<span class="sd">    - col_indices (np.ndarray): Preallocated array for column indices.</span>
+<span class="sd">    - entry_idx (int): Starting index in the row_indices/col_indices arrays.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        int: The updated index after filling in entries.</span>
+<span class="sd">    - int: Updated index after filling in entries.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">num_dims</span> <span class="o">=</span> <span class="n">shape_in</span><span class="o">.</span><span class="n">size</span>
     <span class="n">size_lin</span> <span class="o">=</span> <span class="mi">1</span>
@@ -654,27 +691,22 @@ document.write(`
         <span class="n">col_indices</span><span class="p">[</span><span class="n">current_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">ravel_index_numba</span><span class="p">(</span><span class="n">shape_in</span><span class="p">,</span> <span class="n">in_idx</span><span class="p">)</span>
         <span class="n">current_idx</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    <span class="k">return</span> <span class="n">current_idx</span>
+    <span class="k">return</span> <span class="n">current_idx</span></div>
+
 
 <div class="viewcode-block" id="generate_sparsity_pattern">
-<a class="viewcode-back" href="../../content/api/generated/all/pymrm.numjac.generate_sparsity_pattern.html#pymrm.numjac.generate_sparsity_pattern">[docs]</a>
+<a class="viewcode-back" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.generate_sparsity_pattern">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">generate_sparsity_pattern</span><span class="p">(</span><span class="n">shape_in</span><span class="p">,</span> <span class="n">shape_out</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generate row and column indices for the sparse matrix representation</span>
-<span class="sd">    of a given stencil pattern. This function attempts to minimize loops</span>
-<span class="sd">    over large dimensions by focusing on relative axes and using Numba-compiled</span>
-<span class="sd">    helper functions for speed.</span>
+<span class="sd">    Generate row and column indices for the sparse matrix representation of a stencil pattern.</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">    - shape_in: Tuple of ints, the shape of the multidimensional array corresponding to the field.</span>
-<span class="sd">    - shape_out: Tuple of ints, the shape of the multidimensional array corresponding to the function.</span>
-<span class="sd">    - dependencies: A list of tuples (idx_out, idx_in, fixed_axes, periodic_axes)</span>
-<span class="sd">      representing the stencil pattern. Each dependency indicates how output positions</span>
-<span class="sd">      relate to input positions and which axes are fixed or periodic.</span>
+<span class="sd">    - shape_in (tuple): Shape of the input array.</span>
+<span class="sd">    - shape_out (tuple): Shape of the output array.</span>
+<span class="sd">    - dependencies (list): List of dependencies in PyMRM dependency notation.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">    - row_indices: 1D numpy array of row indices for the sparse pattern.</span>
-<span class="sd">    - col_indices: 1D numpy array of column indices for the sparse pattern.</span>
+<span class="sd">    - tuple: (row_indices, col_indices) for the sparse pattern.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">shape_in</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">shape_in</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
     <span class="n">shape_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">shape_out</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
@@ -729,8 +761,20 @@ document.write(`
     <span class="k">return</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">col_indices</span></div>
 
 
+<div class="viewcode-block" id="group_columns_by_non_overlap_numba">
+<a class="viewcode-back" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.group_columns_by_non_overlap_numba">[docs]</a>
 <span class="nd">@njit</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">group_columns_by_non_overlap_numba</span><span class="p">(</span><span class="n">indptr</span><span class="p">,</span> <span class="n">indices</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Group columns of a sparse matrix by non-overlapping rows.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - indptr (np.ndarray): Index pointer array of the sparse matrix.</span>
+<span class="sd">    - indices (np.ndarray): Column indices of the sparse matrix.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - tuple: (group array, number of groups).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">indptr</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
     <span class="n">groupnum</span> <span class="o">=</span> <span class="mi">0</span>
@@ -747,11 +791,23 @@ document.write(`
                 <span class="n">g</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">groupnum</span>
         <span class="n">J</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">g</span> <span class="o">==</span> <span class="n">n</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">groupnum</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="n">g</span><span class="p">,</span> <span class="n">groupnum</span>
+    <span class="k">return</span> <span class="n">g</span><span class="p">,</span> <span class="n">groupnum</span></div>
+
 
 <div class="viewcode-block" id="colgroup">
-<a class="viewcode-back" href="../../content/api/generated/all/pymrm.numjac.colgroup.html#pymrm.numjac.colgroup">[docs]</a>
+<a class="viewcode-back" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.colgroup">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">colgroup</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">try_reorder</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Group columns of a sparse matrix by non-overlapping rows.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - args: Sparse matrix or row/column indices.</span>
+<span class="sd">    - shape (tuple, optional): Shape of the sparse matrix.</span>
+<span class="sd">    - try_reorder (bool, optional): Whether to attempt reordering for fewer groups.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - tuple: (group array, number of groups).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">sparray</span><span class="p">):</span>
         <span class="n">S</span> <span class="o">=</span> <span class="n">csc_array</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="n">T</span> <span class="o">=</span> <span class="n">csc_array</span><span class="p">((</span><span class="n">S</span><span class="o">.</span><span class="n">data</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">indptr</span><span class="p">),</span> <span class="n">shape</span><span class="o">=</span><span class="n">S</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
@@ -785,8 +841,20 @@ document.write(`
 
 
 <div class="viewcode-block" id="stencil_block_diagonals">
-<a class="viewcode-back" href="../../content/api/generated/all/pymrm.numjac.stencil_block_diagonals.html#pymrm.numjac.stencil_block_diagonals">[docs]</a>
+<a class="viewcode-back" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.stencil_block_diagonals">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">stencil_block_diagonals</span><span class="p">(</span><span class="n">ndims</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">axes_diagonals</span><span class="o">=</span><span class="p">[],</span> <span class="n">axes_blocks</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">periodic_axes</span><span class="o">=</span><span class="p">[]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate a stencil pattern for block diagonals.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - ndims (int): Number of dimensions.</span>
+<span class="sd">    - axes_diagonals (list): Axes for diagonal dependencies.</span>
+<span class="sd">    - axes_blocks (list): Axes for block dependencies.</span>
+<span class="sd">    - periodic_axes (list): Axes with periodic boundaries.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - list: Stencil pattern in PyMRM dependency notation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">ndims</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">axes_diagonals</span><span class="p">)</span> <span class="ow">or</span> <span class="n">ndims</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">axes_blocks</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Number of dimensions should be greater than the number of axes.&quot;</span><span class="p">)</span>
     <span class="n">dependencies</span> <span class="o">=</span> <span class="p">[]</span>
@@ -806,15 +874,41 @@ document.write(`
 
 
 <div class="viewcode-block" id="precompute_perturbations">
-<a class="viewcode-back" href="../../content/api/generated/all/pymrm.numjac.precompute_perturbations.html#pymrm.numjac.precompute_perturbations">[docs]</a>
+<a class="viewcode-back" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.precompute_perturbations">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">precompute_perturbations</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">dc</span><span class="p">,</span> <span class="n">num_gr</span><span class="p">,</span> <span class="n">gr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Precompute perturbed values of the input array for numerical Jacobian computation.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - c (np.ndarray): Input array.</span>
+<span class="sd">    - dc (np.ndarray): Perturbation array.</span>
+<span class="sd">    - num_gr (int): Number of groups.</span>
+<span class="sd">    - gr (np.ndarray): Group array.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - np.ndarray: Perturbed values of the input array.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">c_perturb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="p">(</span><span class="n">num_gr</span><span class="p">,)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="p">,)</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span>
     <span class="n">c_perturb</span><span class="o">.</span><span class="n">ravel</span><span class="p">()[</span><span class="n">c</span><span class="o">.</span><span class="n">size</span> <span class="o">*</span> <span class="n">gr</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">size</span><span class="p">)]</span> <span class="o">+=</span> <span class="n">dc</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">c_perturb</span></div>
 
 
+<div class="viewcode-block" id="precompute_perturbations_numba">
+<a class="viewcode-back" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.precompute_perturbations_numba">[docs]</a>
 <span class="nd">@njit</span><span class="p">(</span><span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">precompute_perturbations_numba</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">dc</span><span class="p">,</span> <span class="n">num_gr</span><span class="p">,</span> <span class="n">gr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Precompute perturbed values of the input array using Numba for numerical Jacobian computation.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - c (np.ndarray): Input array.</span>
+<span class="sd">    - dc (np.ndarray): Perturbation array.</span>
+<span class="sd">    - num_gr (int): Number of groups.</span>
+<span class="sd">    - gr (np.ndarray): Group array.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - np.ndarray: Perturbed values of the input array.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">c_flat</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
     <span class="n">dc_flat</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
     <span class="n">gr_flat</span> <span class="o">=</span> <span class="n">gr</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
@@ -830,19 +924,45 @@ document.write(`
         <span class="n">c_perturb_flat</span><span class="p">[</span><span class="n">gr_flat</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">idx</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dc_flat</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
     
     <span class="n">c_perturb</span> <span class="o">=</span> <span class="n">c_perturb_flat</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">num_gr</span><span class="p">,)</span> <span class="o">+</span> <span class="n">c</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">c_perturb</span>
+    <span class="k">return</span> <span class="n">c_perturb</span></div>
 
+
+<div class="viewcode-block" id="compute_df">
+<a class="viewcode-back" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.compute_df">[docs]</a>
 <span class="nd">@njit</span><span class="p">(</span><span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_df</span><span class="p">(</span><span class="n">f_value</span><span class="p">,</span> <span class="n">perturbed_values</span><span class="p">,</span> <span class="n">num_gr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the difference in function values for perturbed inputs.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - f_value (np.ndarray): Original function value.</span>
+<span class="sd">    - perturbed_values (np.ndarray): Function values for perturbed inputs.</span>
+<span class="sd">    - num_gr (int): Number of groups.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - np.ndarray: Differences in function values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">perturbed_values</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">prange</span><span class="p">(</span><span class="n">num_gr</span><span class="p">):</span>
         <span class="n">df</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">perturbed_values</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">-</span> <span class="n">f_value</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">df</span>
+    <span class="k">return</span> <span class="n">df</span></div>
 
-<span class="c1">#@njit(parallel=True)</span>
+
 <div class="viewcode-block" id="compute_df2">
-<a class="viewcode-back" href="../../content/api/generated/all/pymrm.numjac.compute_df2.html#pymrm.numjac.compute_df2">[docs]</a>
+<a class="viewcode-back" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.compute_df2">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_df2</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">f_value</span><span class="p">,</span> <span class="n">c_values</span><span class="p">,</span> <span class="n">num_gr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the difference in function values for perturbed inputs by evaluating the function.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - f (callable): Function to evaluate.</span>
+<span class="sd">    - f_value (np.ndarray): Original function value.</span>
+<span class="sd">    - c_values (np.ndarray): Perturbed input values.</span>
+<span class="sd">    - num_gr (int): Number of groups.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - np.ndarray: Differences in function values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">num_gr</span><span class="p">,</span><span class="o">*</span><span class="n">f_value</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">prange</span><span class="p">(</span><span class="n">num_gr</span><span class="p">):</span>
         <span class="n">df</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">c_values</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span> <span class="o">-</span> <span class="n">f_value</span><span class="p">)</span>
@@ -850,33 +970,35 @@ document.write(`
 
 
 <div class="viewcode-block" id="NumJac">
-<a class="viewcode-back" href="../../content/api/generated/all/pymrm.numjac.NumJac.html#pymrm.numjac.NumJac">[docs]</a>
+<a class="viewcode-back" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.NumJac">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">NumJac</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class for computing numerical Jacobians for multidimensional arrays.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">    - shape_in (tuple): Shape of the input array.</span>
+<span class="sd">    - shape_out (tuple): Shape of the output array.</span>
+<span class="sd">    - eps_jac (float): Perturbation size for numerical Jacobian.</span>
+<span class="sd">    - dependencies (list): Stencil pattern in PyMRM dependency notation.</span>
+<span class="sd">    - rows (np.ndarray): Row indices for the sparse Jacobian.</span>
+<span class="sd">    - cols (np.ndarray): Column indices for the sparse Jacobian.</span>
+<span class="sd">    - gr (np.ndarray): Group array for column grouping.</span>
+<span class="sd">    - num_gr (int): Number of groups.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
 <div class="viewcode-block" id="NumJac.__init__">
 <a class="viewcode-back" href="../../content/api/generated/all/pymrm.numjac.NumJac.html#pymrm.numjac.NumJac.__init__">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">shape</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">shape_in</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">shape_out</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">stencil</span><span class="o">=</span><span class="n">stencil_block_diagonals</span><span class="p">,</span>
-        <span class="n">eps_jac</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-    <span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shape_in</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shape_out</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stencil</span><span class="o">=</span><span class="n">stencil_block_diagonals</span><span class="p">,</span> <span class="n">eps_jac</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize the NumJac class.</span>
 
-<span class="sd">        Args:</span>
-<span class="sd">            shape (tuple, optional): Shape of the multidimensional array (used when shape_in == shape_out).</span>
-<span class="sd">            shape_in (tuple, optional): Shape of the input array (used when shape != shape_out).</span>
-<span class="sd">            shape_out (tuple, optional): Shape of the output array (used when shape != shape_out).</span>
-<span class="sd">            stencil (callable, optional): Function to generate the stencil. Default is None.</span>
-<span class="sd">            eps_jac (float, optional): Perturbation size for numerical Jacobian. Default is 1e-6.</span>
-<span class="sd">            *args: Additional positional arguments passed to the stencil function.</span>
-<span class="sd">            **kwargs: Additional keyword arguments passed to the stencil function.</span>
-
-<span class="sd">        Raises:</span>
-<span class="sd">            ValueError: If both `shape` and `shape_in`/`shape_out` are specified or if inputs are inconsistent.</span>
+<span class="sd">        Parameters:</span>
+<span class="sd">        - shape (tuple, optional): Shape of the multidimensional array (used when shape_in == shape_out).</span>
+<span class="sd">        - shape_in (tuple, optional): Shape of the input array (used when shape != shape_out).</span>
+<span class="sd">        - shape_out (tuple, optional): Shape of the output array (used when shape != shape_out).</span>
+<span class="sd">        - stencil (callable, optional): Function to generate the stencil. Default is stencil_block_diagonals.</span>
+<span class="sd">        - eps_jac (float, optional): Perturbation size for numerical Jacobian. Default is 1e-6.</span>
+<span class="sd">        - **kwargs: Additional keyword arguments passed to the stencil function.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">shape</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span><span class="n">shape_in</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">shape_out</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
@@ -902,14 +1024,15 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">init_stencil</span><span class="p">(</span><span class="n">stencil</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="NumJac.init_stencil">
+<a class="viewcode-back" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.NumJac.init_stencil">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">init_stencil</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stencil</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize the stencil pattern.</span>
 
-<span class="sd">        Args:</span>
-<span class="sd">            stencil (callable): Function to generate the stencil.</span>
-<span class="sd">            *args: Additional positional arguments passed to the stencil function.</span>
-<span class="sd">            **kwargs: Additional keyword arguments passed to the stencil function.</span>
+<span class="sd">        Parameters:</span>
+<span class="sd">        - stencil (callable): Function to generate the stencil.</span>
+<span class="sd">        - **kwargs: Additional keyword arguments passed to the stencil function.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">stencil</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;A stencil function or stencil specification must be provided.&quot;</span><span class="p">)</span>
@@ -919,9 +1042,20 @@ document.write(`
             <span class="n">stencil</span> <span class="o">=</span> <span class="n">stencil</span><span class="p">(</span><span class="n">ndims</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape_in</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span> <span class="o">=</span> <span class="n">expand_dependencies</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape_in</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape_out</span><span class="p">,</span> <span class="n">stencil</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span> <span class="o">=</span> <span class="n">generate_sparsity_pattern</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape_in</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape_out</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">gr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_gr</span> <span class="o">=</span> <span class="n">colgroup</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape_out</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape_in</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_gr</span> <span class="o">=</span> <span class="n">colgroup</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape_out</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape_in</span><span class="p">)))</span></div>
+
         
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the numerical Jacobian for a given function and input array.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">        - f (callable): Function to evaluate.</span>
+<span class="sd">        - c (np.ndarray): Input array.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">        - tuple: (Function value, Jacobian as a sparse matrix).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">f_value</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
         <span class="n">dc</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">eps_jac</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
         <span class="n">dc</span><span class="p">[</span><span class="n">dc</span> <span class="o">&gt;</span> <span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">eps_jac</span><span class="p">)]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">eps_jac</span>

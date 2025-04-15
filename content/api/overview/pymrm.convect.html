@@ -254,7 +254,6 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../alphabetical_overview.html">All Functions and Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.convect.clam.html">pymrm.convect.clam</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.convect.construct_convflux_upwind.html">pymrm.convect.construct_convflux_upwind</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.convect.construct_convflux_upwind_bc.html">pymrm.convect.construct_convflux_upwind_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.convect.construct_convflux_upwind_int.html">pymrm.convect.construct_convflux_upwind_int</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.convect.minmod.html">pymrm.convect.minmod</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.convect.muscl.html">pymrm.convect.muscl</a></li>
@@ -266,7 +265,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.grid.generate_grid.html">pymrm.grid.generate_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.grid.non_uniform_grid.html">pymrm.grid.non_uniform_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.helpers.construct_coefficient_matrix.html">pymrm.helpers.construct_coefficient_matrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.helpers.unwrap_bc.html">pymrm.helpers.unwrap_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.interpolate.create_staggered_array.html">pymrm.interpolate.create_staggered_array</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.interpolate.interp_cntr_to_stagg.html">pymrm.interpolate.interp_cntr_to_stagg</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.interpolate.interp_cntr_to_stagg_tvd.html">pymrm.interpolate.interp_cntr_to_stagg_tvd</a></li>
@@ -521,7 +519,7 @@ upwind schemes and apply Total Variation Diminishing (TVD) limiters for numerica
 <p>Functions:
 - construct_convflux_upwind: Constructs the convective flux matrix using the upwind scheme.
 - construct_convflux_upwind_int: Constructs the internal convective flux matrix.
-- construct_convflux_upwind_bc: Constructs the convective flux matrix for boundary conditions.
+- construct_convflux_bc: Constructs the convective flux matrix for boundary conditions.
 - upwind: Upwind TVD limiter.
 - minmod: Minmod TVD limiter.
 - osher: Osher TVD limiter.
@@ -534,42 +532,42 @@ upwind schemes and apply Total Variation Diminishing (TVD) limiters for numerica
 - numpy
 - scipy.sparse (for csc_array)
 - pymrm.grid (for optional grid generation)
-- pymrm.helper (for boundary condition handling)</p>
+- pymrm.helpers (for boundary condition handling)</p>
 <p class="rubric">Functions</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../generated/all/pymrm.convect.clam.html#pymrm.convect.clam" title="pymrm.convect.clam"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clam</span></code></a>(normalized_c_c, normalized_x_c, ...)</p></td>
-<td><p>Apply the CLAM TVD limiter to reduce oscillations in numerical schemes.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.convect.clam" title="pymrm.convect.clam"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clam</span></code></a>(normalized_c_c, normalized_x_c, ...)</p></td>
+<td><p>Applies the CLAM TVD limiter to reduce oscillations in numerical schemes.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../generated/all/pymrm.convect.construct_convflux_upwind.html#pymrm.convect.construct_convflux_upwind" title="pymrm.convect.construct_convflux_upwind"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_convflux_upwind</span></code></a>(shape, x_f[, x_c, ...])</p></td>
-<td><p>Construct the convective flux matrix using the upwind scheme.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.convect.construct_convflux_bc" title="pymrm.convect.construct_convflux_bc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_convflux_bc</span></code></a>(shape, x_f[, x_c, bc, ...])</p></td>
+<td><p>Constructs the convective flux matrix for boundary faces using the upwind scheme.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../generated/all/pymrm.convect.construct_convflux_upwind_bc.html#pymrm.convect.construct_convflux_upwind_bc" title="pymrm.convect.construct_convflux_upwind_bc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_convflux_upwind_bc</span></code></a>(shape, x_f[, ...])</p></td>
-<td><p>Construct the convective flux matrix for the boundary faces using the upwind scheme.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.convect.construct_convflux_upwind" title="pymrm.convect.construct_convflux_upwind"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_convflux_upwind</span></code></a>(shape, x_f[, x_c, ...])</p></td>
+<td><p>Constructs the convective flux matrix using the upwind scheme.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../generated/all/pymrm.convect.construct_convflux_upwind_int.html#pymrm.convect.construct_convflux_upwind_int" title="pymrm.convect.construct_convflux_upwind_int"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_convflux_upwind_int</span></code></a>(shape[, v, axis])</p></td>
-<td><p>Construct the convective flux matrix for internal faces using the upwind scheme.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.convect.construct_convflux_upwind_int" title="pymrm.convect.construct_convflux_upwind_int"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_convflux_upwind_int</span></code></a>(shape[, v, axis])</p></td>
+<td><p>Constructs the convective flux matrix for internal faces using the upwind scheme.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../generated/all/pymrm.convect.minmod.html#pymrm.convect.minmod" title="pymrm.convect.minmod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">minmod</span></code></a>(normalized_c_c, normalized_x_c, ...)</p></td>
-<td><p>Apply the Minmod TVD limiter to reduce oscillations in numerical schemes.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.convect.minmod" title="pymrm.convect.minmod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">minmod</span></code></a>(normalized_c_c, normalized_x_c, ...)</p></td>
+<td><p>Applies the Minmod TVD limiter to reduce oscillations in numerical schemes.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../generated/all/pymrm.convect.muscl.html#pymrm.convect.muscl" title="pymrm.convect.muscl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">muscl</span></code></a>(normalized_c_c, normalized_x_c, ...)</p></td>
-<td><p>Apply the MUSCL TVD limiter to reduce oscillations in numerical schemes.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.convect.muscl" title="pymrm.convect.muscl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">muscl</span></code></a>(normalized_c_c, normalized_x_c, ...)</p></td>
+<td><p>Applies the MUSCL TVD limiter to reduce oscillations in numerical schemes.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../generated/all/pymrm.convect.osher.html#pymrm.convect.osher" title="pymrm.convect.osher"><code class="xref py py-obj docutils literal notranslate"><span class="pre">osher</span></code></a>(normalized_c_c, normalized_x_c, ...)</p></td>
-<td><p>Apply the Osher TVD limiter to reduce oscillations in numerical schemes.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.convect.osher" title="pymrm.convect.osher"><code class="xref py py-obj docutils literal notranslate"><span class="pre">osher</span></code></a>(normalized_c_c, normalized_x_c, ...)</p></td>
+<td><p>Applies the Osher TVD limiter to reduce oscillations in numerical schemes.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../generated/all/pymrm.convect.smart.html#pymrm.convect.smart" title="pymrm.convect.smart"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smart</span></code></a>(normalized_c_c, normalized_x_c, ...)</p></td>
-<td><p>Apply the SMART TVD limiter to reduce oscillations in numerical schemes.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.convect.smart" title="pymrm.convect.smart"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smart</span></code></a>(normalized_c_c, normalized_x_c, ...)</p></td>
+<td><p>Applies the SMART TVD limiter to reduce oscillations in numerical schemes.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../generated/all/pymrm.convect.stoic.html#pymrm.convect.stoic" title="pymrm.convect.stoic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stoic</span></code></a>(normalized_c_c, normalized_x_c, ...)</p></td>
-<td><p>Apply the STOIC TVD limiter to reduce oscillations in numerical schemes.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.convect.stoic" title="pymrm.convect.stoic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stoic</span></code></a>(normalized_c_c, normalized_x_c, ...)</p></td>
+<td><p>Applies the STOIC TVD limiter to reduce oscillations in numerical schemes.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../generated/all/pymrm.convect.upwind.html#pymrm.convect.upwind" title="pymrm.convect.upwind"><code class="xref py py-obj docutils literal notranslate"><span class="pre">upwind</span></code></a>(normalized_c_c, normalized_x_c, ...)</p></td>
-<td><p>Apply the upwind TVD limiter to reduce oscillations in numerical schemes.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.convect.upwind" title="pymrm.convect.upwind"><code class="xref py py-obj docutils literal notranslate"><span class="pre">upwind</span></code></a>(normalized_c_c, normalized_x_c, ...)</p></td>
+<td><p>Applies the upwind TVD limiter to reduce oscillations in numerical schemes.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../generated/all/pymrm.convect.vanleer.html#pymrm.convect.vanleer" title="pymrm.convect.vanleer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vanleer</span></code></a>(normalized_c_c, normalized_x_c, ...)</p></td>
-<td><p>Apply the van Leer TVD limiter to reduce oscillations in numerical schemes.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.convect.vanleer" title="pymrm.convect.vanleer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vanleer</span></code></a>(normalized_c_c, normalized_x_c, ...)</p></td>
+<td><p>Applies the van Leer TVD limiter to reduce oscillations in numerical schemes.</p></td>
 </tr>
 </tbody>
 </table>

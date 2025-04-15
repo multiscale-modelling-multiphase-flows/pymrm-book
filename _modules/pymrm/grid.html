@@ -253,7 +253,6 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../content/api/alphabetical_overview.html">All Functions and Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.convect.clam.html">pymrm.convect.clam</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.convect.construct_convflux_upwind.html">pymrm.convect.construct_convflux_upwind</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.convect.construct_convflux_upwind_bc.html">pymrm.convect.construct_convflux_upwind_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.convect.construct_convflux_upwind_int.html">pymrm.convect.construct_convflux_upwind_int</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.convect.minmod.html">pymrm.convect.minmod</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.convect.muscl.html">pymrm.convect.muscl</a></li>
@@ -265,7 +264,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.grid.generate_grid.html">pymrm.grid.generate_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.grid.non_uniform_grid.html">pymrm.grid.non_uniform_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.helpers.construct_coefficient_matrix.html">pymrm.helpers.construct_coefficient_matrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.helpers.unwrap_bc.html">pymrm.helpers.unwrap_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.interpolate.create_staggered_array.html">pymrm.interpolate.create_staggered_array</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.interpolate.interp_cntr_to_stagg.html">pymrm.interpolate.interp_cntr_to_stagg</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../content/api/generated/all/pymrm.interpolate.interp_cntr_to_stagg_tvd.html">pymrm.interpolate.interp_cntr_to_stagg_tvd</a></li>
@@ -467,7 +465,7 @@ document.write(`
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <div class="viewcode-block" id="non_uniform_grid">
-<a class="viewcode-back" href="../../content/api/generated/all/pymrm.grid.non_uniform_grid.html#pymrm.grid.non_uniform_grid">[docs]</a>
+<a class="viewcode-back" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.grid.non_uniform_grid">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">non_uniform_grid</span><span class="p">(</span><span class="n">left_bound</span><span class="p">,</span> <span class="n">right_bound</span><span class="p">,</span> <span class="n">num_points</span><span class="p">,</span> <span class="n">dx_inf</span><span class="p">,</span> <span class="n">factor</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate a non-uniform grid of points in the interval [left_bound, right_bound].</span>
@@ -496,7 +494,7 @@ document.write(`
 
 
 <div class="viewcode-block" id="generate_grid">
-<a class="viewcode-back" href="../../content/api/generated/all/pymrm.grid.generate_grid.html#pymrm.grid.generate_grid">[docs]</a>
+<a class="viewcode-back" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.grid.generate_grid">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">generate_grid</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">x_f</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">generate_x_c</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">x_c</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate a structured grid with face and optional cell-centered positions.</span>

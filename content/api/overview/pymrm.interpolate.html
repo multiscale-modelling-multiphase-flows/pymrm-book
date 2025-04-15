@@ -254,7 +254,6 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../alphabetical_overview.html">All Functions and Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.convect.clam.html">pymrm.convect.clam</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.convect.construct_convflux_upwind.html">pymrm.convect.construct_convflux_upwind</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.convect.construct_convflux_upwind_bc.html">pymrm.convect.construct_convflux_upwind_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.convect.construct_convflux_upwind_int.html">pymrm.convect.construct_convflux_upwind_int</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.convect.minmod.html">pymrm.convect.minmod</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.convect.muscl.html">pymrm.convect.muscl</a></li>
@@ -266,7 +265,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.grid.generate_grid.html">pymrm.grid.generate_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.grid.non_uniform_grid.html">pymrm.grid.non_uniform_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.helpers.construct_coefficient_matrix.html">pymrm.helpers.construct_coefficient_matrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.helpers.unwrap_bc.html">pymrm.helpers.unwrap_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.interpolate.create_staggered_array.html">pymrm.interpolate.create_staggered_array</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.interpolate.interp_cntr_to_stagg.html">pymrm.interpolate.interp_cntr_to_stagg</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/all/pymrm.interpolate.interp_cntr_to_stagg_tvd.html">pymrm.interpolate.interp_cntr_to_stagg_tvd</a></li>
@@ -561,22 +559,25 @@ oscillations in convective transport problems.</p>
 <h2>Dependencies:<a class="headerlink" href="#dependencies" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>numpy: For array manipulations.</p></li>
-<li><p>pymrm.helpers: For boundary condition handling (<cite>unwrap_bc</cite>).</p></li>
+<li><p>pymrm.helpers: For boundary condition handling (<cite>unwrap_bc_coeff</cite>).</p></li>
 </ul>
 </section>
 <p class="rubric">Functions</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../generated/all/pymrm.interpolate.create_staggered_array.html#pymrm.interpolate.create_staggered_array" title="pymrm.interpolate.create_staggered_array"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_staggered_array</span></code></a>(array, shape, axis[, ...])</p></td>
-<td><p>Create a staggered array by interpolating values to face-centered positions.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../generated/all/pymrm.interpolate.interp_cntr_to_stagg.html#pymrm.interpolate.interp_cntr_to_stagg" title="pymrm.interpolate.interp_cntr_to_stagg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">interp_cntr_to_stagg</span></code></a>(cell_centered_values, x_f)</p></td>
-<td><p>Interpolate values at cell-centers to staggered positions using linear interpolation.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../generated/all/pymrm.interpolate.interp_cntr_to_stagg_tvd.html#pymrm.interpolate.interp_cntr_to_stagg_tvd" title="pymrm.interpolate.interp_cntr_to_stagg_tvd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">interp_cntr_to_stagg_tvd</span></code></a>(...[, x_c, bc, v, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.interpolate.compute_boundary_values" title="pymrm.interpolate.compute_boundary_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_boundary_values</span></code></a>(...[, x_c, bc, axis])</p></td>
 <td><p>Interpolate values at cell-centers to staggered positions using a TVD scheme.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../generated/all/pymrm.interpolate.interp_stagg_to_cntr.html#pymrm.interpolate.interp_stagg_to_cntr" title="pymrm.interpolate.interp_stagg_to_cntr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">interp_stagg_to_cntr</span></code></a>(staggered_values, x_f)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.interpolate.create_staggered_array" title="pymrm.interpolate.create_staggered_array"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_staggered_array</span></code></a>(array, shape, axis[, ...])</p></td>
+<td><p>Create a staggered array by broadcasting or interpolating face-centered values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.interpolate.interp_cntr_to_stagg" title="pymrm.interpolate.interp_cntr_to_stagg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">interp_cntr_to_stagg</span></code></a>(cell_centered_values, x_f)</p></td>
+<td><p>Interpolate values at cell-centers to staggered positions using linear interpolation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.interpolate.interp_cntr_to_stagg_tvd" title="pymrm.interpolate.interp_cntr_to_stagg_tvd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">interp_cntr_to_stagg_tvd</span></code></a>(...[, x_c, bc, v, ...])</p></td>
+<td><p>Interpolate values at cell-centers to staggered positions using a TVD scheme.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../pymrm/docs/sphinx/pymrm.html#pymrm.interpolate.interp_stagg_to_cntr" title="pymrm.interpolate.interp_stagg_to_cntr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">interp_stagg_to_cntr</span></code></a>(staggered_values, x_f)</p></td>
 <td><p>Interpolate values at staggered positions to cell-centers using linear interpolation.</p></td>
 </tr>
 </tbody>

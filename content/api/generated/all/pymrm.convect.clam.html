@@ -254,7 +254,6 @@
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="../../alphabetical_overview.html">All Functions and Classes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">pymrm.convect.clam</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.convect.construct_convflux_upwind.html">pymrm.convect.construct_convflux_upwind</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pymrm.convect.construct_convflux_upwind_bc.html">pymrm.convect.construct_convflux_upwind_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.convect.construct_convflux_upwind_int.html">pymrm.convect.construct_convflux_upwind_int</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.convect.minmod.html">pymrm.convect.minmod</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.convect.muscl.html">pymrm.convect.muscl</a></li>
@@ -266,7 +265,6 @@
 <li class="toctree-l3"><a class="reference internal" href="pymrm.grid.generate_grid.html">pymrm.grid.generate_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.grid.non_uniform_grid.html">pymrm.grid.non_uniform_grid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.helpers.construct_coefficient_matrix.html">pymrm.helpers.construct_coefficient_matrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pymrm.helpers.unwrap_bc.html">pymrm.helpers.unwrap_bc</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.interpolate.create_staggered_array.html">pymrm.interpolate.create_staggered_array</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.interpolate.interp_cntr_to_stagg.html">pymrm.interpolate.interp_cntr_to_stagg</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pymrm.interpolate.interp_cntr_to_stagg_tvd.html">pymrm.interpolate.interp_cntr_to_stagg_tvd</a></li>
@@ -528,17 +526,17 @@ document.write(`
 <dl class="py function">
 <dt class="sig sig-object py" id="pymrm.convect.clam">
 <span class="sig-prename descclassname"><span class="pre">pymrm.convect.</span></span><span class="sig-name descname"><span class="pre">clam</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">normalized_c_c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalized_x_c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalized_x_d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/pymrm/convect.html#clam"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymrm.convect.clam" title="Link to this definition">#</a></dt>
-<dd><p>Apply the CLAM TVD limiter to reduce oscillations in numerical schemes.</p>
+<dd><p>Applies the CLAM TVD limiter to reduce oscillations in numerical schemes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>normalized_c_c</strong> (<em>ndarray</em>) – Normalized concentration at cell centers.</p></li>
 <li><p><strong>normalized_x_c</strong> (<em>ndarray</em>) – Normalized position of cell centers.</p></li>
-<li><p><strong>normalized_x_d</strong> (<em>ndarray</em>) – Normalized position of down-wind face.</p></li>
+<li><p><strong>normalized_x_d</strong> (<em>ndarray</em>) – Normalized position of downwind face.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Normalized concentration difference c_norm_d - c_norm_C.</p>
+<dd class="field-even"><p>Normalized concentration difference (c_norm_d - c_norm_C).</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>ndarray</p>
