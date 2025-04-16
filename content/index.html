@@ -185,8 +185,19 @@
             </li>
         </ul>
         <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="getting_started/getting_started.html">Getting Started with PyMRM</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../pymrm/docs/installation.html">Installation of PyMRM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/getting_started.html">Getting Started with PyMRM</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="tutorials/tutorials.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="examples/examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pymrm/examples/counter_diffusion_reaction.html">Counter diffusion and reaction in a slab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pymrm/examples/particle_model_effectiveness.html">Particle model: diffusion + first order reaction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pymrm/examples/counter_current_reaction.html">Counter-current convection and reaction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pymrm/examples/tvd.html">TVD schemes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pymrm/examples/unsteady_diffusion_reaction_2D.html">Unsteady diffusion + reaction 1/2/3D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pymrm/examples/unsteady_convection_reaction.html">Unsteady convection + reaction 1D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pymrm/examples/darcy_flow.html">Darcy flow in a 2D domain with varying permeability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pymrm/examples/lid_driven_cavity.html">Lid-driven cavity</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="exercises/index.html">Exercises</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -287,17 +298,6 @@
 <li class="toctree-l3"><a class="reference internal" href="api/generated/all/pymrm.solve.newton.html">pymrm.solve.newton</a></li>
 </ul>
 </details></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="examples/examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../pymrm/examples/counter_diffusion_reaction.html">Counter diffusion and reaction in a slab</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pymrm/examples/particle_model_effectiveness.html">Particle model: diffusion + first order reaction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pymrm/examples/counter_current_reaction.html">Counter-current convection and reaction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pymrm/examples/tvd.html">TVD schemes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pymrm/examples/unsteady_diffusion_reaction_2D.html">Unsteady diffusion + reaction 1/2/3D</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pymrm/examples/unsteady_convection_reaction.html">Unsteady convection + reaction 1D</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pymrm/examples/darcy_flow.html">Darcy flow in a 2D domain with varying permeability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pymrm/examples/lid_driven_cavity.html">Lid-driven cavity</a></li>
 </ul>
 </details></li>
 </ul>
@@ -516,7 +516,8 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="multiphase-reactor-modeling-using-pymrm">
 <h1><svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-home" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z"></path></svg> Multiphase Reactor Modeling using PyMRM<a class="headerlink" href="#multiphase-reactor-modeling-using-pymrm" title="Link to this heading">#</a></h1>
-<p>This book is work in progress. Currently it contains a set of exercises, a set of examples and case studies.</p>
+<p>This book is a work in progress. Currently, it contains a set of tutorials, examples, case studies and, exercises.<br />
+For TU/e students of the MRM class (6EMA05), the course material is posted on the <a class="reference internal" href="#../_static/redirect.html"><span class="xref myst">Canvas page</span></a>.</p>
 <div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
 <div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-5 sd-g-1 sd-g-xs-1 sd-g-sm-1 sd-g-md-1 sd-g-lg-2 docutils">
 <div class="sd-col sd-d-flex-row docutils">
@@ -529,20 +530,20 @@ document.write(`
 <a class="sd-stretched-link sd-hide-link-text reference internal" href="getting_started/getting_started.html"><span class="doc">Getting Started with PyMRM</span></a></div>
 </div>
 <div class="sd-col sd-d-flex-row docutils">
-<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
-<svg version="1.1" width="2.5em" height="2.5em" class="sd-octicon sd-octicon-book sd-mr-1" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 3.75A.75.75 0 0 1 .75 3h7.497c1.566 0 2.945.8 3.751 2.014A4.495 4.495 0 0 1 15.75 3h7.5a.75.75 0 0 1 .75.75v15.063a.752.752 0 0 1-.755.75l-7.682-.052a3 3 0 0 0-2.142.878l-.89.891a.75.75 0 0 1-1.061 0l-.902-.901a2.996 2.996 0 0 0-2.121-.879H.75a.75.75 0 0 1-.75-.75Zm12.75 15.232a4.503 4.503 0 0 1 2.823-.971l6.927.047V4.5h-6.75a3 3 0 0 0-3 3ZM11.247 7.497a3 3 0 0 0-3-2.997H1.5V18h6.947c1.018 0 2.006.346 2.803.98Z"></path></svg> Multiphase Reactor Modeling</div>
-<p class="sd-card-text">Theoretical background of multiphase reactor modeling.</p>
+<svg version="1.1" width="2.5em" height="2.5em" class="sd-octicon sd-octicon-graph sd-mr-1" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 2.75a.75.75 0 0 0-1.5 0v18.5c0 .414.336.75.75.75H20a.75.75 0 0 0 0-1.5H2.5V2.75Z"></path><path d="M22.28 7.78a.75.75 0 0 0-1.06-1.06l-5.72 5.72-3.72-3.72a.75.75 0 0 0-1.06 0l-6 6a.75.75 0 1 0 1.06 1.06l5.47-5.47 3.72 3.72a.75.75 0 0 0 1.06 0l6.25-6.25Z"></path></svg> Tutorials</div>
+<p class="sd-card-text">Python notebooks with tutorials on using <code class="docutils literal notranslate"><span class="pre">PyMRM</span></code> for Multiphase Reactor Models.</p>
 </div>
-</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="tutorials/tutorials.html"><span class="doc">Tutorials</span></a></div>
 </div>
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
 <svg version="1.1" width="2.5em" height="2.5em" class="sd-octicon sd-octicon-graph sd-mr-1" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 2.75a.75.75 0 0 0-1.5 0v18.5c0 .414.336.75.75.75H20a.75.75 0 0 0 0-1.5H2.5V2.75Z"></path><path d="M22.28 7.78a.75.75 0 0 0-1.06-1.06l-5.72 5.72-3.72-3.72a.75.75 0 0 0-1.06 0l-6 6a.75.75 0 1 0 1.06 1.06l5.47-5.47 3.72 3.72a.75.75 0 0 0 1.06 0l6.25-6.25Z"></path></svg> Examples</div>
-<p class="sd-card-text">Example Python notebooks and case studies highlighting different use cases for pymrm.</p>
+<p class="sd-card-text">Example Python notebooks and case studies for different use cases.</p>
 </div>
 <a class="sd-stretched-link sd-hide-link-text reference internal" href="examples/examples.html"><span class="doc">Examples</span></a></div>
 </div>
@@ -559,8 +560,8 @@ document.write(`
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
-<svg version="1.1" width="2.5em" height="2.5em" class="sd-octicon sd-octicon-code-square sd-mr-1" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.3 8.24a.75.75 0 0 1-.04 1.06L7.352 12l2.908 2.7a.75.75 0 1 1-1.02 1.1l-3.5-3.25a.75.75 0 0 1 0-1.1l3.5-3.25a.75.75 0 0 1 1.06.04Zm3.44 1.06a.75.75 0 1 1 1.02-1.1l3.5 3.25a.75.75 0 0 1 0 1.1l-3.5 3.25a.75.75 0 1 1-1.02-1.1l2.908-2.7-2.908-2.7Z"></path><path d="M2 3.75C2 2.784 2.784 2 3.75 2h16.5c.966 0 1.75.784 1.75 1.75v16.5A1.75 1.75 0 0 1 20.25 22H3.75A1.75 1.75 0 0 1 2 20.25Zm1.75-.25a.25.25 0 0 0-.25.25v16.5c0 .138.112.25.25.25h16.5a.25.25 0 0 0 .25-.25V3.75a.25.25 0 0 0-.25-.25Z"></path></svg> API reference.</div>
-<p class="sd-card-text">The PyMRM API reference</p>
+<svg version="1.1" width="2.5em" height="2.5em" class="sd-octicon sd-octicon-code-square sd-mr-1" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.3 8.24a.75.75 0 0 1-.04 1.06L7.352 12l2.908 2.7a.75.75 0 1 1-1.02 1.1l-3.5-3.25a.75.75 0 0 1 0-1.1l3.5-3.25a.75.75 0 0 1 1.06.04Zm3.44 1.06a.75.75 0 1 1 1.02-1.1l3.5 3.25a.75.75 0 0 1 0 1.1l-3.5 3.25a.75.75 0 1 1-1.02-1.1l2.908-2.7-2.908-2.7Z"></path><path d="M2 3.75C2 2.784 2.784 2 3.75 2h16.5c.966 0 1.75.784 1.75 1.75v16.5A1.75 1.75 0 0 1 20.25 22H3.75A1.75 1.75 0 0 1 2 20.25Zm1.75-.25a.25.25 0 0 0-.25.25v16.5c0 .138.112.25.25.25h16.5a.25.25 0 0 0 .25-.25V3.75a.25.25 0 0 0-.25-.25Z"></path></svg> API Reference</div>
+<p class="sd-card-text">The <code class="docutils literal notranslate"><span class="pre">PyMRM</span></code> API reference.</p>
 </div>
 <a class="sd-stretched-link sd-hide-link-text reference internal" href="api/index.html"><span class="doc">API Reference of pymrm</span></a></div>
 </div>
