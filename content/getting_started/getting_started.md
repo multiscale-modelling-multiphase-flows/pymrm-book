@@ -1,23 +1,54 @@
 # Getting Started with PyMRM
 
-To get familiar with the basics of PyMRM, start by running some Jupyter notebooks. A great first step is the [](../../pymrm/examples/counter_diffusion_reaction.ipynb) notebook. After that, you can explore a variety of [examples](../examples/examples.rst) to deepen your understanding, and then try developing your own models. For additional practice, consider working through the [exercises](../exercises/index.md). To fully understand PyMRM's functions and classes, consult the [API documentation](../api/api.rst).
+## Overview
 
-For setting up your environment to run and develop multiphase reactor models with PyMRM, follow our [installation guide](../../pymrm/docs/installation.md).
+PyMRM is a Python package for modeling multiphase reactors, developed as part of the Multiphase Reactor Modeling course at Eindhoven University of Technology. It provides tools for modeling diffusion, convection, reaction, and mass transfer, with a user-friendly interface and extensive documentation.
 
-If you prefer to explore sample notebooks quickly, you can use [Google Colab](https://colab.research.google.com/). Follow these steps to open a sample notebook from GitHub on Colab:
+This book is designed to help you get started with PyMRM, explore its features, and develop your own models.
 
-1. **Go to Google Colab**: [Google Colab](https://colab.research.google.com/).
-2. **Open the GitHub tab**:
-   - Navigate to **File → Open Notebook**.
-   - Click on the **GitHub** tab.
-3. **Enter the repository URL**:  
-   Paste this URL into the input box:  
-   [](https://github.com/multiscale-modelling-multiphase-flows/pymrm).
-4. Navigate to the [examples folder](https://github.com/multiscale-modelling-multiphase-flows/pymrm/tree/main/examples) and choose a notebook, such as [counter_diffusion_reaction.ipynb](https://github.com/multiscale-modelling-multiphase-flows/pymrm/blob/main/examples/counter_diffusion_reaction.ipynb).
+## Installation
 
-Using this setup, you can explore and run sample notebooks directly from the repository.
+To use PyMRM locally, follow these steps:
 
-To use PyMRM, you need to install the package. Add a code cell at the top of a notebook, then paste and execute the following code:
+1. **Install Python**: Use [Anaconda](https://www.anaconda.com/products/distribution) or another Python distribution.
+2. **Set up a virtual environment**:
+   ```sh
+   conda create -n pymrm_env python=3.10
+   conda activate pymrm_env
+   ```
+3. **Install PyMRM**:
+   ```sh
+   pip install pymrm
+   ```
+4. **Verify the installation**:
+   ```python
+   import pymrm
+   print("PyMRM version:", pymrm.__version__)
+   ```
 
-```python
-!pip install pymrm
+For detailed instructions, refer to the [Installation Guide](../../pymrm/docs/installation.md).
+
+## Using Google Colab
+
+If you prefer not to install PyMRM locally, you can use [Google Colab](https://colab.research.google.com/). Colab allows you to run Jupyter notebooks in the cloud without any setup. To get started:
+
+1. Open [Google Colab](https://colab.research.google.com/).
+2. Navigate to the **GitHub** tab under **File → Open Notebook**.
+3. Enter the repository URL:  
+   [https://github.com/multiscale-modelling-multiphase-flows/pymrm](https://github.com/multiscale-modelling-multiphase-flows/pymrm).
+4. Select a notebook from the [examples folder](https://github.com/multiscale-modelling-multiphase-flows/pymrm/tree/main/examples), such as [counter_diffusion_reaction.ipynb](https://github.com/multiscale-modelling-multiphase-flows/pymrm/blob/main/examples/counter_diffusion_reaction.ipynb).
+5. Add the following code cell to install PyMRM:
+   ```python
+   !pip install pymrm
+   ```
+
+## Content of the Book
+
+This book contains the following sections to help you master PyMRM:
+
+- **Tutorials**: Step-by-step guides to learn the basics of PyMRM (coming soon).
+- **Examples**: A collection of advanced use cases, such as modeling diffusion, convection, and reaction processes.
+- **Exercises**: Practice problems to deepen your understanding of PyMRM's features.
+- **API Documentation**: A comprehensive reference for all functions and classes in PyMRM.
+
+Start with the tutorials to build a strong foundation, then explore the examples and exercises to enhance your skills. For further details, consult the [API documentation](../api/api.rst).

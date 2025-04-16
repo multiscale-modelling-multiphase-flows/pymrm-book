@@ -4,9 +4,10 @@ root: content/index
 chapters:
 - file: content/getting_started/getting_started
   title: Getting Started with PyMRM
-  sections:
-  - file: pymrm/docs/installation
-    title: Installation of PyMRM
+- file: content/tutorials/tutorials
+  title: Tutorials
+- file: content/examples/examples
+  title: Examples
 - file: content/exercises/index
   title: Exercises
   options:
@@ -104,5 +105,3 @@ chapters:
     title: Modules
   - file: content/api/alphabetical_overview
     title: All Functions and Classes
-- file: content/examples/examples
-  title: Examples
