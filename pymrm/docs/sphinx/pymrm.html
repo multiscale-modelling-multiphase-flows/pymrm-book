@@ -181,7 +181,8 @@
         </ul>
         <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../../content/getting_started/getting_started.html">Getting Started with PyMRM</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../../content/tutorials/tutorials.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../content/tutorials/tutorials.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/introduction_and_start.html">Multiphase Reactor Modeling</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../content/examples/examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1033,6 +1034,11 @@ oscillations in convective transport problems.</p>
 </dd>
 </dl>
 </li>
+<li><dl class="simple">
+<dt>compute_boundary_values(cell_centered_values, x_f, x_c=None, bc=None, axis=0)</dt><dd><p>Compute boundary values and gradients for cell-centered values.</p>
+</dd>
+</dl>
+</li>
 </ul>
 </section>
 <section id="dependencies">
@@ -1045,22 +1051,28 @@ oscillations in convective transport problems.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pymrm.interpolate.compute_boundary_values">
 <span class="sig-prename descclassname"><span class="pre">pymrm.interpolate.</span></span><span class="sig-name descname"><span class="pre">compute_boundary_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell_centered_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pymrm/interpolate.html#compute_boundary_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymrm.interpolate.compute_boundary_values" title="Link to this definition">#</a></dt>
-<dd><p>Interpolate values at cell-centers to staggered positions using a TVD scheme.</p>
+<dd><p>Compute boundary values and gradients for cell-centered values.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>cell_centered_values</strong> (<em>ndarray</em>) – Quantities at cell-centered positions.</p></li>
-<li><p><strong>x_f</strong> (<em>ndarray</em>) – Positions of cell-faces.</p></li>
-<li><p><strong>x_c</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Cell-centered positions. If None, they are computed as midpoints.</p></li>
-<li><p><strong>bc</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Boundary conditions. Default is None.</p></li>
-<li><p><strong>axis</strong> (<em>int</em><em>, </em><em>optional</em>) – Dimension to interpolate along. Default is 0.</p></li>
+<li><p><strong>cell_centered_values</strong> (<em>ndarray</em>) – Array of values at cell-centered positions.</p></li>
+<li><p><strong>x_f</strong> (<em>ndarray</em>) – Positions of cell faces.</p></li>
+<li><p><strong>x_c</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Positions of cell centers. If None, midpoints are used.</p></li>
+<li><p><strong>bc</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Boundary conditions as dictionaries with keys ‘a’, ‘b’, and ‘d’.</p></li>
+<li><p><strong>axis</strong> (<em>int</em><em>, </em><em>optional</em>) – Axis along which to compute boundary values. Default is 0.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>concentrations at staggered positions.</p>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ndarray: Boundary values at the lower boundary.</p></li>
+<li><p>ndarray: Gradients at the lower boundary.</p></li>
+<li><p>ndarray: Boundary values at the upper boundary.</p></li>
+<li><p>ndarray: Gradients at the upper boundary.</p></li>
+</ul>
+</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray</p>
+<dd class="field-odd"><p>tuple</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1068,19 +1080,19 @@ oscillations in convective transport problems.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pymrm.interpolate.create_staggered_array">
 <span class="sig-prename descclassname"><span class="pre">pymrm.interpolate.</span></span><span class="sig-name descname"><span class="pre">create_staggered_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_f</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pymrm/interpolate.html#create_staggered_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymrm.interpolate.create_staggered_array" title="Link to this definition">#</a></dt>
-<dd><p>Create a staggered array by broadcasting or interpolating face-centered values.</p>
+<dd><p>Generate a staggered array by broadcasting or interpolating face-centered values.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>array</strong> (<em>ndarray</em>) – The array to be staggered.</p></li>
+<li><p><strong>array</strong> (<em>ndarray</em>) – Input array to be staggered.</p></li>
 <li><p><strong>shape</strong> (<em>tuple</em>) – Shape of the non-staggered cell-centered field.</p></li>
 <li><p><strong>axis</strong> (<em>int</em>) – Axis along which staggering is applied.</p></li>
-<li><p><strong>x_f</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Face positions. Default is None.</p></li>
-<li><p><strong>x_c</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Cell positions. Default is None.</p></li>
+<li><p><strong>x_f</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Positions of cell faces. Default is None.</p></li>
+<li><p><strong>x_c</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Positions of cell centers. Default is None.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The staggered array aligned with face positions.</p>
+<dd class="field-even"><p>Staggered array aligned with face positions.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>ndarray</p>
@@ -1091,14 +1103,14 @@ oscillations in convective transport problems.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pymrm.interpolate.interp_cntr_to_stagg">
 <span class="sig-prename descclassname"><span class="pre">pymrm.interpolate.</span></span><span class="sig-name descname"><span class="pre">interp_cntr_to_stagg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell_centered_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pymrm/interpolate.html#interp_cntr_to_stagg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymrm.interpolate.interp_cntr_to_stagg" title="Link to this definition">#</a></dt>
-<dd><p>Interpolate values at cell-centers to staggered positions using linear interpolation.</p>
+<dd><p>Linearly interpolate values from cell-centered positions to staggered positions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>cell_centered_values</strong> (<em>ndarray</em>) – Quantities at cell-centered positions.</p></li>
-<li><p><strong>x_f</strong> (<em>ndarray</em>) – Positions of cell-faces.</p></li>
-<li><p><strong>x_c</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Cell-centered positions. If None, they are computed as midpoints.</p></li>
-<li><p><strong>axis</strong> (<em>int</em><em>, </em><em>optional</em>) – Dimension to interpolate along. Default is 0.</p></li>
+<li><p><strong>cell_centered_values</strong> (<em>ndarray</em>) – Array of values at cell-centered positions.</p></li>
+<li><p><strong>x_f</strong> (<em>ndarray</em>) – Positions of cell faces.</p></li>
+<li><p><strong>x_c</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Positions of cell centers. If None, midpoints are used.</p></li>
+<li><p><strong>axis</strong> (<em>int</em><em>, </em><em>optional</em>) – Axis along which to interpolate. Default is 0.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -1113,25 +1125,28 @@ oscillations in convective transport problems.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pymrm.interpolate.interp_cntr_to_stagg_tvd">
 <span class="sig-prename descclassname"><span class="pre">pymrm.interpolate.</span></span><span class="sig-name descname"><span class="pre">interp_cntr_to_stagg_tvd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell_centered_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tvd_limiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pymrm/interpolate.html#interp_cntr_to_stagg_tvd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymrm.interpolate.interp_cntr_to_stagg_tvd" title="Link to this definition">#</a></dt>
-<dd><p>Interpolate values at cell-centers to staggered positions using a TVD scheme.</p>
+<dd><p>Perform TVD interpolation from cell-centered positions to staggered positions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>cell_centered_values</strong> (<em>ndarray</em>) – Quantities at cell-centered positions.</p></li>
-<li><p><strong>x_f</strong> (<em>ndarray</em>) – Positions of cell-faces.</p></li>
-<li><p><strong>x_c</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Cell-centered positions. If None, they are computed as midpoints.</p></li>
-<li><p><strong>bc</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Boundary conditions. Default is None.</p></li>
+<li><p><strong>cell_centered_values</strong> (<em>ndarray</em>) – Array of values at cell-centered positions.</p></li>
+<li><p><strong>x_f</strong> (<em>ndarray</em>) – Positions of cell faces.</p></li>
+<li><p><strong>x_c</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Positions of cell centers. If None, midpoints are used.</p></li>
+<li><p><strong>bc</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Boundary conditions as dictionaries with keys ‘a’, ‘b’, and ‘d’.</p></li>
 <li><p><strong>v</strong> (<em>ndarray</em><em> or </em><em>float</em><em>, </em><em>optional</em>) – Velocity field for upwinding. Default is 0.</p></li>
 <li><p><strong>tvd_limiter</strong> (<em>callable</em><em>, </em><em>optional</em>) – TVD limiter function. Default is None.</p></li>
-<li><p><strong>axis</strong> (<em>int</em><em>, </em><em>optional</em>) – Dimension to interpolate along. Default is 0.</p></li>
+<li><p><strong>axis</strong> (<em>int</em><em>, </em><em>optional</em>) – Axis along which to interpolate. Default is 0.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Interpolated concentrations at staggered positions.
-ndarray: Delta staggered values.</p>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ndarray: Interpolated values at staggered positions.</p></li>
+<li><p>ndarray: Delta values for TVD corrections.</p></li>
+</ul>
+</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray</p>
+<dd class="field-odd"><p>tuple</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1139,18 +1154,18 @@ ndarray: Delta staggered values.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pymrm.interpolate.interp_stagg_to_cntr">
 <span class="sig-prename descclassname"><span class="pre">pymrm.interpolate.</span></span><span class="sig-name descname"><span class="pre">interp_stagg_to_cntr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">staggered_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pymrm/interpolate.html#interp_stagg_to_cntr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymrm.interpolate.interp_stagg_to_cntr" title="Link to this definition">#</a></dt>
-<dd><p>Interpolate values at staggered positions to cell-centers using linear interpolation.</p>
+<dd><p>Linearly interpolate values from staggered positions to cell-centered positions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>staggered_values</strong> (<em>ndarray</em>) – Quantities at staggered positions.</p></li>
-<li><p><strong>x_f</strong> (<em>ndarray</em>) – Positions of cell-faces.</p></li>
-<li><p><strong>x_c</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Cell-centered positions. If None, they are computed as midpoints.</p></li>
-<li><p><strong>axis</strong> (<em>int</em><em>, </em><em>optional</em>) – Dimension to interpolate along. Default is 0.</p></li>
+<li><p><strong>staggered_values</strong> (<em>ndarray</em>) – Array of values at staggered positions.</p></li>
+<li><p><strong>x_f</strong> (<em>ndarray</em>) – Positions of cell faces.</p></li>
+<li><p><strong>x_c</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Positions of cell centers. If None, midpoints are used.</p></li>
+<li><p><strong>axis</strong> (<em>int</em><em>, </em><em>optional</em>) – Axis along which to interpolate. Default is 0.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Interpolated values at cell centers.</p>
+<dd class="field-even"><p>Interpolated values at cell-centered positions.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>ndarray</p>
@@ -1672,22 +1687,28 @@ adjusted proportionally. Default is 0.</p></li>
 <dl class="py function">
 <dt class="sig sig-object py" id="pymrm.compute_boundary_values">
 <span class="sig-prename descclassname"><span class="pre">pymrm.</span></span><span class="sig-name descname"><span class="pre">compute_boundary_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell_centered_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pymrm/interpolate.html#compute_boundary_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymrm.compute_boundary_values" title="Link to this definition">#</a></dt>
-<dd><p>Interpolate values at cell-centers to staggered positions using a TVD scheme.</p>
+<dd><p>Compute boundary values and gradients for cell-centered values.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>cell_centered_values</strong> (<em>ndarray</em>) – Quantities at cell-centered positions.</p></li>
-<li><p><strong>x_f</strong> (<em>ndarray</em>) – Positions of cell-faces.</p></li>
-<li><p><strong>x_c</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Cell-centered positions. If None, they are computed as midpoints.</p></li>
-<li><p><strong>bc</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Boundary conditions. Default is None.</p></li>
-<li><p><strong>axis</strong> (<em>int</em><em>, </em><em>optional</em>) – Dimension to interpolate along. Default is 0.</p></li>
+<li><p><strong>cell_centered_values</strong> (<em>ndarray</em>) – Array of values at cell-centered positions.</p></li>
+<li><p><strong>x_f</strong> (<em>ndarray</em>) – Positions of cell faces.</p></li>
+<li><p><strong>x_c</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Positions of cell centers. If None, midpoints are used.</p></li>
+<li><p><strong>bc</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Boundary conditions as dictionaries with keys ‘a’, ‘b’, and ‘d’.</p></li>
+<li><p><strong>axis</strong> (<em>int</em><em>, </em><em>optional</em>) – Axis along which to compute boundary values. Default is 0.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>concentrations at staggered positions.</p>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ndarray: Boundary values at the lower boundary.</p></li>
+<li><p>ndarray: Gradients at the lower boundary.</p></li>
+<li><p>ndarray: Boundary values at the upper boundary.</p></li>
+<li><p>ndarray: Gradients at the upper boundary.</p></li>
+</ul>
+</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray</p>
+<dd class="field-odd"><p>tuple</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1933,19 +1954,19 @@ between domains, improving numerical stability.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pymrm.create_staggered_array">
 <span class="sig-prename descclassname"><span class="pre">pymrm.</span></span><span class="sig-name descname"><span class="pre">create_staggered_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_f</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pymrm/interpolate.html#create_staggered_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymrm.create_staggered_array" title="Link to this definition">#</a></dt>
-<dd><p>Create a staggered array by broadcasting or interpolating face-centered values.</p>
+<dd><p>Generate a staggered array by broadcasting or interpolating face-centered values.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>array</strong> (<em>ndarray</em>) – The array to be staggered.</p></li>
+<li><p><strong>array</strong> (<em>ndarray</em>) – Input array to be staggered.</p></li>
 <li><p><strong>shape</strong> (<em>tuple</em>) – Shape of the non-staggered cell-centered field.</p></li>
 <li><p><strong>axis</strong> (<em>int</em>) – Axis along which staggering is applied.</p></li>
-<li><p><strong>x_f</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Face positions. Default is None.</p></li>
-<li><p><strong>x_c</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Cell positions. Default is None.</p></li>
+<li><p><strong>x_f</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Positions of cell faces. Default is None.</p></li>
+<li><p><strong>x_c</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Positions of cell centers. Default is None.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The staggered array aligned with face positions.</p>
+<dd class="field-even"><p>Staggered array aligned with face positions.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>ndarray</p>
@@ -1982,14 +2003,14 @@ between domains, improving numerical stability.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pymrm.interp_cntr_to_stagg">
 <span class="sig-prename descclassname"><span class="pre">pymrm.</span></span><span class="sig-name descname"><span class="pre">interp_cntr_to_stagg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell_centered_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pymrm/interpolate.html#interp_cntr_to_stagg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymrm.interp_cntr_to_stagg" title="Link to this definition">#</a></dt>
-<dd><p>Interpolate values at cell-centers to staggered positions using linear interpolation.</p>
+<dd><p>Linearly interpolate values from cell-centered positions to staggered positions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>cell_centered_values</strong> (<em>ndarray</em>) – Quantities at cell-centered positions.</p></li>
-<li><p><strong>x_f</strong> (<em>ndarray</em>) – Positions of cell-faces.</p></li>
-<li><p><strong>x_c</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Cell-centered positions. If None, they are computed as midpoints.</p></li>
-<li><p><strong>axis</strong> (<em>int</em><em>, </em><em>optional</em>) – Dimension to interpolate along. Default is 0.</p></li>
+<li><p><strong>cell_centered_values</strong> (<em>ndarray</em>) – Array of values at cell-centered positions.</p></li>
+<li><p><strong>x_f</strong> (<em>ndarray</em>) – Positions of cell faces.</p></li>
+<li><p><strong>x_c</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Positions of cell centers. If None, midpoints are used.</p></li>
+<li><p><strong>axis</strong> (<em>int</em><em>, </em><em>optional</em>) – Axis along which to interpolate. Default is 0.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -2004,25 +2025,28 @@ between domains, improving numerical stability.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pymrm.interp_cntr_to_stagg_tvd">
 <span class="sig-prename descclassname"><span class="pre">pymrm.</span></span><span class="sig-name descname"><span class="pre">interp_cntr_to_stagg_tvd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell_centered_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tvd_limiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pymrm/interpolate.html#interp_cntr_to_stagg_tvd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymrm.interp_cntr_to_stagg_tvd" title="Link to this definition">#</a></dt>
-<dd><p>Interpolate values at cell-centers to staggered positions using a TVD scheme.</p>
+<dd><p>Perform TVD interpolation from cell-centered positions to staggered positions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>cell_centered_values</strong> (<em>ndarray</em>) – Quantities at cell-centered positions.</p></li>
-<li><p><strong>x_f</strong> (<em>ndarray</em>) – Positions of cell-faces.</p></li>
-<li><p><strong>x_c</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Cell-centered positions. If None, they are computed as midpoints.</p></li>
-<li><p><strong>bc</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Boundary conditions. Default is None.</p></li>
+<li><p><strong>cell_centered_values</strong> (<em>ndarray</em>) – Array of values at cell-centered positions.</p></li>
+<li><p><strong>x_f</strong> (<em>ndarray</em>) – Positions of cell faces.</p></li>
+<li><p><strong>x_c</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Positions of cell centers. If None, midpoints are used.</p></li>
+<li><p><strong>bc</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Boundary conditions as dictionaries with keys ‘a’, ‘b’, and ‘d’.</p></li>
 <li><p><strong>v</strong> (<em>ndarray</em><em> or </em><em>float</em><em>, </em><em>optional</em>) – Velocity field for upwinding. Default is 0.</p></li>
 <li><p><strong>tvd_limiter</strong> (<em>callable</em><em>, </em><em>optional</em>) – TVD limiter function. Default is None.</p></li>
-<li><p><strong>axis</strong> (<em>int</em><em>, </em><em>optional</em>) – Dimension to interpolate along. Default is 0.</p></li>
+<li><p><strong>axis</strong> (<em>int</em><em>, </em><em>optional</em>) – Axis along which to interpolate. Default is 0.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Interpolated concentrations at staggered positions.
-ndarray: Delta staggered values.</p>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ndarray: Interpolated values at staggered positions.</p></li>
+<li><p>ndarray: Delta values for TVD corrections.</p></li>
+</ul>
+</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray</p>
+<dd class="field-odd"><p>tuple</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2030,18 +2054,18 @@ ndarray: Delta staggered values.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pymrm.interp_stagg_to_cntr">
 <span class="sig-prename descclassname"><span class="pre">pymrm.</span></span><span class="sig-name descname"><span class="pre">interp_stagg_to_cntr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">staggered_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pymrm/interpolate.html#interp_stagg_to_cntr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymrm.interp_stagg_to_cntr" title="Link to this definition">#</a></dt>
-<dd><p>Interpolate values at staggered positions to cell-centers using linear interpolation.</p>
+<dd><p>Linearly interpolate values from staggered positions to cell-centered positions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>staggered_values</strong> (<em>ndarray</em>) – Quantities at staggered positions.</p></li>
-<li><p><strong>x_f</strong> (<em>ndarray</em>) – Positions of cell-faces.</p></li>
-<li><p><strong>x_c</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Cell-centered positions. If None, they are computed as midpoints.</p></li>
-<li><p><strong>axis</strong> (<em>int</em><em>, </em><em>optional</em>) – Dimension to interpolate along. Default is 0.</p></li>
+<li><p><strong>staggered_values</strong> (<em>ndarray</em>) – Array of values at staggered positions.</p></li>
+<li><p><strong>x_f</strong> (<em>ndarray</em>) – Positions of cell faces.</p></li>
+<li><p><strong>x_c</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Positions of cell centers. If None, midpoints are used.</p></li>
+<li><p><strong>axis</strong> (<em>int</em><em>, </em><em>optional</em>) – Axis along which to interpolate. Default is 0.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Interpolated values at cell centers.</p>
+<dd class="field-even"><p>Interpolated values at cell-centered positions.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>ndarray</p>

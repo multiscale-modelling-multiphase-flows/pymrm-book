@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; Multiphase Reactor Modeling using PyMRM</title>
+    <title>Multiphase Reactor Modeling &#8212; Multiphase Reactor Modeling using PyMRM</title>
   
   
   
@@ -58,12 +58,14 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'pymrm/examples/optimization_example';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pymrm/tutorials/introduction_and_start';</script>
     <link rel="icon" href="../../_static/logo.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Exercises" href="../../content/exercises/index.html" />
-    <link rel="prev" title="Lid-driven cavity" href="lid_driven_cavity.html" />
+    <link rel="next" title="Examples" href="../../content/examples/examples.html" />
+    <link rel="prev" title="Tutorials" href="../../content/tutorials/tutorials.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -181,21 +183,21 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../content/getting_started/getting_started.html">Getting Started with PyMRM</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../content/tutorials/tutorials.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials/introduction_and_start.html">Multiphase Reactor Modeling</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../content/tutorials/tutorials.html">Tutorials</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Multiphase Reactor Modeling</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../content/examples/examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="counter_diffusion_reaction.html">Counter diffusion and reaction in a slab</a></li>
-<li class="toctree-l2"><a class="reference internal" href="particle_model_effectiveness.html">Particle model: diffusion + first order reaction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="counter_current_reaction.html">Counter-current convection and reaction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tvd.html">TVD schemes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="unsteady_diffusion_reaction_2D.html">Unsteady diffusion + reaction 1/2/3D</a></li>
-<li class="toctree-l2"><a class="reference internal" href="unsteady_convection_reaction.html">Unsteady convection + reaction 1D</a></li>
-<li class="toctree-l2"><a class="reference internal" href="darcy_flow.html">Darcy flow in a 2D domain with varying permeability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lid_driven_cavity.html">Lid-driven cavity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/counter_diffusion_reaction.html">Counter diffusion and reaction in a slab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/particle_model_effectiveness.html">Particle model: diffusion + first order reaction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/counter_current_reaction.html">Counter-current convection and reaction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/tvd.html">TVD schemes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/unsteady_diffusion_reaction_2D.html">Unsteady diffusion + reaction 1/2/3D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/unsteady_convection_reaction.html">Unsteady convection + reaction 1D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/darcy_flow.html">Darcy flow in a 2D domain with varying permeability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/lid_driven_cavity.html">Lid-driven cavity</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../content/exercises/index.html">Exercises</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -369,7 +371,7 @@
       
       
       
-      <li><a href="https://github.com/eajfpeters/pymrm-book/edit/main/_build/html/pymrm/examples/optimization_example.ipynb" target="_blank"
+      <li><a href="https://github.com/eajfpeters/pymrm-book/edit/main/_build/html/pymrm/tutorials/introduction_and_start.ipynb" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -386,7 +388,7 @@
       
       
       
-      <li><a href="https://github.com/eajfpeters/pymrm-book/issues/new?title=Issue%20on%20page%20%2Fpymrm/examples/optimization_example.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/eajfpeters/pymrm-book/issues/new?title=Issue%20on%20page%20%2Fpymrm/tutorials/introduction_and_start.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -416,7 +418,7 @@
       
       
       
-      <li><a href="../../_sources/pymrm/examples/optimization_example.ipynb" target="_blank"
+      <li><a href="../../_sources/pymrm/tutorials/introduction_and_start.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -500,7 +502,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Multiphase Reactor Modeling</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -509,9 +511,14 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-typical-transport-equation">A Typical Transport Equation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discretization-of-the-reactor-model">Discretization of the Reactor Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stationary-diffusion">Stationary Diffusion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-explanation">Detailed Explanation</a></li>
 </ul>
-
+</li>
+</ul>
             </nav>
         </div>
     </div>
@@ -522,68 +529,134 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="cell docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="multiphase-reactor-modeling">
+<h1>Multiphase Reactor Modeling<a class="headerlink" href="#multiphase-reactor-modeling" title="Link to this heading">#</a></h1>
+<p>In chemical reactors, reactants are converted into products through chemical reactions. The goal is often to optimize quantities such as yield and selectivity.
+In addition to chemical reaction kinetics, transport phenomena such as mixing, mass transfer, and heat transfer play a crucial role in determining reactor performance.
+A reactor model aims to describe these phenomena, enabling it to serve as a tool for designing and optimizing reactors.</p>
+<section id="a-typical-transport-equation">
+<h2>A Typical Transport Equation<a class="headerlink" href="#a-typical-transport-equation" title="Link to this heading">#</a></h2>
+<p>A common type of model is the convection-diffusion-reaction equation:</p>
+<div class="math notranslate nohighlight">
+\[ \frac{\partial c}{\partial t} + \nabla \cdot (\mathbf{v} \, c - D\nabla c) = r\]</div>
+<p>Here, it is written as a single-species equation, but in general, <span class="math notranslate nohighlight">\(c\)</span> could represent the concentrations of multiple species, corresponding to different chemical components and their presence in various phases. The ‘reaction’ term <span class="math notranslate nohighlight">\(r\)</span> can include mass-transfer terms (between phases) in addition to reaction kinetics. The diffusion coefficient <span class="math notranslate nohighlight">\(D\)</span> might actually represent a dispersion coefficient. In addition to concentrations, temperature can also be modeled using a similar equation. Accumulation terms can be more complex, and there might be counter-flow or other phenomena to consider.</p>
+</section>
+<section id="discretization-of-the-reactor-model">
+<h2>Discretization of the Reactor Model<a class="headerlink" href="#discretization-of-the-reactor-model" title="Link to this heading">#</a></h2>
+<p>The convection-diffusion-reaction equation is a partial differential equation (PDE) that is discretized in space. The <code class="docutils literal notranslate"><span class="pre">PyMRM</span></code> package provides a set of building blocks to easily create such discretizations and efficiently solve them. Phenomenological models, which are the focus of the <code class="docutils literal notranslate"><span class="pre">PyMRM</span></code> package, are typically 1D and sometimes 2D in space. The discretization is performed on a regular grid, which can always be represented by a multi-dimensional array. Different species and phases can also correspond to different dimensions.</p>
+<p>To enable efficient (vectorized) computations with these multi-dimensional arrays, the <code class="docutils literal notranslate"><span class="pre">PyMRM</span></code> package extensively uses <code class="docutils literal notranslate"><span class="pre">Numpy</span></code>. For example, consider a 4-dimensional array where <code class="docutils literal notranslate"><span class="pre">c.shape</span> <span class="pre">=</span> <span class="pre">(n_x,</span> <span class="pre">n_y,</span> <span class="pre">n_p,</span> <span class="pre">n_c)</span></code>. Here, the first two axes (<code class="docutils literal notranslate"><span class="pre">n_x</span></code> and <code class="docutils literal notranslate"><span class="pre">n_y</span></code>) correspond to the spatial <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> directions. The third axis (<code class="docutils literal notranslate"><span class="pre">n_p</span></code>) represents the number of phases, and the fourth axis (<code class="docutils literal notranslate"><span class="pre">n_c</span></code>) represents the number of components. In Python, axis indexing starts at 0, so <code class="docutils literal notranslate"><span class="pre">axis=2</span></code> corresponds to the phases, and <code class="docutils literal notranslate"><span class="pre">axis=3</span></code> corresponds to the components.</p>
+<p>In most cases, there will be a (partly) implicit equation that needs to be solved. In the general case of a non-linear equation, we will use Newton-Raphson iteration for that. Inside each iteration, a linear system of equations is solved, i.e., a matrix-vector equation, where the matrix is sparse. For the solution of these sparse-matrix equations, we heavily depend on the <code class="docutils literal notranslate"><span class="pre">SciPy</span></code> package. The sparse matrix representation we use is a compressed column format, <code class="docutils literal notranslate"><span class="pre">csc_array</span></code>, in <code class="docutils literal notranslate"><span class="pre">SciPy</span></code>.</p>
+<p>The general transport equation, including reaction, can be seen as a micro balance of accumulation and transport on the left-hand side, with production/consumption on the right-hand side. The transport term is the divergence of a (molar) flux, where the flux has a convective and a diffusion contribution. Sometimes, especially in mathematical writings, a more explicit distinction between the divergence and gradient operators is made. We can then write the equation as:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial c}{\partial t} + \mathrm{div}(\mathbf{v} \, c - D \, \mathrm{grad}(c)) = r\]</div>
+<p>This is a convenient form because our discretized equations will have a form that looks similar. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">c</span><span class="o">-</span><span class="n">c_old</span><span class="p">)</span><span class="o">/</span><span class="n">dt</span> <span class="o">+</span> <span class="n">div_mat</span> <span class="o">@</span> <span class="p">(</span><span class="n">conv_mat</span> <span class="o">@</span> <span class="n">c</span> <span class="o">-</span> <span class="n">D</span> <span class="o">*</span> <span class="n">grad_mat</span> <span class="o">@</span> <span class="n">c</span><span class="p">)</span> <span class="o">=</span> <span class="n">r</span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">div_mat</span></code> and <code class="docutils literal notranslate"><span class="pre">grad_mat</span></code> are matrices that are discrete approximations of the differential operators <span class="math notranslate nohighlight">\(\mathrm{div}\)</span> and <span class="math notranslate nohighlight">\(\mathrm{grad}\)</span>. <code class="docutils literal notranslate"><span class="pre">conv_mat</span></code> is also a matrix containing velocities. (You might think you could just use <code class="docutils literal notranslate"><span class="pre">v*c</span></code> when <code class="docutils literal notranslate"><span class="pre">v</span></code> is constant, but convection is a bit tricky in relation to numerical stability).</p>
+</section>
+<section id="stationary-diffusion">
+<h2>Stationary Diffusion<a class="headerlink" href="#stationary-diffusion" title="Link to this heading">#</a></h2>
+<p>Let us consider the stationary diffusion problem, or Poisson equation:</p>
+<div class="math notranslate nohighlight">
+\[\Delta c = f, \text{ or: } \mathrm{div}(\mathrm{grad}(c))=f,\]</div>
+<p>This can be discretized as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">div_mat</span> <span class="o">@</span> <span class="n">grad_mat</span><span class="p">)</span> <span class="o">@</span> <span class="n">c</span> <span class="o">=</span> <span class="n">f</span>
+</pre></div>
+</div>
+<p>Let’s consider the case with <span class="math notranslate nohighlight">\(f=-1\)</span> and zero values at the wall. In 1D, on the domain <span class="math notranslate nohighlight">\([0,L]\)</span>, the equation <span class="math notranslate nohighlight">\(c''=-1\)</span> gives <span class="math notranslate nohighlight">\(c = \tfrac{1}{2} x (L-x)\)</span>. A minimal code to solve this problem in <code class="docutils literal notranslate"><span class="pre">PyMRM</span></code> is:</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pymrm</span><span class="w"> </span><span class="kn">import</span> <span class="n">NumJac</span><span class="p">,</span> <span class="n">newton</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">optim</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pymrm</span><span class="w"> </span><span class="kn">import</span> <span class="n">construct_grad</span><span class="p">,</span> <span class="n">construct_div</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.sparse.linalg</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sla</span>
 
+<span class="n">L</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="c1"># length of the domain</span>
+<span class="n">n_c</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># number of cells in the computational domain</span>
+<span class="n">shape_c</span> <span class="o">=</span> <span class="p">(</span><span class="n">n_c</span><span class="p">,)</span> <span class="c1"># shape array c</span>
+<span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape_c</span><span class="p">)</span> <span class="c1"># source term</span>
 
-<span class="c1"># Define the objective function and its Jacobian</span>
-<span class="n">numjac</span> <span class="o">=</span> <span class="n">NumJac</span><span class="p">((</span><span class="mi">2</span><span class="p">,))</span>
+<span class="n">x_f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">shape_c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># location of cell faces</span>
+<span class="n">x_c</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">x_f</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">x_f</span><span class="p">[</span><span class="mi">1</span><span class="p">:]);</span> <span class="c1"># location of cell centers</span>
+<span class="n">bc</span> <span class="o">=</span> <span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">})</span> <span class="c1"># boundary conditions specification</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">fun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">div_mat</span> <span class="o">=</span> <span class="n">construct_div</span><span class="p">(</span><span class="n">shape_c</span><span class="p">,</span> <span class="n">x_f</span><span class="p">)</span> <span class="c1"># Divergence matrix</span>
+<span class="n">grad_mat</span><span class="p">,</span> <span class="n">grad_bc</span> <span class="o">=</span> <span class="n">construct_grad</span><span class="p">(</span><span class="n">shape_c</span><span class="p">,</span> <span class="n">x_f</span><span class="p">,</span> <span class="n">x_c</span><span class="p">,</span> <span class="n">bc</span><span class="o">=</span><span class="n">bc</span><span class="p">)</span> <span class="c1"># Gradient matrix</span>
+<span class="n">lapl_mat</span> <span class="o">=</span> <span class="n">div_mat</span> <span class="o">@</span> <span class="n">grad_mat</span> <span class="c1"># Laplacian matrix</span>
 
-<span class="c1"># Initial guess</span>
-<span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
-<span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">sla</span><span class="o">.</span><span class="n">spsolve</span><span class="p">(</span><span class="n">lapl_mat</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span> <span class="c1"># solve the PDE</span>
 
-<span class="c1"># Solve the system</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">wrapper_fun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="n">g</span><span class="p">,</span> <span class="n">Jac</span> <span class="o">=</span> <span class="n">numjac</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">fun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">g</span><span class="p">,</span> <span class="n">Jac</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
-
-<span class="n">sol</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">root</span><span class="p">(</span><span class="n">wrapper_fun</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span> <span class="n">jac</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Solution SciPy root:</span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">sol</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="n">sol2</span> <span class="o">=</span> <span class="n">newton</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">numjac</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">fun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">),</span> <span class="n">x</span><span class="p">),</span> <span class="n">x0</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Solution pymrm newton:</span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">sol2</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_c</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;numerical solution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_c</span><span class="p">,</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">x_c</span><span class="o">*</span><span class="p">(</span><span class="n">L</span><span class="o">-</span><span class="n">x_c</span><span class="p">)),</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;exact solution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solution SciPy root:
-  message: The solution converged.
- success: True
-  status: 1
-     fun: [ 2.220e-16  0.000e+00]
-       x: [ 4.472e-01  4.472e-01]
-  method: hybr
-    nfev: 8
-    njev: 1
-    fjac: [[-8.769e-01 -4.807e-01]
-           [ 4.807e-01 -8.769e-01]]
-       r: [-2.080e+00 -1.841e+00  2.150e+00]
-     qtf: [-3.263e-10  1.789e-10]
+<img alt="../../_images/0a346e093047b82370f4df694b0ef788fe6eca4e6b65fef08783bd6ab0d3ac41.png" src="../../_images/0a346e093047b82370f4df694b0ef788fe6eca4e6b65fef08783bd6ab0d3ac41.png" />
+</div>
+</div>
+<section id="detailed-explanation">
+<h3>Detailed Explanation<a class="headerlink" href="#detailed-explanation" title="Link to this heading">#</a></h3>
+<p>In <code class="docutils literal notranslate"><span class="pre">PyMRM</span></code>, quantities are defined as cell-centered. This is slightly inconvenient because there are two types of positions: face positions <code class="docutils literal notranslate"><span class="pre">x_f</span></code>, which indicate the positions of cell faces, and cell-centered positions <code class="docutils literal notranslate"><span class="pre">x_c</span></code>, where quantities are defined. There is always one more face position than cell-centered positions. This explains the <code class="docutils literal notranslate"><span class="pre">+1</span></code> in <code class="docutils literal notranslate"><span class="pre">x_f</span> <span class="pre">=</span> <span class="pre">np.linspace(0,</span> <span class="pre">L,</span> <span class="pre">shape_c[0]+1)</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
-Solution pymrm newton:
-  message: The solution converged
- success: True
-     fun: [ 4.155e-10  0.000e+00]
-       x: [ 4.472e-01  4.472e-01]
-     nit: 4
-     jac: &lt;Compressed Sparse Column sparse array of dtype &#39;float64&#39;
-          	with 4 stored elements and shape (2, 2)&gt;
-            Coords	Values
-            (0, 0)	1.7888563824043469
-            (1, 0)	1.0
-            (0, 1)	2.683284573495498
-            (1, 1)	-1.0
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># Adjust figure size to make it rectangular</span>
+
+<span class="c1"># Plot face positions as vertical lines</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_f</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Face positions&#39;</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">x_f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot cell-centered positions as dots</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_c</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_c</span><span class="p">),</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Cell-centered positions&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Position&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>  <span class="c1"># Remove y-ticks</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([])</span>  <span class="c1"># Remove y-labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Face and Cell-Centered Positions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/badbd0214b4d2b326df16e27e6acd809faa6d0448525e0158fad77b99446d135.png" src="../../_images/badbd0214b4d2b326df16e27e6acd809faa6d0448525e0158fad77b99446d135.png" />
+</div>
+</div>
+<p>This inconvenenience is compensated by modelling convenience. A cell can now be seen as a control volume, with a quantity in the center and fluxes on the faces. For example, gradients are computed from the values in two neighboring cells and are defined on cell faces. The matrix <code class="docutils literal notranslate"><span class="pre">grad_mat</span></code> operates on cell values, and outputs face quantitues. Therefore it is not a square matrix, but its shape is:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shape of the gradient matrix, grad_mat:&quot;</span><span class="p">,</span> <span class="n">grad_mat</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape of the gradient matrix, grad_mat: (11, 10)
 </pre></div>
 </div>
 </div>
 </div>
+<p>When computing a divergence, the input are fluxes defined on cell faces. This also explains why <code class="docutils literal notranslate"><span class="pre">construct_div</span></code> only needs face positions, <code class="docutils literal notranslate"><span class="pre">x_f</span></code>, as input. The matrix <code class="docutils literal notranslate"><span class="pre">div_mat</span></code> thus takes values defined on face positions and outputs cell-centered values:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shape of the divergence matrix, div_mat:&quot;</span><span class="p">,</span> <span class="n">div_mat</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape of the divergence matrix, div_mat: (10, 11)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -598,7 +671,7 @@ Solution pymrm newton:
         },
         kernelOptions: {
             name: "python3",
-            path: "./pymrm/examples"
+            path: "./pymrm/tutorials"
         },
         predefinedOutput: true
     }
@@ -616,20 +689,20 @@ Solution pymrm newton:
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="lid_driven_cavity.html"
+       href="../../content/tutorials/tutorials.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Lid-driven cavity</p>
+        <p class="prev-next-title">Tutorials</p>
       </div>
     </a>
     <a class="right-next"
-       href="../../content/exercises/index.html"
+       href="../../content/examples/examples.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Exercises</p>
+        <p class="prev-next-title">Examples</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -648,9 +721,14 @@ Solution pymrm newton:
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-typical-transport-equation">A Typical Transport Equation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discretization-of-the-reactor-model">Discretization of the Reactor Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stationary-diffusion">Stationary Diffusion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-explanation">Detailed Explanation</a></li>
 </ul>
-
+</li>
+</ul>
   </nav></div>
 
 </div></div>

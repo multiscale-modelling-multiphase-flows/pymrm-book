@@ -183,7 +183,8 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_started.html">Getting Started with PyMRM</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/tutorials.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/tutorials.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pymrm/tutorials/introduction_and_start.html">Multiphase Reactor Modeling</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples/examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -556,16 +557,16 @@ document.write(`
 <td><p>Construct a diagonal matrix with coefficients on its diagonal.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.interpolate.create_staggered_array" title="pymrm.interpolate.create_staggered_array"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymrm.interpolate.create_staggered_array</span></code></a></p></td>
-<td><p>Create a staggered array by broadcasting or interpolating face-centered values.</p></td>
+<td><p>Generate a staggered array by broadcasting or interpolating face-centered values.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.interpolate.interp_cntr_to_stagg" title="pymrm.interpolate.interp_cntr_to_stagg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymrm.interpolate.interp_cntr_to_stagg</span></code></a></p></td>
-<td><p>Interpolate values at cell-centers to staggered positions using linear interpolation.</p></td>
+<td><p>Linearly interpolate values from cell-centered positions to staggered positions.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.interpolate.interp_cntr_to_stagg_tvd" title="pymrm.interpolate.interp_cntr_to_stagg_tvd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymrm.interpolate.interp_cntr_to_stagg_tvd</span></code></a></p></td>
-<td><p>Interpolate values at cell-centers to staggered positions using a TVD scheme.</p></td>
+<td><p>Perform TVD interpolation from cell-centered positions to staggered positions.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.interpolate.interp_stagg_to_cntr" title="pymrm.interpolate.interp_stagg_to_cntr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymrm.interpolate.interp_stagg_to_cntr</span></code></a></p></td>
-<td><p>Interpolate values at staggered positions to cell-centers using linear interpolation.</p></td>
+<td><p>Linearly interpolate values from staggered positions to cell-centered positions.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.NumJac" title="pymrm.numjac.NumJac"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymrm.numjac.NumJac</span></code></a></p></td>
 <td><p>Class for computing numerical Jacobians for multidimensional arrays.</p></td>

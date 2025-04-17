@@ -182,7 +182,8 @@
         </ul>
         <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../content/getting_started/getting_started.html">Getting Started with PyMRM</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../content/tutorials/tutorials.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../content/tutorials/tutorials.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pymrm/tutorials/introduction_and_start.html">Multiphase Reactor Modeling</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../content/examples/examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -469,6 +470,9 @@ document.write(`
 <span class="sd">- create_staggered_array(array, shape, axis, x_f=None, x_c=None)</span>
 <span class="sd">    Generate staggered arrays for face-centered values.</span>
 
+<span class="sd">- compute_boundary_values(cell_centered_values, x_f, x_c=None, bc=None, axis=0)</span>
+<span class="sd">    Compute boundary values and gradients for cell-centered values.</span>
+
 <span class="sd">Dependencies:</span>
 <span class="sd">-------------</span>
 <span class="sd">- numpy: For array manipulations.</span>
@@ -483,16 +487,16 @@ document.write(`
 <a class="viewcode-back" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.interpolate.interp_stagg_to_cntr">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">interp_stagg_to_cntr</span><span class="p">(</span><span class="n">staggered_values</span><span class="p">,</span> <span class="n">x_f</span><span class="p">,</span> <span class="n">x_c</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Interpolate values at staggered positions to cell-centers using linear interpolation.</span>
+<span class="sd">    Linearly interpolate values from staggered positions to cell-centered positions.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        staggered_values (ndarray): Quantities at staggered positions.</span>
-<span class="sd">        x_f (ndarray): Positions of cell-faces.</span>
-<span class="sd">        x_c (ndarray, optional): Cell-centered positions. If None, they are computed as midpoints.</span>
-<span class="sd">        axis (int, optional): Dimension to interpolate along. Default is 0.</span>
+<span class="sd">        staggered_values (ndarray): Array of values at staggered positions.</span>
+<span class="sd">        x_f (ndarray): Positions of cell faces.</span>
+<span class="sd">        x_c (ndarray, optional): Positions of cell centers. If None, midpoints are used.</span>
+<span class="sd">        axis (int, optional): Axis along which to interpolate. Default is 0.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        ndarray: Interpolated values at cell centers.</span>
+<span class="sd">        ndarray: Interpolated values at cell-centered positions.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">shape_f</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">staggered_values</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">axis</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -513,55 +517,17 @@ document.write(`
 
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">interp_cntr_to_stagg</span><span class="p">(</span><span class="n">cell_centered_values</span><span class="p">,</span> <span class="n">x_f</span><span class="p">,</span> <span class="n">x_c</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Interpolate values at cell-centers to staggered positions using linear interpolation.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        cell_centered_values (ndarray): Quantities at cell-centered positions.</span>
-<span class="sd">        x_f (ndarray): Positions of cell-faces.</span>
-<span class="sd">        x_c (ndarray, optional): Cell-centered positions. If None, they are computed as midpoints.</span>
-<span class="sd">        axis (int, optional): Dimension to interpolate along. Default is 0.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        ndarray: Interpolated values at staggered positions.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">shape</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">cell_centered_values</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">axis</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">axis</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
-    <span class="n">shape_t</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">shape</span><span class="p">[:</span><span class="n">axis</span><span class="p">]),</span> <span class="n">math</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="n">axis</span><span class="p">:</span><span class="n">axis</span><span class="o">+</span><span class="mi">1</span><span class="p">]),</span> <span class="n">math</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="n">axis</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:])]</span>
-    <span class="n">shape_f</span> <span class="o">=</span> <span class="n">shape</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="n">shape_f</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="n">shape_f_t</span> <span class="o">=</span> <span class="n">shape_t</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="n">shape_f_t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">if</span> <span class="n">x_c</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">x_c</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">x_f</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">x_f</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-
-    <span class="n">wght</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_f</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x_c</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">x_c</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">x_c</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">cell_centered_values</span> <span class="o">=</span> <span class="n">cell_centered_values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shape_t</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">shape_t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">staggered_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">cell_centered_values</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">staggered_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">shape_f_t</span><span class="p">)</span>
-        <span class="n">staggered_values</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">cell_centered_values</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">wght</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span>
-            <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">cell_centered_values</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">cell_centered_values</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
-        <span class="n">staggered_values</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="p">(</span><span class="n">cell_centered_values</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span><span class="o">*</span><span class="p">(</span><span class="n">x_c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x_f</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span>
-                                     <span class="n">cell_centered_values</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span><span class="o">*</span><span class="p">(</span><span class="n">x_c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">x_f</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">/</span><span class="p">(</span><span class="n">x_c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x_c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">staggered_values</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="p">(</span><span class="n">cell_centered_values</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span><span class="o">*</span><span class="p">(</span><span class="n">x_f</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x_c</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span> <span class="o">-</span>
-                                      <span class="n">cell_centered_values</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span><span class="o">*</span><span class="p">(</span><span class="n">x_f</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x_c</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span><span class="o">/</span><span class="p">(</span><span class="n">x_c</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x_c</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">staggered_values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shape_f</span><span class="p">)</span>
-
 <div class="viewcode-block" id="interp_cntr_to_stagg">
 <a class="viewcode-back" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.interpolate.interp_cntr_to_stagg">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">interp_cntr_to_stagg</span><span class="p">(</span><span class="n">cell_centered_values</span><span class="p">,</span> <span class="n">x_f</span><span class="p">,</span> <span class="n">x_c</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Interpolate values at cell-centers to staggered positions using linear interpolation.</span>
+<span class="sd">    Linearly interpolate values from cell-centered positions to staggered positions.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        cell_centered_values (ndarray): Quantities at cell-centered positions.</span>
-<span class="sd">        x_f (ndarray): Positions of cell-faces.</span>
-<span class="sd">        x_c (ndarray, optional): Cell-centered positions. If None, they are computed as midpoints.</span>
-<span class="sd">        axis (int, optional): Dimension to interpolate along. Default is 0.</span>
+<span class="sd">        cell_centered_values (ndarray): Array of values at cell-centered positions.</span>
+<span class="sd">        x_f (ndarray): Positions of cell faces.</span>
+<span class="sd">        x_c (ndarray, optional): Positions of cell centers. If None, midpoints are used.</span>
+<span class="sd">        axis (int, optional): Axis along which to interpolate. Default is 0.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        ndarray: Interpolated values at staggered positions.</span>
@@ -592,24 +558,26 @@ document.write(`
     <span class="k">return</span> <span class="n">staggered_values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shape_f</span><span class="p">)</span></div>
 
 
+
 <div class="viewcode-block" id="interp_cntr_to_stagg_tvd">
 <a class="viewcode-back" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.interpolate.interp_cntr_to_stagg_tvd">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">interp_cntr_to_stagg_tvd</span><span class="p">(</span><span class="n">cell_centered_values</span><span class="p">,</span> <span class="n">x_f</span><span class="p">,</span> <span class="n">x_c</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tvd_limiter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Interpolate values at cell-centers to staggered positions using a TVD scheme.</span>
+<span class="sd">    Perform TVD interpolation from cell-centered positions to staggered positions.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        cell_centered_values (ndarray): Quantities at cell-centered positions.</span>
-<span class="sd">        x_f (ndarray): Positions of cell-faces.</span>
-<span class="sd">        x_c (ndarray, optional): Cell-centered positions. If None, they are computed as midpoints.</span>
-<span class="sd">        bc (tuple, optional): Boundary conditions. Default is None.</span>
+<span class="sd">        cell_centered_values (ndarray): Array of values at cell-centered positions.</span>
+<span class="sd">        x_f (ndarray): Positions of cell faces.</span>
+<span class="sd">        x_c (ndarray, optional): Positions of cell centers. If None, midpoints are used.</span>
+<span class="sd">        bc (tuple, optional): Boundary conditions as dictionaries with keys &#39;a&#39;, &#39;b&#39;, and &#39;d&#39;.</span>
 <span class="sd">        v (ndarray or float, optional): Velocity field for upwinding. Default is 0.</span>
 <span class="sd">        tvd_limiter (callable, optional): TVD limiter function. Default is None.</span>
-<span class="sd">        axis (int, optional): Dimension to interpolate along. Default is 0.</span>
+<span class="sd">        axis (int, optional): Axis along which to interpolate. Default is 0.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        ndarray: Interpolated concentrations at staggered positions.</span>
-<span class="sd">        ndarray: Delta staggered values.</span>
+<span class="sd">        tuple:</span>
+<span class="sd">            - ndarray: Interpolated values at staggered positions.</span>
+<span class="sd">            - ndarray: Delta values for TVD corrections.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">shape</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">cell_centered_values</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">axis</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -741,21 +709,22 @@ document.write(`
     <span class="k">return</span> <span class="n">staggered_values</span><span class="p">,</span> <span class="n">delta_staggered_values</span></div>
 
 
+
 <div class="viewcode-block" id="create_staggered_array">
 <a class="viewcode-back" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.interpolate.create_staggered_array">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">create_staggered_array</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">x_f</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">x_c</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Create a staggered array by broadcasting or interpolating face-centered values.</span>
+<span class="sd">    Generate a staggered array by broadcasting or interpolating face-centered values.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        array (ndarray): The array to be staggered.</span>
+<span class="sd">        array (ndarray): Input array to be staggered.</span>
 <span class="sd">        shape (tuple): Shape of the non-staggered cell-centered field.</span>
 <span class="sd">        axis (int): Axis along which staggering is applied.</span>
-<span class="sd">        x_f (ndarray, optional): Face positions. Default is None.</span>
-<span class="sd">        x_c (ndarray, optional): Cell positions. Default is None.</span>
+<span class="sd">        x_f (ndarray, optional): Positions of cell faces. Default is None.</span>
+<span class="sd">        x_c (ndarray, optional): Positions of cell centers. Default is None.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        ndarray: The staggered array aligned with face positions.</span>
+<span class="sd">        ndarray: Staggered array aligned with face positions.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
         <span class="n">shape_f</span> <span class="o">=</span> <span class="p">[</span><span class="n">shape</span><span class="p">]</span>
@@ -794,21 +763,26 @@ document.write(`
     <span class="k">return</span> <span class="n">array_f</span></div>
 
 
+
 <div class="viewcode-block" id="compute_boundary_values">
 <a class="viewcode-back" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.interpolate.compute_boundary_values">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_boundary_values</span><span class="p">(</span><span class="n">cell_centered_values</span><span class="p">,</span> <span class="n">x_f</span><span class="p">,</span> <span class="n">x_c</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Interpolate values at cell-centers to staggered positions using a TVD scheme.</span>
+<span class="sd">    Compute boundary values and gradients for cell-centered values.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        cell_centered_values (ndarray): Quantities at cell-centered positions.</span>
-<span class="sd">        x_f (ndarray): Positions of cell-faces.</span>
-<span class="sd">        x_c (ndarray, optional): Cell-centered positions. If None, they are computed as midpoints.</span>
-<span class="sd">        bc (tuple, optional): Boundary conditions. Default is None.</span>
-<span class="sd">        axis (int, optional): Dimension to interpolate along. Default is 0.</span>
+<span class="sd">        cell_centered_values (ndarray): Array of values at cell-centered positions.</span>
+<span class="sd">        x_f (ndarray): Positions of cell faces.</span>
+<span class="sd">        x_c (ndarray, optional): Positions of cell centers. If None, midpoints are used.</span>
+<span class="sd">        bc (tuple, optional): Boundary conditions as dictionaries with keys &#39;a&#39;, &#39;b&#39;, and &#39;d&#39;.</span>
+<span class="sd">        axis (int, optional): Axis along which to compute boundary values. Default is 0.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        ndarray: concentrations at staggered positions.</span>
+<span class="sd">        tuple:</span>
+<span class="sd">            - ndarray: Boundary values at the lower boundary.</span>
+<span class="sd">            - ndarray: Gradients at the lower boundary.</span>
+<span class="sd">            - ndarray: Boundary values at the upper boundary.</span>
+<span class="sd">            - ndarray: Gradients at the upper boundary.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">shape</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">cell_centered_values</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">axis</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
