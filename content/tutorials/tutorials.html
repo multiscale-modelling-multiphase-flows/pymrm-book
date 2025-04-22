@@ -64,7 +64,7 @@
     <link rel="icon" href="../../_static/logo.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Multiphase Reactor Modeling" href="../../pymrm/tutorials/introduction_and_start.html" />
+    <link rel="next" title="Introduction to PyMRM" href="../../pymrm/tutorials/introduction_and_start.html" />
     <link rel="prev" title="Getting Started with PyMRM" href="../getting_started/getting_started.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -186,7 +186,9 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_started.html">Getting Started with PyMRM</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Tutorials</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../pymrm/tutorials/introduction_and_start.html">Multiphase Reactor Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pymrm/tutorials/introduction_and_start.html">Introduction to PyMRM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pymrm/tutorials/stationary_diffusion.html">Stationary Diffusion Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pymrm/tutorials/diffusion_first_order_kinetics.html">Diffusion: First-order Kinetics, Multi-Component, Unsteady</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples/examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -284,11 +286,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../api/generated/all/pymrm.interpolate.interp_cntr_to_stagg_tvd.html">pymrm.interpolate.interp_cntr_to_stagg_tvd</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api/generated/all/pymrm.interpolate.interp_stagg_to_cntr.html">pymrm.interpolate.interp_stagg_to_cntr</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api/generated/all/pymrm.numjac.NumJac.html">pymrm.numjac.NumJac</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/generated/all/pymrm.numjac.colgroup.html">pymrm.numjac.colgroup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/generated/all/pymrm.numjac.compute_df2.html">pymrm.numjac.compute_df2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/generated/all/pymrm.numjac.expand_dependencies.html">pymrm.numjac.expand_dependencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/generated/all/pymrm.numjac.generate_sparsity_pattern.html">pymrm.numjac.generate_sparsity_pattern</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/generated/all/pymrm.numjac.precompute_perturbations.html">pymrm.numjac.precompute_perturbations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api/generated/all/pymrm.numjac.stencil_block_diagonals.html">pymrm.numjac.stencil_block_diagonals</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api/generated/all/pymrm.operators.construct_div.html">pymrm.operators.construct_div</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api/generated/all/pymrm.operators.construct_grad.html">pymrm.operators.construct_grad</a></li>
@@ -516,12 +513,16 @@ document.write(`
                   
   <section id="tutorials">
 <h1>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading">#</a></h1>
-<p>Below is a list of Python notebooks that provide tutorials for learning to make reactor models using the <cite>pymrm</cite>.
-This is work in progress, and we will be adding more tutorials in the future.</p>
+<p>Below is a list of Python notebooks that provide tutorials for learning to make reactor models using the <code class="docutils literal notranslate"><span class="pre">pymrm</span></code>.
+The notebooks can also be directly downloaded from the GitHub repository:
+<a class="reference external" href="https://github.com/multiscale-modelling-multiphase-flows/pymrm/tree/main/tutorials">pymrm/tutorials</a>.</p>
+<p>This is work in progress, and we will be adding more tutorials in the future.</p>
 <div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials Notebooks:</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorial Notebooks:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../pymrm/tutorials/introduction_and_start.html">Multiphase Reactor Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pymrm/tutorials/introduction_and_start.html">Introduction to PyMRM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pymrm/tutorials/stationary_diffusion.html">Stationary Diffusion Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pymrm/tutorials/diffusion_first_order_kinetics.html">Diffusion: First-order Kinetics, Multi-Component, Unsteady</a></li>
 </ul>
 </div>
 </section>
@@ -570,7 +571,7 @@ This is work in progress, and we will be adding more tutorials in the future.</p
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Multiphase Reactor Modeling</p>
+        <p class="prev-next-title">Introduction to PyMRM</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

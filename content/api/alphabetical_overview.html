@@ -184,7 +184,9 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_started.html">Getting Started with PyMRM</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/tutorials.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../pymrm/tutorials/introduction_and_start.html">Multiphase Reactor Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pymrm/tutorials/introduction_and_start.html">Introduction to PyMRM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pymrm/tutorials/stationary_diffusion.html">Stationary Diffusion Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pymrm/tutorials/diffusion_first_order_kinetics.html">Diffusion: First-order Kinetics, Multi-Component, Unsteady</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples/examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -282,11 +284,6 @@
 <li class="toctree-l3"><a class="reference internal" href="generated/all/pymrm.interpolate.interp_cntr_to_stagg_tvd.html">pymrm.interpolate.interp_cntr_to_stagg_tvd</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/all/pymrm.interpolate.interp_stagg_to_cntr.html">pymrm.interpolate.interp_stagg_to_cntr</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/all/pymrm.numjac.NumJac.html">pymrm.numjac.NumJac</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/all/pymrm.numjac.colgroup.html">pymrm.numjac.colgroup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/all/pymrm.numjac.compute_df2.html">pymrm.numjac.compute_df2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/all/pymrm.numjac.expand_dependencies.html">pymrm.numjac.expand_dependencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/all/pymrm.numjac.generate_sparsity_pattern.html">pymrm.numjac.generate_sparsity_pattern</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/all/pymrm.numjac.precompute_perturbations.html">pymrm.numjac.precompute_perturbations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/all/pymrm.numjac.stencil_block_diagonals.html">pymrm.numjac.stencil_block_diagonals</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/all/pymrm.operators.construct_div.html">pymrm.operators.construct_div</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/all/pymrm.operators.construct_grad.html">pymrm.operators.construct_grad</a></li>
@@ -571,40 +568,25 @@ document.write(`
 <tr class="row-even"><td><p><a class="reference internal" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.NumJac" title="pymrm.numjac.NumJac"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymrm.numjac.NumJac</span></code></a></p></td>
 <td><p>Class for computing numerical Jacobians for multidimensional arrays.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.colgroup" title="pymrm.numjac.colgroup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymrm.numjac.colgroup</span></code></a></p></td>
-<td><p>Group columns of a sparse matrix by non-overlapping rows.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.compute_df2" title="pymrm.numjac.compute_df2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymrm.numjac.compute_df2</span></code></a></p></td>
-<td><p>Compute the difference in function values for perturbed inputs by evaluating the function.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.expand_dependencies" title="pymrm.numjac.expand_dependencies"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymrm.numjac.expand_dependencies</span></code></a></p></td>
-<td><p>Expand a given set of dependencies into a uniform list of tuples in the PyMRM dependency notation, fully expanded.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.generate_sparsity_pattern" title="pymrm.numjac.generate_sparsity_pattern"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymrm.numjac.generate_sparsity_pattern</span></code></a></p></td>
-<td><p>Generate row and column indices for the sparse matrix representation of a stencil pattern.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.precompute_perturbations" title="pymrm.numjac.precompute_perturbations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymrm.numjac.precompute_perturbations</span></code></a></p></td>
-<td><p>Precompute perturbed values of the input array for numerical Jacobian computation.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.stencil_block_diagonals" title="pymrm.numjac.stencil_block_diagonals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymrm.numjac.stencil_block_diagonals</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.numjac.stencil_block_diagonals" title="pymrm.numjac.stencil_block_diagonals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymrm.numjac.stencil_block_diagonals</span></code></a></p></td>
 <td><p>Generate a stencil pattern for block diagonals.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.operators.construct_div" title="pymrm.operators.construct_div"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymrm.operators.construct_div</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.operators.construct_div" title="pymrm.operators.construct_div"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymrm.operators.construct_div</span></code></a></p></td>
 <td><p>Construct the divergence matrix for flux calculations.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.operators.construct_grad" title="pymrm.operators.construct_grad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymrm.operators.construct_grad</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.operators.construct_grad" title="pymrm.operators.construct_grad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymrm.operators.construct_grad</span></code></a></p></td>
 <td><p>Construct the gradient matrix for spatial differentiation.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.operators.construct_grad_bc" title="pymrm.operators.construct_grad_bc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymrm.operators.construct_grad_bc</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.operators.construct_grad_bc" title="pymrm.operators.construct_grad_bc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymrm.operators.construct_grad_bc</span></code></a></p></td>
 <td><p>Construct the gradient matrix for boundary faces.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.operators.construct_grad_int" title="pymrm.operators.construct_grad_int"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymrm.operators.construct_grad_int</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.operators.construct_grad_int" title="pymrm.operators.construct_grad_int"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymrm.operators.construct_grad_int</span></code></a></p></td>
 <td><p>Construct the gradient matrix for internal faces.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.solve.clip_approach" title="pymrm.solve.clip_approach"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymrm.solve.clip_approach</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.solve.clip_approach" title="pymrm.solve.clip_approach"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymrm.solve.clip_approach</span></code></a></p></td>
 <td><p>Apply bounds and an approach factor to an array of values.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.solve.newton" title="pymrm.solve.newton"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymrm.solve.newton</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../pymrm/docs/sphinx/pymrm.html#pymrm.solve.newton" title="pymrm.solve.newton"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymrm.solve.newton</span></code></a></p></td>
 <td><p>Perform Newton-Raphson iterations to solve nonlinear systems of equations.</p></td>
 </tr>
 </tbody>

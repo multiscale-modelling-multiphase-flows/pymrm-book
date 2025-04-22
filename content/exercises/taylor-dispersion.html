@@ -186,7 +186,9 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_started.html">Getting Started with PyMRM</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/tutorials.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../pymrm/tutorials/introduction_and_start.html">Multiphase Reactor Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pymrm/tutorials/introduction_and_start.html">Introduction to PyMRM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pymrm/tutorials/stationary_diffusion.html">Stationary Diffusion Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pymrm/tutorials/diffusion_first_order_kinetics.html">Diffusion: First-order Kinetics, Multi-Component, Unsteady</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples/examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -284,11 +286,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../api/generated/all/pymrm.interpolate.interp_cntr_to_stagg_tvd.html">pymrm.interpolate.interp_cntr_to_stagg_tvd</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api/generated/all/pymrm.interpolate.interp_stagg_to_cntr.html">pymrm.interpolate.interp_stagg_to_cntr</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api/generated/all/pymrm.numjac.NumJac.html">pymrm.numjac.NumJac</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/generated/all/pymrm.numjac.colgroup.html">pymrm.numjac.colgroup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/generated/all/pymrm.numjac.compute_df2.html">pymrm.numjac.compute_df2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/generated/all/pymrm.numjac.expand_dependencies.html">pymrm.numjac.expand_dependencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/generated/all/pymrm.numjac.generate_sparsity_pattern.html">pymrm.numjac.generate_sparsity_pattern</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/generated/all/pymrm.numjac.precompute_perturbations.html">pymrm.numjac.precompute_perturbations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api/generated/all/pymrm.numjac.stencil_block_diagonals.html">pymrm.numjac.stencil_block_diagonals</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api/generated/all/pymrm.operators.construct_div.html">pymrm.operators.construct_div</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api/generated/all/pymrm.operators.construct_grad.html">pymrm.operators.construct_grad</a></li>
@@ -518,7 +515,7 @@ document.write(`
 <h1><span class="section-number">5.7. </span>Taylor Dispersion<a class="headerlink" href="#taylor-dispersion" title="Link to this heading">#</a></h1>
 <p>Taylor dispersion is caused by the presence of a velocity profile. Solute particles experience different flow velocities depending on their radial position. By means of molecular diffusion, the particles sample these different velocities, which gives a spread in residence time.</p>
 <figure class="align-left">
-<a class="reference internal image-reference" href="content/exercises/media/Taylor_dispersion.png"><img alt="content/exercises/media/Taylor_dispersion.png" src="content/exercises/media/Taylor_dispersion.png" style="width: 60%;" />
+<a class="reference internal image-reference" href="../../_images/Taylor_dispersion.png"><img alt="../../_images/Taylor_dispersion.png" src="../../_images/Taylor_dispersion.png" style="width: 60%;" />
 </a>
 </figure>
 <p>The spread of the solute can be described by a 2D convection-diffusion equation:</p>
