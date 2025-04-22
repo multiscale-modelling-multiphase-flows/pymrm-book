@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Introduction to PyMRM &#8212; Multiphase Reactor Modeling using PyMRM</title>
+    <title>Nonlinear Kinetics &#8212; Multiphase Reactor Modeling using PyMRM</title>
   
   
   
@@ -60,12 +60,12 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'pymrm/tutorials/introduction_and_start';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pymrm/tutorials/nonlinear_kinetics';</script>
     <link rel="icon" href="../../_static/logo.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Stationary Diffusion Equations" href="stationary_diffusion.html" />
-    <link rel="prev" title="Tutorials" href="../../content/tutorials/tutorials.html" />
+    <link rel="next" title="Examples" href="../../content/examples/examples.html" />
+    <link rel="prev" title="Diffusion: First-order Kinetics, Multi-Component, Unsteady" href="diffusion_first_order_kinetics.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -186,10 +186,10 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../content/getting_started/getting_started.html">Getting Started with PyMRM</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../../content/tutorials/tutorials.html">Tutorials</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Introduction to PyMRM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction_and_start.html">Introduction to PyMRM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stationary_diffusion.html">Stationary Diffusion Equations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="diffusion_first_order_kinetics.html">Diffusion: First-order Kinetics, Multi-Component, Unsteady</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nonlinear_kinetics.html">Nonlinear Kinetics</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Nonlinear Kinetics</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../content/examples/examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -369,7 +369,7 @@
       
       
       
-      <li><a href="https://github.com/eajfpeters/pymrm-book/edit/main/_build/html/pymrm/tutorials/introduction_and_start.ipynb" target="_blank"
+      <li><a href="https://github.com/eajfpeters/pymrm-book/edit/main/_build/html/pymrm/tutorials/nonlinear_kinetics.ipynb" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -386,7 +386,7 @@
       
       
       
-      <li><a href="https://github.com/eajfpeters/pymrm-book/issues/new?title=Issue%20on%20page%20%2Fpymrm/tutorials/introduction_and_start.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/eajfpeters/pymrm-book/issues/new?title=Issue%20on%20page%20%2Fpymrm/tutorials/nonlinear_kinetics.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -416,7 +416,7 @@
       
       
       
-      <li><a href="../../_sources/pymrm/tutorials/introduction_and_start.ipynb" target="_blank"
+      <li><a href="../../_sources/pymrm/tutorials/nonlinear_kinetics.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -500,7 +500,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Introduction to PyMRM</h1>
+    <h1>Nonlinear Kinetics</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -510,9 +510,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-typical-transport-equation">A Typical Transport Equation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discretization-of-the-reactor-model">Discretization of the Reactor Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorials">Tutorials</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-setup">Problem Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-setup">Numerical Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-non-linear-system-using-newton-s-method">Solving Non-linear System using Newton’s Method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-the-nonlinear-diffusion-reaction-problem">Solving the Nonlinear Diffusion-Reaction Problem</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
 </ul>
             </nav>
         </div>
@@ -524,56 +528,183 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-pymrm">
-<h1>Introduction to PyMRM<a class="headerlink" href="#introduction-to-pymrm" title="Link to this heading">#</a></h1>
-<p>Chemical reactors convert reactants into products through chemical reactions. The goal is often to optimize quantities such as yield and selectivity.
-In addition to reaction kinetics, transport phenomena like mixing, mass transfer, and heat transfer play a crucial role in determining reactor performance.
-A reactor model aims to describe these phenomena, serving as a tool for designing and optimizing reactors.</p>
-<section id="a-typical-transport-equation">
-<h2>A Typical Transport Equation<a class="headerlink" href="#a-typical-transport-equation" title="Link to this heading">#</a></h2>
-<p>A common model is the convection-diffusion-reaction equation:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="nonlinear-kinetics">
+<h1>Nonlinear Kinetics<a class="headerlink" href="#nonlinear-kinetics" title="Link to this heading">#</a></h1>
+<p>This tutorial extends the concepts introduced in the <a class="reference internal" href="stationary_diffusion.html"><span class="std std-doc">Stationary Diffusion</span></a> and <a class="reference internal" href="diffusion_first_order_kinetics.html"><span class="std std-doc">Diffusion with First-Order Kinetics</span></a> tutorials. Here, we will solve a nonlinear reaction-diffusion problem involving two components that react according to the equation:</p>
 <div class="math notranslate nohighlight">
-\[ \frac{\partial c}{\partial t} + \nabla \cdot (\mathbf{v} \, c - D\nabla c) = r\]</div>
-<p>Here, <span class="math notranslate nohighlight">\(c\)</span> represents the concentration of a species, but it can also represent multiple species across various phases. The reaction term <span class="math notranslate nohighlight">\(r\)</span> may include mass-transfer terms (between phases) in addition to reaction kinetics. The diffusion coefficient <span class="math notranslate nohighlight">\(D\)</span> could represent a dispersion coefficient. Similarly, temperature can be modeled using a similar equation. Accumulation terms can be more complex, and counter-flow or other phenomena may also need to be considered.</p>
-</section>
-<section id="discretization-of-the-reactor-model">
-<h2>Discretization of the Reactor Model<a class="headerlink" href="#discretization-of-the-reactor-model" title="Link to this heading">#</a></h2>
-<p>The convection-diffusion-reaction equation is a partial differential equation (PDE) that needs to be discretized for numerical solutions. The <code class="docutils literal notranslate"><span class="pre">PyMRM</span></code> package provides a set of tools to simplify this process and efficiently solve the resulting equations. Phenomenological models, which are the focus of <code class="docutils literal notranslate"><span class="pre">PyMRM</span></code>, are typically 1D or 2D in space. The discretization is performed on a structured rectilinear grid, represented as a multi-dimensional array. Different species and phases can also correspond to additional dimensions.</p>
-<p>To enable efficient computations with these multi-dimensional arrays, <code class="docutils literal notranslate"><span class="pre">PyMRM</span></code> extensively uses <code class="docutils literal notranslate"><span class="pre">Numpy</span></code>. For example, consider a 4-dimensional array where <code class="docutils literal notranslate"><span class="pre">c.shape</span> <span class="pre">=</span> <span class="pre">(n_x,</span> <span class="pre">n_y,</span> <span class="pre">n_p,</span> <span class="pre">n_c)</span></code>. Here:</p>
+\[A + B \rightarrow C\]</div>
+<p>The governing equations for the concentrations of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\frac{\partial c_A}{\partial t} + \mathrm{div}(-D \nabla c_A) &amp;= -k \, c_A c_B\\
+\frac{\partial c_B}{\partial t} + \mathrm{div}(-D \nabla c_B) &amp;= -k \, c_A c_B\\
+\frac{\partial c_C}{\partial t} + \mathrm{div}(-D \nabla c_C) &amp;= +k \, c_A c_B
+\end{align*}
+\end{split}\]</div>
+<p>Initially, none of the 3 species is present.
+The boundary conditions are:</p>
 <ul class="simple">
-<li><p>The first two axes (<code class="docutils literal notranslate"><span class="pre">n_x</span></code> and <code class="docutils literal notranslate"><span class="pre">n_y</span></code>) correspond to the spatial <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> directions.</p></li>
-<li><p>The third axis (<code class="docutils literal notranslate"><span class="pre">n_p</span></code>) represents the number of phases.</p></li>
-<li><p>The fourth axis (<code class="docutils literal notranslate"><span class="pre">n_c</span></code>) represents the number of components.</p></li>
+<li><p><span class="math notranslate nohighlight">\(c_A(0) = 1\)</span>, <span class="math notranslate nohighlight">\({\partial c_A(L)}/{\partial n} = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\({\partial c_B(0)}/{\partial n} = 0\)</span>, <span class="math notranslate nohighlight">\(c_B(L) = 1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(c_C(0) = 0\)</span>, <span class="math notranslate nohighlight">\(c_C(L) = 0\)</span>.</p></li>
 </ul>
-<p>In Python, axis indexing starts at 0, so <code class="docutils literal notranslate"><span class="pre">axis=2</span></code> corresponds to the phases, and <code class="docutils literal notranslate"><span class="pre">axis=3</span></code> corresponds to the components.</p>
-<p>In most cases, solving these equations involves a (partly) implicit approach. For non-linear equations, Newton-Raphson iteration is used. During each iteration, a linear system of equations is solved, represented as a sparse matrix-vector equation. To handle these sparse systems efficiently, <code class="docutils literal notranslate"><span class="pre">PyMRM</span></code> relies on the <code class="docutils literal notranslate"><span class="pre">SciPy</span></code> package, specifically its compressed column format (<code class="docutils literal notranslate"><span class="pre">csc_array</span></code>).</p>
-<p>The general transport equation, including reaction, represents a balance of accumulation and transport on the left-hand side, with production or consumption on the right-hand side. The transport term is the divergence of a (molar) flux, which has both convective and diffusive contributions. To explicitly distinguish between the divergence and gradient operators, the equation can be written as:</p>
-<div class="math notranslate nohighlight">
-\[\frac{\partial c}{\partial t} + \mathrm{div}(\mathbf{v} \, c - D \, \mathrm{grad}(c)) = r\]</div>
-<p>This form is particularly useful because it closely resembles the structure of the discretized equations. For example, in <code class="docutils literal notranslate"><span class="pre">PyMRM</span></code>, the discretized form can be expressed as:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="n">c_old</span><span class="p">)</span> <span class="o">/</span> <span class="n">dt</span> <span class="o">+</span> <span class="n">div_mat</span> <span class="o">@</span> <span class="p">(</span><span class="n">conv_mat</span> <span class="o">@</span> <span class="n">c</span> <span class="o">-</span> <span class="n">D</span> <span class="o">*</span> <span class="n">grad_mat</span> <span class="o">@</span> <span class="n">c</span><span class="p">)</span> <span class="o">=</span> <span class="n">r</span>
+<p>We will use the <code class="docutils literal notranslate"><span class="pre">NumJac</span></code> class from <code class="docutils literal notranslate"><span class="pre">PyMRM</span></code> to compute the Jacobian of the nonlinear reaction term and solve the system iteratively using Newton-Raphson.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.sparse</span><span class="w"> </span><span class="kn">import</span> <span class="n">linalg</span> <span class="k">as</span> <span class="n">sla</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pymrm</span><span class="w"> </span><span class="kn">import</span> <span class="n">construct_grad</span><span class="p">,</span> <span class="n">construct_div</span><span class="p">,</span> <span class="n">construct_coefficient_matrix</span><span class="p">,</span> <span class="n">NumJac</span><span class="p">,</span> <span class="n">newton</span>
 </pre></div>
 </div>
-<p>Here:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">div_mat</span></code> and <code class="docutils literal notranslate"><span class="pre">grad_mat</span></code> are matrices that approximate the differential operators <span class="math notranslate nohighlight">\(\mathrm{div}\)</span> and <span class="math notranslate nohighlight">\(\mathrm{grad}\)</span>, respectively.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">conv_mat</span></code> is a matrix representing the convective velocities.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">c_old</span></code> is the concentration from the previous time step.</p></li>
-</ul>
-<p>While it might seem straightforward to compute convection as <code class="docutils literal notranslate"><span class="pre">v</span> <span class="pre">*</span> <span class="pre">c</span></code> when <code class="docutils literal notranslate"><span class="pre">v</span></code> is constant, convection is more complex due to numerical stability considerations. This is why specialized operators like <code class="docutils literal notranslate"><span class="pre">conv_mat</span></code> are used in <code class="docutils literal notranslate"><span class="pre">PyMRM</span></code>.</p>
+</div>
+</div>
+<section id="problem-setup">
+<h2>Problem Setup<a class="headerlink" href="#problem-setup" title="Link to this heading">#</a></h2>
+<p>We define the physical parameters, boundary conditions, and the reaction kinetics.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Physical parameters</span>
+<span class="n">num_c</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># Number of components</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mf">1.0</span>    <span class="c1"># Length of the domain</span>
+<span class="n">D</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]]</span>    <span class="c1"># Diffusion coefficients</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">500</span>    <span class="c1"># Reaction rate constant</span>
+
+<span class="c1"># Boundary conditions</span>
+<span class="n">bc_L</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]}</span>  <span class="c1"># Dirichlet for A, Neumann for B, Dirichlet for C</span>
+<span class="n">bc_R</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]}</span>  <span class="c1"># Neumann for A, Dirichlet for B, Dirichlet for C</span>
+
+<span class="c1"># Reaction kinetics</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">reaction</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># Reaction rate</span>
+    <span class="n">f</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">r</span>  <span class="c1"># Loss of A</span>
+    <span class="n">f</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">r</span>  <span class="c1"># Loss of B</span>
+    <span class="n">f</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span>   <span class="c1"># Gain of C</span>
+    <span class="k">return</span> <span class="n">f</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
-<section id="tutorials">
-<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading">#</a></h2>
-<p>This collection of tutorials is designed to familiarize you with the basic building blocks of <code class="docutils literal notranslate"><span class="pre">PyMRM</span></code> and some of its advanced features. The full API documentation is available at <a class="reference external" href="https://multiscale-modelling-multiphase-flows.github.io/pymrm-book/content/api/index.html">PyMRM Documentation</a>.</p>
-<p>Below is an outline of the available tutorials:</p>
-<ol class="arabic simple">
-<li><p><strong><a class="reference internal" href="stationary_diffusion.html"><span class="std std-doc">Stationary Diffusion</span></a></strong>: This tutorial introduces spatial discretization in <code class="docutils literal notranslate"><span class="pre">PyMRM</span></code> using stationary diffusion with a source term as an example. It covers constructing matrices for the divergence and grad ient operators, applying boundary conditions, and assembling the final matrix-vector equation.</p></li>
-<li><p><strong><a class="reference internal" href="diffusion_first_order_kinetics.html"><span class="doc std std-doc">Diffusion with First-Order Kinetics</span></a></strong>: This tutorial extends the diffusion example to include first-order kinetics, multi-component systems, and accumulation terms. It also demonstrates diffusion in cylindrical and spherical symmetric 1D geometries.</p></li>
-<li><p><strong><a class="reference internal" href="nonlinear_kinetics.html"><span class="doc std std-doc">Nonlinear Kinetics</span></a></strong>: This tutorial (coming soon) will extend the previous example to handle nonlinear multicomponent reaction kinetics. It will introduce the <code class="docutils literal notranslate"><span class="pre">NumJac</span></code> class for numerical differentiation and Jacobian matrix approximation, solving the non-linear problem using the Newton-Raphson method.</p></li>
-<li><p><strong><a class="reference internal" href="#diffusion_2D"><span class="xref myst">2D Diffusion</span></a></strong>: This tutorial (coming soon) will demonstrate diffusion-reaction modeling in a 2D geometry.</p></li>
-<li><p><strong><a class="reference internal" href="#convection"><span class="xref myst">Convection</span></a></strong>: This tutorial (coming soon) will show how to include convection in the model. It will cover implicit upwind discretization and second-order TVD schemes using deferred correction.</p></li>
-<li><p><strong><a class="reference internal" href="#reactor_model_class"><span class="xref myst">Reactor Model Classes</span></a></strong>: This tutorial (coming soon) will explain how to organize a reactor model as a class.</p></li>
-</ol>
+<section id="numerical-setup">
+<h2>Numerical Setup<a class="headerlink" href="#numerical-setup" title="Link to this heading">#</a></h2>
+<p>We discretize the domain and construct the gradient and divergence matrices for the diffusion term.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Numerical parameters</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>  <span class="c1"># Time step size (infinity for steady state)</span>
+<span class="n">num_x</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># Number of grid points</span>
+<span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_x</span><span class="p">,</span> <span class="n">num_c</span><span class="p">)</span>  <span class="c1"># Shape of the concentration array</span>
+
+<span class="c1"># Grid setup</span>
+<span class="n">x_f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">num_x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Face positions</span>
+<span class="n">x_c</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">x_f</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">x_f</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>  <span class="c1"># Cell-centered positions</span>
+
+<span class="c1"># Create accumulation matrix</span>
+<span class="n">accum_mat</span> <span class="o">=</span> <span class="n">construct_coefficient_matrix</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">dt</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">shape</span><span class="p">)</span> <span class="c1"># Accumulation term</span>
+
+<span class="c1"># Create and diffusion Jacobian matrix and boundary condition contribution</span>
+<span class="n">grad_mat</span><span class="p">,</span> <span class="n">grad_bc</span> <span class="o">=</span> <span class="n">construct_grad</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">x_f</span><span class="p">,</span> <span class="n">x_c</span><span class="p">,</span> <span class="n">bc</span><span class="o">=</span><span class="p">(</span><span class="n">bc_L</span><span class="p">,</span> <span class="n">bc_R</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">D_mat</span> <span class="o">=</span> <span class="n">construct_coefficient_matrix</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">shape</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">div_mat</span> <span class="o">=</span> <span class="n">construct_div</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">x_f</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">jac_diff</span>    <span class="o">=</span> <span class="n">div_mat</span> <span class="o">@</span> <span class="p">(</span><span class="o">-</span><span class="n">D_mat</span> <span class="o">@</span> <span class="n">grad_mat</span><span class="p">)</span>  <span class="c1"># Diffusion term</span>
+<span class="n">jac_diff_bc</span> <span class="o">=</span> <span class="n">div_mat</span> <span class="o">@</span> <span class="p">(</span><span class="o">-</span><span class="n">D_mat</span> <span class="o">@</span> <span class="n">grad_bc</span><span class="p">)</span>   <span class="c1"># Boundary condition contribution</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="solving-non-linear-system-using-newton-s-method">
+<h2>Solving Non-linear System using Newton’s Method<a class="headerlink" href="#solving-non-linear-system-using-newton-s-method" title="Link to this heading">#</a></h2>
+<p>The reaction term is non-linear, so we use the Newton-Raphson method to solve the system iteratively. This method is efficient, especially when the initial guess is close to the solution, as is often the case for unsteady problems. For steady-state problems, convergence may require additional techniques, such as starting with a time-dependent solution.</p>
+<p>In Newton-Raphson, the system of equations is reformulated as a root-finding problem:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="n">c_old</span><span class="p">)</span> <span class="o">/</span> <span class="n">dt</span> <span class="o">-</span> <span class="n">div_mat</span> <span class="o">@</span> <span class="p">(</span><span class="n">D_mat</span> <span class="o">@</span> <span class="p">(</span><span class="n">grad_mat</span> <span class="o">@</span> <span class="n">c</span> <span class="o">+</span> <span class="n">grad_bc</span><span class="p">))</span> <span class="o">-</span> <span class="n">r</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The solution satisfies <code class="docutils literal notranslate"><span class="pre">g(c)</span> <span class="pre">=</span> <span class="pre">0</span></code>. The method iteratively solves the linearized equation:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{g}(\mathbf{c}^{(k+1)}) \approx \mathbf{g}(\mathbf{c}^{(k)}) + \mathbf{J} (\mathbf{c}^{(k+1)} - \mathbf{c}^{(k)})\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{J}\)</span> is the Jacobian matrix of <span class="math notranslate nohighlight">\(\mathbf{g}\)</span>, defined as:</p>
+<div class="math notranslate nohighlight">
+\[J_{ij} = \frac{\partial g_i}{\partial c_j}\]</div>
+<p>The update step is:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{c}^{(k+1)} = \mathbf{c}^{(k)} - \mathbf{J}^{-1} \mathbf{g}(\mathbf{c}^{(k)})\]</div>
+<p>In <code class="docutils literal notranslate"><span class="pre">PyMRM</span></code>, the <code class="docutils literal notranslate"><span class="pre">newton</span></code> function simplifies this process by handling the iterative updates and convergence checks. It supports sparse Jacobians, making it suitable for large systems. The function requires:</p>
+<ul class="simple">
+<li><p>A callable that computes both <code class="docutils literal notranslate"><span class="pre">g(c)</span></code> and its Jacobian <code class="docutils literal notranslate"><span class="pre">J(c)</span></code>.</p></li>
+<li><p>An initial guess for <code class="docutils literal notranslate"><span class="pre">c</span></code>.</p></li>
+<li><p>Optional parameters like tolerance (<code class="docutils literal notranslate"><span class="pre">tol</span></code>) and maximum iterations (<code class="docutils literal notranslate"><span class="pre">maxfev</span></code>).
+The <code class="docutils literal notranslate"><span class="pre">newton</span></code> function in <code class="docutils literal notranslate"><span class="pre">PyMRM</span></code> is designed to align with <code class="docutils literal notranslate"><span class="pre">scipy.optimize</span></code> conventions but adds support for sparse Jacobians, which are essential for solving large-scale problems efficiently.</p></li>
+</ul>
+<p>Using the definitions above, we can write:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">=</span> <span class="n">jac_accum</span> <span class="o">@</span> <span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="n">c_old</span><span class="p">)</span> <span class="o">+</span> <span class="n">jac_diff</span> <span class="o">@</span> <span class="n">c</span> <span class="o">+</span> <span class="n">jac_diff_bc</span> <span class="o">-</span> <span class="n">r</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and the Jacobian:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">jac</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">=</span> <span class="n">jac_accum</span> <span class="o">+</span> <span class="n">jac_diff</span> <span class="o">-</span> <span class="n">jac_react</span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">jac_react</span></code> is the Jacobian of the reaction term, which changes with each iteration. The <code class="docutils literal notranslate"><span class="pre">NumJac</span></code> class in <code class="docutils literal notranslate"><span class="pre">PyMRM</span></code> efficiently computes this Jacobian using numerical differentiation. It automatically determines the sparsity pattern for multi-component systems when initialized with <code class="docutils literal notranslate"><span class="pre">c.shape</span></code>.</p>
+<p>For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">numjac</span> <span class="o">=</span> <span class="n">NumJac</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">g_react</span><span class="p">,</span> <span class="n">jac_react</span> <span class="o">=</span> <span class="n">numjac</span><span class="p">(</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">reaction</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This computes both the reaction term and its Jacobian efficiently.</p>
+<section id="solving-the-nonlinear-diffusion-reaction-problem">
+<h3>Solving the Nonlinear Diffusion-Reaction Problem<a class="headerlink" href="#solving-the-nonlinear-diffusion-reaction-problem" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numjac</span> <span class="o">=</span> <span class="n">NumJac</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">g</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">c_old</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to compute the residual of the system of equations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">c_vec</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">c_old_vec</span> <span class="o">=</span> <span class="n">c_old</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">g_react</span><span class="p">,</span> <span class="n">jac_react</span> <span class="o">=</span> <span class="n">numjac</span><span class="p">(</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">reaction</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="n">c</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">accum_mat</span> <span class="o">@</span> <span class="p">(</span><span class="n">c_vec</span> <span class="o">-</span> <span class="n">c_old_vec</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="n">jac_diff</span> <span class="o">@</span> <span class="n">c_vec</span> <span class="o">+</span> <span class="n">jac_diff_bc</span> <span class="o">-</span> <span class="n">g_react</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">jac</span> <span class="o">=</span> <span class="n">accum_mat</span> <span class="o">+</span> <span class="n">jac_diff</span> <span class="o">-</span> <span class="n">jac_react</span>
+    <span class="k">return</span> <span class="n">g</span><span class="p">,</span> <span class="n">jac</span>
+
+<span class="n">c_old</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">newton</span><span class="p">(</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">g</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">c_old</span><span class="p">),</span> <span class="n">c_old</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">maxfev</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># Plotting the results</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_c</span><span class="p">,</span> <span class="n">c</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Component A&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_c</span><span class="p">,</span> <span class="n">c</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Component B&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_c</span><span class="p">,</span> <span class="n">c</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Component C&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Position&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Concentration&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Steady-State Concentration Profiles&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/ca617cba8d83f0d3a08a6d8bbda3667cea69d190655e9608be779e446f9ac409.png" src="../../_images/ca617cba8d83f0d3a08a6d8bbda3667cea69d190655e9608be779e446f9ac409.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h2>
+<p>Here are some suggestions to extend and experiment with the current implementation:</p>
+<ul class="simple">
+<li><p><strong>Vary Diffusion Coefficients</strong>: Assign different diffusion coefficients to the components (e.g., <code class="docutils literal notranslate"><span class="pre">D</span> <span class="pre">=</span> <span class="pre">[[1.0,</span> <span class="pre">0.5,</span> <span class="pre">0.1]]</span></code>). Observe how the steady-state profiles change.</p></li>
+<li><p><strong>Modify Boundary Conditions</strong>: Change the boundary conditions for one or more components.</p></li>
+<li><p><strong>Include a Reverse Reaction</strong>: Add a reverse reaction term, such as <span class="math notranslate nohighlight">\(C \rightarrow A + B\)</span>, with a rate constant <code class="docutils literal notranslate"><span class="pre">k_rev</span></code>. Update the reaction function to include this reverse reaction.</p></li>
+<li><p><strong>Explore Convergence</strong>: Experiment with different tolerances (<code class="docutils literal notranslate"><span class="pre">tol</span></code>) and maximum iterations (<code class="docutils literal notranslate"><span class="pre">maxfev</span></code>) in the <code class="docutils literal notranslate"><span class="pre">newton</span></code> function. Analyze how these parameters affect convergence and computation time.</p></li>
+<li><p><strong>Time-Dependent Solution</strong>: Solve the system for a finite time step size (<code class="docutils literal notranslate"><span class="pre">dt</span></code>) instead of steady-state. Evolve the concentration profiles over time and visualize the transient behavior.</p></li>
+</ul>
+<p>Feel free to implement these changes and observe how they impact the results!</p>
 </section>
 </section>
 
@@ -608,20 +739,20 @@ A reactor model aims to describe these phenomena, serving as a tool for designin
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../../content/tutorials/tutorials.html"
+       href="diffusion_first_order_kinetics.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Tutorials</p>
+        <p class="prev-next-title">Diffusion: First-order Kinetics, Multi-Component, Unsteady</p>
       </div>
     </a>
     <a class="right-next"
-       href="stationary_diffusion.html"
+       href="../../content/examples/examples.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Stationary Diffusion Equations</p>
+        <p class="prev-next-title">Examples</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -641,9 +772,13 @@ A reactor model aims to describe these phenomena, serving as a tool for designin
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-typical-transport-equation">A Typical Transport Equation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discretization-of-the-reactor-model">Discretization of the Reactor Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorials">Tutorials</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-setup">Problem Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-setup">Numerical Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-non-linear-system-using-newton-s-method">Solving Non-linear System using Newton’s Method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-the-nonlinear-diffusion-reaction-problem">Solving the Nonlinear Diffusion-Reaction Problem</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
 </ul>
   </nav></div>
 

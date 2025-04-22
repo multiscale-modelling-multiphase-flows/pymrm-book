@@ -64,7 +64,7 @@
     <link rel="icon" href="../../_static/logo.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Examples" href="../../content/examples/examples.html" />
+    <link rel="next" title="Nonlinear Kinetics" href="nonlinear_kinetics.html" />
     <link rel="prev" title="Stationary Diffusion Equations" href="stationary_diffusion.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -189,6 +189,7 @@
 <li class="toctree-l2"><a class="reference internal" href="introduction_and_start.html">Introduction to PyMRM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stationary_diffusion.html">Stationary Diffusion Equations</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Diffusion: First-order Kinetics, Multi-Component, Unsteady</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nonlinear_kinetics.html">Nonlinear Kinetics</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../content/examples/examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -758,7 +759,7 @@ In the <code class="docutils literal notranslate"><span class="pre">PyMRM</span>
 \[A \rightarrow B \rightarrow C,\]</div>
 <p>with reaction rate constants <span class="math notranslate nohighlight">\(k_1\)</span> and <span class="math notranslate nohighlight">\(k_2\)</span>. Without spatial dependence, the kinetics can be expressed as:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\frac{d}{dt} \begin{bmatrix} c_A \\ c_B \\ c_C \end{bmatrix} = \begin{bmatrix} -k_1 &amp; 0 &amp; 0 \\ k_1 &amp; -k_2 &amp; 0 \\ 0 &amp; k_2 &amp; 0 \end{bmatrix} \begin{bmatrix} c_A \\ c_B \\ c_C \end{bmatrix}.\end{split}\]</div>
+\[\begin{split}\frac{d}{dt} \begin{bmatrix} c_A \\ c_B \\ c_C \end{bmatrix} = -\begin{bmatrix} k_1 &amp; 0 &amp; 0 \\ -k_1 &amp; k_2 &amp; 0 \\ 0 &amp; -k_2 &amp; 0 \end{bmatrix} \begin{bmatrix} c_A \\ c_B \\ c_C \end{bmatrix}.\end{split}\]</div>
 <p>The diffusion coefficients for each species can vary and are typically stored in a diagonal matrix. The <code class="docutils literal notranslate"><span class="pre">PyMRM</span></code> function <code class="docutils literal notranslate"><span class="pre">construct_coefficient_matrix</span></code> is used to create this diagonal matrix, ensuring that the diffusion coefficients.
 Fluxes are computed from gradients that are defined on cell-face (also called staggered) positions. The <code class="docutils literal notranslate"><span class="pre">axis</span></code> parameter in <code class="docutils literal notranslate"><span class="pre">construct_coefficient_matrix</span></code> specifies the axis along which the staggered positions are computed.</p>
 <p>The code below solves the stationary diffusion-reaction problem for three reacting species inside a spherical particle.</p>
@@ -910,7 +911,22 @@ Fluxes are computed from gradients that are defined on cell-face (also called st
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/26f8d0a2bb3d0466ab62610c56ff35fe14ca76e8f1a27d4d5e4ca8f4c32d9b80.png" src="../../_images/26f8d0a2bb3d0466ab62610c56ff35fe14ca76e8f1a27d4d5e4ca8f4c32d9b80.png" />
+<img alt="../../_images/ae0c1f73cd5d4ffa5544cb8ce9ed96118e43ce05603a0a700f85f09691da6c32.png" src="../../_images/ae0c1f73cd5d4ffa5544cb8ce9ed96118e43ce05603a0a700f85f09691da6c32.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">47</span>
+<span class="g g-Whitespace">     </span><span class="mi">45</span> <span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span> <span class="n">display</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">47</span> <span class="n">plt</span><span class="o">.</span><span class="n">pause</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>  <span class="c1"># Pause to allow the plot to update</span>
+
+<span class="nn">File d:\Users\eajfpeters\Anaconda3\envs\mrm\Lib\site-packages\matplotlib\pyplot.py:760,</span> in <span class="ni">pause</span><span class="nt">(interval)</span>
+<span class="g g-Whitespace">    </span><span class="mi">758</span>     <span class="n">canvas</span><span class="o">.</span><span class="n">start_event_loop</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">759</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">760</span>     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
 </div>
 </div>
 </section>
@@ -956,11 +972,11 @@ Fluxes are computed from gradients that are defined on cell-face (also called st
       </div>
     </a>
     <a class="right-next"
-       href="../../content/examples/examples.html"
+       href="nonlinear_kinetics.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Examples</p>
+        <p class="prev-next-title">Nonlinear Kinetics</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
