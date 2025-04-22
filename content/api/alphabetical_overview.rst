@@ -27,11 +27,6 @@ An overview of all functions and classes in the `pymrm package.
    pymrm.interpolate.interp_cntr_to_stagg_tvd
    pymrm.interpolate.interp_stagg_to_cntr
    pymrm.numjac.NumJac
-   pymrm.numjac.colgroup
-   pymrm.numjac.compute_df2
-   pymrm.numjac.expand_dependencies
-   pymrm.numjac.generate_sparsity_pattern
-   pymrm.numjac.precompute_perturbations
    pymrm.numjac.stencil_block_diagonals
    pymrm.operators.construct_div
    pymrm.operators.construct_grad
