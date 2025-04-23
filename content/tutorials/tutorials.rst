@@ -15,3 +15,4 @@ This is work in progress, and we will be adding more tutorials in the future.
    ../../pymrm/tutorials/stationary_diffusion
    ../../pymrm/tutorials/diffusion_first_order_kinetics
    ../../pymrm/tutorials/nonlinear_kinetics
+   ../../pymrm/tutorials/diffusion_2D
