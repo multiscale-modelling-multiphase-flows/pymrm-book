@@ -612,6 +612,12 @@ document.write(`
 </li>
 </ul>
 </li>
+<li><p><strong>Trouble shooting Windows Powershell</strong>
+When using Windows Powershell it sometimes refuses to execute scripts, and it refuses to run the <code class="docutils literal notranslate"><span class="pre">activate</span></code> script. In that case run Powershell as an administrator and execute the command:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>Set-ExecutionPolicy<span class="w"> </span>-Scope<span class="w"> </span>CurrentUser<span class="w"> </span>-ExecutionPolicy<span class="w"> </span>RemoteSigned
+</pre></div>
+</div>
+</li>
 </ol>
 </section>
 </section>
