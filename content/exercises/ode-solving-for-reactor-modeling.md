@@ -4,6 +4,6 @@ This set of exercises is associated with Lecture 1 of the class *Multiphase Reac
 
 **Exercise List**
 
-- [First order reaction in a batch reactor](first-order-reaction-in-a-batch-reactor)
-- [Equilibrium consecutive batch reactions](equilibrium-consecutive-batch-reactions)
-- [Steady state 1D fixed bed reactor model: first order exothermal reaction](steady-state-1d-fixed-bed-reactor-model-first-order-exothermal-reaction)
+1. [First order reaction in a batch reactor](first-order-reaction-in-a-batch-reactor)
+2. [Equilibrium consecutive batch reactions](equilibrium-consecutive-batch-reactions)
+3. [Steady state 1D fixed bed reactor model: first order exothermal reaction](steady-state-1d-fixed-bed-reactor-model-first-order-exothermal-reaction)
