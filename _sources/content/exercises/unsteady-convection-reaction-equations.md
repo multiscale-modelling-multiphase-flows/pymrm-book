@@ -4,7 +4,6 @@ This set of exercises is associated with Lecture 2 of the class *Multiphase Reac
 
 **Exercise List**
 
-- [Convection of one species using different schemes](convection-of-one-species-using-different-schemes)
-- [Multicomponent convection-reaction with first-order chemical kinetics](multicomponent-convection-reaction-with-first-order-chemical-kinetics)
-- [Multicomponent convection-reaction with general chemical kinetics](multicomponent-convection-reaction-with-general-chemical-kinetics)
-
+1. [Convection of one species using different schemes](convection-of-one-species-using-different-schemes)
+2. [Multicomponent convection-reaction with first-order chemical kinetics](multicomponent-convection-reaction-with-first-order-chemical-kinetics)
+3. [Multicomponent convection-reaction with general chemical kinetics](multicomponent-convection-reaction-with-general-chemical-kinetics)
