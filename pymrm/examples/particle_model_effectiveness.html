@@ -511,18 +511,25 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="particle-model-diffusion-first-order-reaction">
+  <section class="tex2jax_ignore mathjax_ignore" id="particle-model-diffusion-first-order-reaction">
 <h1>Particle model: diffusion + first order reaction<a class="headerlink" href="#particle-model-diffusion-first-order-reaction" title="Link to this heading">#</a></h1>
-<p>Note that a non-uniform grid us used that is refined at the particle surface. In this way the effectiveness is still accurately computed for larger Thiele moduli.</p>
+<p>This notebook demonstrates how to compute the effectiveness factor of a particle model with diffusion and a first-order reaction.</p>
+<p>A non-uniform grid is used, refined near the particle surface, to ensure accurate computation for larger Thiele moduli.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import required libraries</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pymrm</span><span class="w"> </span><span class="kn">import</span> <span class="n">non_uniform_grid</span>
 
-<span class="n">shape_c</span> <span class="o">=</span> <span class="p">(</span><span class="mi">30</span><span class="p">,)</span>
-<span class="n">R</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">dr_large</span> <span class="o">=</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">R</span>
+<span class="c1"># Define grid parameters</span>
+<span class="n">shape_c</span> <span class="o">=</span> <span class="p">(</span><span class="mi">30</span><span class="p">,)</span>  <span class="c1"># Number of cells in the grid</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Radius of the particle</span>
+<span class="n">dr_large</span> <span class="o">=</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">R</span>  <span class="c1"># Initial large spacing for the grid</span>
+
+<span class="c1"># Generate a non-uniform grid refined near the particle surface</span>
 <span class="n">r_f</span> <span class="o">=</span> <span class="n">non_uniform_grid</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">shape_c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">dr_large</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">)</span>
+
+<span class="c1"># Plot the non-uniform grid positions</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r_f</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;non-uniform grid positions&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;number&quot;</span><span class="p">)</span>
@@ -532,36 +539,48 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/9a96da4fd2067ed620730591224d45e21181b8d270d8aeda1d75017851a3d1ea.png" src="../../_images/9a96da4fd2067ed620730591224d45e21181b8d270d8aeda1d75017851a3d1ea.png" />
+<img alt="../../_images/273734c664a231765a75e1cf6147b2ee4f3c1c234e8127095e27fc1cbee92c22.png" src="../../_images/273734c664a231765a75e1cf6147b2ee4f3c1c234e8127095e27fc1cbee92c22.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import required libraries</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.sparse</span><span class="w"> </span><span class="kn">import</span> <span class="n">linalg</span> <span class="k">as</span> <span class="n">sla</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pymrm</span><span class="w"> </span><span class="kn">import</span> <span class="n">construct_grad</span><span class="p">,</span> <span class="n">construct_div</span>
 
-<span class="n">D</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">phis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">30</span><span class="p">)</span>
-<span class="n">bc</span> <span class="o">=</span> <span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span> <span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">},{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
-<span class="n">Grad</span><span class="p">,</span> <span class="n">grad_bc</span> <span class="o">=</span> <span class="n">construct_grad</span><span class="p">(</span><span class="n">shape_c</span><span class="p">,</span> <span class="n">r_f</span><span class="p">,</span> <span class="n">bc</span><span class="o">=</span><span class="n">bc</span><span class="p">)</span>
-<span class="n">Div</span> <span class="o">=</span> <span class="n">construct_div</span><span class="p">(</span><span class="n">shape_c</span><span class="p">,</span> <span class="n">r_f</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">Lapl</span> <span class="o">=</span> <span class="n">Div</span> <span class="o">@</span> <span class="n">Grad</span>
-<span class="n">lapl_bc</span> <span class="o">=</span> <span class="n">Div</span> <span class="o">@</span> <span class="n">grad_bc</span>
+<span class="c1"># Define constants and parameters</span>
+<span class="n">D</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Diffusion coefficient</span>
+<span class="n">phis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">30</span><span class="p">)</span>  <span class="c1"># Range of Thiele moduli</span>
+<span class="n">bc</span> <span class="o">=</span> <span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span> <span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">},{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>  <span class="c1"># Boundary conditions</span>
 
+<span class="c1"># Construct gradient and divergence matrices</span>
+<span class="n">grad_mat</span><span class="p">,</span> <span class="n">grad_bc</span> <span class="o">=</span> <span class="n">construct_grad</span><span class="p">(</span><span class="n">shape_c</span><span class="p">,</span> <span class="n">r_f</span><span class="p">,</span> <span class="n">bc</span><span class="o">=</span><span class="n">bc</span><span class="p">)</span>
+<span class="n">div_mat</span> <span class="o">=</span> <span class="n">construct_div</span><span class="p">(</span><span class="n">shape_c</span><span class="p">,</span> <span class="n">r_f</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Compute Laplacian matrix and boundary conditions</span>
+<span class="n">lapl_mat</span> <span class="o">=</span> <span class="n">div_mat</span> <span class="o">@</span> <span class="n">grad_mat</span>
+<span class="n">lapl_bc</span> <span class="o">=</span> <span class="n">div_mat</span> <span class="o">@</span> <span class="n">grad_bc</span>
+
+<span class="c1"># Loop over Thiele moduli to compute effectiveness factor</span>
 <span class="k">for</span> <span class="n">phi</span> <span class="ow">in</span> <span class="n">phis</span><span class="p">:</span>
-    <span class="n">k</span> <span class="o">=</span> <span class="n">phi</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">D</span><span class="o">/</span><span class="n">R</span>
-    <span class="n">Jac</span> <span class="o">=</span> <span class="n">k</span><span class="o">*</span><span class="n">sp</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">shape_c</span><span class="p">),</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csc&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="n">Lapl</span>
-    <span class="n">Jac_lu</span> <span class="o">=</span> <span class="n">sla</span><span class="o">.</span><span class="n">splu</span><span class="p">(</span><span class="n">Jac</span><span class="p">)</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">phi</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">D</span><span class="o">/</span><span class="n">R</span>  <span class="c1"># Reaction rate constant</span>
+    <span class="n">jac</span> <span class="o">=</span> <span class="n">k</span><span class="o">*</span><span class="n">sp</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">shape_c</span><span class="p">),</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csc&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="n">lapl_mat</span>  <span class="c1"># Jacobian matrix</span>
+    <span class="n">jac_lu</span> <span class="o">=</span> <span class="n">sla</span><span class="o">.</span><span class="n">splu</span><span class="p">(</span><span class="n">jac</span><span class="p">)</span>  <span class="c1"># LU decomposition of the Jacobian</span>
 
-    <span class="n">c</span> <span class="o">=</span> <span class="n">Jac_lu</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">lapl_bc</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
-    <span class="n">k_app</span> <span class="o">=</span> <span class="p">(</span><span class="n">Grad</span><span class="p">[[</span><span class="o">-</span><span class="mi">1</span><span class="p">],:]</span> <span class="o">@</span> <span class="n">c</span> <span class="o">+</span> <span class="n">grad_bc</span><span class="p">[[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">toarray</span><span class="p">())[[</span><span class="mi">0</span><span class="p">]]</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">D</span><span class="o">/</span><span class="n">R</span><span class="p">)</span>
-    <span class="n">eta</span> <span class="o">=</span> <span class="n">k_app</span><span class="o">/</span><span class="n">k</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shape_c</span><span class="p">)</span>
+    <span class="c1"># Solve for concentration profile</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">jac_lu</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">lapl_bc</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
+    <span class="n">k_app</span> <span class="o">=</span> <span class="p">(</span><span class="n">grad_mat</span><span class="p">[[</span><span class="o">-</span><span class="mi">1</span><span class="p">],:]</span> <span class="o">@</span> <span class="n">c</span> <span class="o">+</span> <span class="n">grad_bc</span><span class="p">[[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">toarray</span><span class="p">())[[</span><span class="mi">0</span><span class="p">]]</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">D</span><span class="o">/</span><span class="n">R</span><span class="p">)</span>  <span class="c1"># Apparent reaction rate</span>
+    <span class="n">eta</span> <span class="o">=</span> <span class="n">k_app</span><span class="o">/</span><span class="n">k</span>  <span class="c1"># Effectiveness factor</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shape_c</span><span class="p">)</span>  <span class="c1"># Reshape concentration profile</span>
+
+    <span class="c1"># Plot effectiveness factor for the current Thiele modulus</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">eta</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot analytical solution for comparison</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">phis</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">phis</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">phis</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">phis</span><span class="o">*</span><span class="n">phis</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$\eta = 3(\phi \coth(\phi)-1)/\phi^2$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Thiele modulus, $\phi$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;effectiveness factor, $\eta$&#39;</span><span class="p">)</span>
@@ -571,7 +590,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/66aa4c51bccb07e6944c85736b6b6124952a0f3443557cf7b32deb920310c09e.png" src="../../_images/66aa4c51bccb07e6944c85736b6b6124952a0f3443557cf7b32deb920310c09e.png" />
+<img alt="../../_images/e2267dafc75eb2b2f6509b74398190e138336d8f0ecb425c4ffc79530295656f.png" src="../../_images/e2267dafc75eb2b2f6509b74398190e138336d8f0ecb425c4ffc79530295656f.png" />
 </div>
 </div>
 </section>
