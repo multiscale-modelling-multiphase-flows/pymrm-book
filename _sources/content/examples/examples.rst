@@ -17,4 +17,5 @@ Below is a list of available example notebooks. The notebooks can also be direct
    ../../pymrm/examples/unsteady_convection_reaction
    ../../pymrm/examples/darcy_flow
    ../../pymrm/examples/lid_driven_cavity
+   ../../pymrm/examples/membrane_module_2D
    ../../pymrm/examples/optimization_example
