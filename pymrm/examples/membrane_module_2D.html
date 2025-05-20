@@ -489,7 +489,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -505,6 +507,18 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#governing-equation">Governing Equation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-conditions">Boundary Conditions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#function-to-compute-and-print-mass-balances">Function to Compute and Print Mass Balances</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explicit-coupling">Explicit Coupling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implicit-coupling">Implicit Coupling</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -516,75 +530,99 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="membrane-model">
 <h1>Membrane Model<a class="headerlink" href="#membrane-model" title="Link to this heading">#</a></h1>
-<p>A 2D model model with a shell in tube geometry. Counter-current plug flow with radial diffusion. Between the inner retentate side and the outside annular permeate side there is a membrane where a substance permeates.
-The purpose of this example is to demonstrate how to couple submodels, either via explicit coupling, or fully implicit.</p>
-<p>On both sides the governing equation is:</p>
+<p>This notebook demonstrates a 2D membrane model with a shell-in-tube geometry. The model simulates counter-current plug flow with radial diffusion. A membrane separates the inner retentate side and the outer annular permeate side, allowing a substance to permeate through.</p>
+<p>The purpose of this example is to illustrate how to couple submodels using either explicit or fully implicit coupling methods. The governing equations and boundary conditions are provided below.</p>
+<section id="governing-equation">
+<h2>Governing Equation<a class="headerlink" href="#governing-equation" title="Link to this heading">#</a></h2>
+<p>The governing equation for both the retentate and permeate sides is:</p>
 <p><span class="math notranslate nohighlight">\(\frac{\partial c}{\partial t} + \mathrm{div}_z (v \, c) - \mathrm{div}_r (D \, \mathrm{div}_r(c))  = 0\)</span></p>
-<p>On the retentate and permeate of the membrane we have boundary conditions:</p>
+</section>
+<section id="boundary-conditions">
+<h2>Boundary Conditions<a class="headerlink" href="#boundary-conditions" title="Link to this heading">#</a></h2>
+<p>At the membrane interface, the boundary conditions are:</p>
 <p><span class="math notranslate nohighlight">\(D \frac{\partial c_\mathrm{ret}}{\partial n} = P \, (c_\mathrm{perm} - c_\mathrm{ret})\)</span>, and <span class="math notranslate nohighlight">\(\frac{R_\mathrm{perm}}{R_\mathrm{ret}} D \frac{\partial c_\mathrm{perm}}{\partial n} =  P \, (c_\mathrm{ret} - c_\mathrm{perm})\)</span>.</p>
+<p>The notebook is divided into sections for parameter initialization, explicit coupling, and implicit coupling, with detailed comments to guide the user.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import necessary libraries</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">scipy.sparse.linalg</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sla</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pymrm</span><span class="w"> </span><span class="kn">import</span> <span class="n">construct_grad</span><span class="p">,</span> <span class="n">construct_div</span><span class="p">,</span> <span class="n">update_csc_array_indices</span><span class="p">,</span> <span class="n">construct_convflux_upwind</span><span class="p">,</span> <span class="n">construct_interface_matrices</span>
 
-<span class="n">L</span> <span class="o">=</span> <span class="mf">0.2</span>
-<span class="n">D</span> <span class="o">=</span> <span class="mf">1e-4</span>
-<span class="n">P</span> <span class="o">=</span> <span class="mf">0.002</span>
-<span class="n">c_in</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="n">v_ret</span> <span class="o">=</span> <span class="mf">1e-1</span>
-<span class="n">v_perm</span> <span class="o">=</span> <span class="mf">1e-1</span>
-<span class="n">R_ret</span> <span class="o">=</span> <span class="mf">5e-3</span>
-<span class="n">R_perm</span> <span class="o">=</span> <span class="n">R_ret</span> <span class="o">+</span> <span class="mf">5e-4</span>
-<span class="n">R_out</span> <span class="o">=</span> <span class="mf">7e-3</span>
+<span class="c1"># Define physical parameters</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mf">0.2</span>  <span class="c1"># Length of the membrane module (m)</span>
+<span class="n">D</span> <span class="o">=</span> <span class="mf">1e-4</span>  <span class="c1"># Diffusion coefficient (m^2/s)</span>
+<span class="n">P</span> <span class="o">=</span> <span class="mf">0.002</span>  <span class="c1"># Permeability of the membrane (m/s)</span>
+<span class="n">c_in</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># Inlet concentration (mol/m^3)</span>
+<span class="n">v_ret</span> <span class="o">=</span> <span class="mf">1e-1</span>  <span class="c1"># Retentate velocity (m/s)</span>
+<span class="n">v_perm</span> <span class="o">=</span> <span class="mf">1e-1</span>  <span class="c1"># Permeate velocity (m/s)</span>
+<span class="n">R_ret</span> <span class="o">=</span> <span class="mf">5e-3</span>  <span class="c1"># Inner radius of the retentate side (m)</span>
+<span class="n">R_perm</span> <span class="o">=</span> <span class="n">R_ret</span> <span class="o">+</span> <span class="mf">5e-4</span>  <span class="c1"># Inner radius of the permeate side (m)</span>
+<span class="n">R_out</span> <span class="o">=</span> <span class="mf">7e-3</span>  <span class="c1"># Outer radius of the permeate side (m)</span>
 
-<span class="n">num_z</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">num_r_perm</span> <span class="o">=</span> <span class="mi">30</span>
-<span class="n">num_r_ret</span> <span class="o">=</span> <span class="mi">30</span>
-<span class="n">dz</span> <span class="o">=</span> <span class="n">L</span><span class="o">/</span><span class="n">num_z</span>
-<span class="n">z_f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">num_z</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">z_c</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">z_f</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">z_f</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">r_f_ret</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">R_ret</span><span class="p">,</span> <span class="n">num_r_ret</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">r_c_ret</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">r_f_ret</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">r_f_ret</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">r_f_perm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">R_perm</span><span class="p">,</span> <span class="n">R_out</span><span class="p">,</span> <span class="n">num_r_perm</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">r_c_perm</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">r_f_perm</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">r_f_perm</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="c1"># Define discretization parameters</span>
+<span class="n">num_z</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># Number of grid points in the axial direction</span>
+<span class="n">num_r_perm</span> <span class="o">=</span> <span class="mi">30</span>  <span class="c1"># Number of grid points in the radial direction (permeate)</span>
+<span class="n">num_r_ret</span> <span class="o">=</span> <span class="mi">30</span>  <span class="c1"># Number of grid points in the radial direction (retentate)</span>
+<span class="n">dz</span> <span class="o">=</span> <span class="n">L</span><span class="o">/</span><span class="n">num_z</span>  <span class="c1"># Axial grid spacing</span>
 
-<span class="n">bc_neumann</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
-<span class="n">bc_dirichlet</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="c1"># Generate grid points</span>
+<span class="n">z_f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">num_z</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Axial face grid points</span>
+<span class="n">z_c</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">z_f</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">z_f</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># Axial cell-centered grid points</span>
+<span class="n">r_f_ret</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">R_ret</span><span class="p">,</span> <span class="n">num_r_ret</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Radial face grid points (retentate)</span>
+<span class="n">r_c_ret</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">r_f_ret</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">r_f_ret</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># Radial cell-centered grid points (retentate)</span>
+<span class="n">r_f_perm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">R_perm</span><span class="p">,</span> <span class="n">R_out</span><span class="p">,</span> <span class="n">num_r_perm</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Radial face grid points (permeate)</span>
+<span class="n">r_c_perm</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">r_f_perm</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">r_f_perm</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># Radial cell-centered grid points (permeate)</span>
 
-<span class="n">shape_ret</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_z</span><span class="p">,</span> <span class="n">num_r_ret</span><span class="p">)</span>
-<span class="n">shape_perm</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_z</span><span class="p">,</span> <span class="n">num_r_perm</span><span class="p">)</span>
-<span class="n">shape_d</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_z</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Define boundary conditions</span>
+<span class="n">bc_neumann</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>  <span class="c1"># Neumann boundary condition</span>
+<span class="n">bc_dirichlet</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>  <span class="c1"># Dirichlet boundary condition</span>
 
-<span class="n">div_ret_mat_z</span> <span class="o">=</span> <span class="n">construct_div</span><span class="p">(</span><span class="n">shape_ret</span><span class="p">,</span> <span class="n">z_f</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">div_ret_mat_r</span> <span class="o">=</span> <span class="n">construct_div</span><span class="p">(</span><span class="n">shape_ret</span><span class="p">,</span> <span class="n">r_f_ret</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">div_perm_mat_z</span> <span class="o">=</span> <span class="n">construct_div</span><span class="p">(</span><span class="n">shape_perm</span><span class="p">,</span> <span class="n">z_f</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">div_perm_mat_r</span> <span class="o">=</span> <span class="n">construct_div</span><span class="p">(</span><span class="n">shape_perm</span><span class="p">,</span> <span class="n">r_f_perm</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Define shapes for matrices</span>
+<span class="n">shape_ret</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_z</span><span class="p">,</span> <span class="n">num_r_ret</span><span class="p">)</span>  <span class="c1"># Shape of the retentate domain</span>
+<span class="n">shape_perm</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_z</span><span class="p">,</span> <span class="n">num_r_perm</span><span class="p">)</span>  <span class="c1"># Shape of the permeate domain</span>
+<span class="n">shape_d</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_z</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Shape for boundary condition vectors</span>
 
-<span class="n">conv_ret_mat</span><span class="p">,</span> <span class="n">conv_ret_bc</span> <span class="o">=</span> <span class="n">construct_convflux_upwind</span><span class="p">(</span><span class="n">shape_ret</span><span class="p">,</span> <span class="n">z_f</span><span class="p">,</span> <span class="n">z_c</span><span class="p">,</span> <span class="p">(</span><span class="n">bc_dirichlet</span><span class="p">,</span> <span class="n">bc_neumann</span><span class="p">),</span> <span class="n">v_ret</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">conv_ret_bc</span> <span class="o">*=</span> <span class="n">c_in</span>
-<span class="n">conv_perm_mat</span><span class="p">,</span> <span class="n">conv_perm_bc</span> <span class="o">=</span> <span class="n">construct_convflux_upwind</span><span class="p">(</span><span class="n">shape_perm</span><span class="p">,</span> <span class="n">z_f</span><span class="p">,</span> <span class="n">z_c</span><span class="p">,</span> <span class="p">(</span><span class="n">bc_neumann</span><span class="p">,</span> <span class="n">bc_dirichlet</span><span class="p">),</span> <span class="o">-</span><span class="n">v_perm</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">conv_perm_bc</span> <span class="o">*=</span> <span class="mf">0.0</span>
+<span class="c1"># Construct divergence matrices for retentate and permeate domains</span>
+<span class="n">div_ret_mat_z</span> <span class="o">=</span> <span class="n">construct_div</span><span class="p">(</span><span class="n">shape_ret</span><span class="p">,</span> <span class="n">z_f</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Axial divergence (retentate)</span>
+<span class="n">div_ret_mat_r</span> <span class="o">=</span> <span class="n">construct_div</span><span class="p">(</span><span class="n">shape_ret</span><span class="p">,</span> <span class="n">r_f_ret</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Radial divergence (retentate)</span>
+<span class="n">div_perm_mat_z</span> <span class="o">=</span> <span class="n">construct_div</span><span class="p">(</span><span class="n">shape_perm</span><span class="p">,</span> <span class="n">z_f</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Axial divergence (permeate)</span>
+<span class="n">div_perm_mat_r</span> <span class="o">=</span> <span class="n">construct_div</span><span class="p">(</span><span class="n">shape_perm</span><span class="p">,</span> <span class="n">r_f_perm</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Radial divergence (permeate)</span>
+
+<span class="c1"># Construct convection flux matrices for retentate and permeate domains</span>
+<span class="n">conv_ret_mat</span><span class="p">,</span> <span class="n">conv_ret_bc</span> <span class="o">=</span> <span class="n">construct_convflux_upwind</span><span class="p">(</span><span class="n">shape_ret</span><span class="p">,</span> <span class="n">z_f</span><span class="p">,</span> <span class="n">z_c</span><span class="p">,</span> <span class="p">(</span><span class="n">bc_dirichlet</span><span class="p">,</span> <span class="n">bc_neumann</span><span class="p">),</span> <span class="n">v_ret</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">conv_ret_bc</span> <span class="o">*=</span> <span class="n">c_in</span>  <span class="c1"># Apply inlet concentration to boundary condition</span>
+<span class="n">conv_perm_mat</span><span class="p">,</span> <span class="n">conv_perm_bc</span> <span class="o">=</span> <span class="n">construct_convflux_upwind</span><span class="p">(</span><span class="n">shape_perm</span><span class="p">,</span> <span class="n">z_f</span><span class="p">,</span> <span class="n">z_c</span><span class="p">,</span> <span class="p">(</span><span class="n">bc_neumann</span><span class="p">,</span> <span class="n">bc_dirichlet</span><span class="p">),</span> <span class="o">-</span><span class="n">v_perm</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">conv_perm_bc</span> <span class="o">*=</span> <span class="mf">0.0</span>  <span class="c1"># No inlet concentration for permeate</span>
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="function-to-compute-and-print-mass-balances">
+<h2>Function to Compute and Print Mass Balances<a class="headerlink" href="#function-to-compute-and-print-mass-balances" title="Link to this heading">#</a></h2>
+<p>This function calculates the mass flow rates at the inlet, outlet, and membrane interface for both the retentate and permeate sides. It also checks the overall mass balance to ensure conservation of mass.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pymrm</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_boundary_values</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">print_balances</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">print_balances</span><span class="p">(</span><span class="n">c_ret</span><span class="p">,</span> <span class="n">c_perm</span><span class="p">):</span>
+    <span class="c1"># Compute boundary values for retentate and permeate sides</span>
     <span class="n">c_in_ret</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">c_out_ret</span><span class="p">,</span> <span class="n">_</span>  <span class="o">=</span> <span class="n">compute_boundary_values</span><span class="p">(</span><span class="n">c_ret</span><span class="p">,</span> <span class="n">z_f</span><span class="p">,</span> <span class="n">z_c</span><span class="p">,</span> <span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span><span class="n">c_in</span><span class="p">},</span> <span class="n">bc_neumann</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">c_out_perm</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">c_in_perm</span><span class="p">,</span> <span class="n">_</span>  <span class="o">=</span> <span class="n">compute_boundary_values</span><span class="p">(</span><span class="n">c_perm</span><span class="p">,</span> <span class="n">z_f</span><span class="p">,</span> <span class="n">z_c</span><span class="p">,</span> <span class="p">(</span><span class="n">bc_neumann</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">}),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Compute cross-sectional areas for radial and axial directions</span>
     <span class="n">dA_r_ret</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">r_f_ret</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">r_f_ret</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
     <span class="n">dA_r_perm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">r_f_perm</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">r_f_perm</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-
-    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">grad_mem_ret</span>  <span class="o">=</span> <span class="n">compute_boundary_values</span><span class="p">(</span><span class="n">c_ret</span><span class="p">,</span> <span class="n">r_f_ret</span><span class="p">,</span> <span class="n">r_c_ret</span><span class="p">,</span> <span class="p">(</span><span class="n">bc_neumann</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span><span class="n">c_b_ret</span><span class="p">}),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">_</span> <span class="p">,</span> <span class="n">grad_mem_perm</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span>  <span class="o">=</span> <span class="n">compute_boundary_values</span><span class="p">(</span><span class="n">c_perm</span><span class="p">,</span> <span class="n">r_f_perm</span><span class="p">,</span> <span class="n">r_c_perm</span><span class="p">,</span> <span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span><span class="n">c_b_perm</span><span class="p">},</span> <span class="n">bc_neumann</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">dA_z_ret</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">R_ret</span><span class="o">*</span><span class="p">(</span><span class="n">z_f</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">z_f</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
     <span class="n">dA_z_perm</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">R_perm</span><span class="o">*</span><span class="p">(</span><span class="n">z_f</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">z_f</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
 
+    <span class="c1"># Compute gradients at the membrane interface</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">grad_mem_ret</span>  <span class="o">=</span> <span class="n">compute_boundary_values</span><span class="p">(</span><span class="n">c_ret</span><span class="p">,</span> <span class="n">r_f_ret</span><span class="p">,</span> <span class="n">r_c_ret</span><span class="p">,</span> <span class="p">(</span><span class="n">bc_neumann</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span><span class="n">c_b_ret</span><span class="p">}),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">_</span> <span class="p">,</span> <span class="n">grad_mem_perm</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span>  <span class="o">=</span> <span class="n">compute_boundary_values</span><span class="p">(</span><span class="n">c_perm</span><span class="p">,</span> <span class="n">r_f_perm</span><span class="p">,</span> <span class="n">r_c_perm</span><span class="p">,</span> <span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span><span class="n">c_b_perm</span><span class="p">},</span> <span class="n">bc_neumann</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Compute flow rates</span>
     <span class="n">flow_in_ret</span> <span class="o">=</span> <span class="n">v_ret</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">c_in_ret</span><span class="o">*</span><span class="n">dA_r_ret</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(())</span>
     <span class="n">flow_out_ret</span> <span class="o">=</span> <span class="n">v_ret</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">c_out_ret</span><span class="o">*</span><span class="n">dA_r_ret</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(())</span>
     <span class="n">flow_in_perm</span> <span class="o">=</span> <span class="n">v_perm</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">c_in_perm</span><span class="o">*</span><span class="n">dA_r_perm</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(())</span>
@@ -592,6 +630,7 @@ The purpose of this example is to demonstrate how to couple submodels, either vi
     <span class="n">flow_mem_ret</span> <span class="o">=</span> <span class="o">-</span><span class="n">D</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">grad_mem_ret</span><span class="o">*</span><span class="n">dA_z_ret</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(())</span>
     <span class="n">flow_mem_perm</span> <span class="o">=</span> <span class="o">-</span><span class="n">D</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">grad_mem_perm</span><span class="o">*</span><span class="n">dA_z_perm</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(())</span>
 
+    <span class="c1"># Print mass balances</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;retentate side: inlet molar flow = </span><span class="si">{</span><span class="n">flow_in_ret</span><span class="si">:</span><span class="s2">.5e</span><span class="si">}</span><span class="s2">, membrane molar flow out = </span><span class="si">{</span><span class="n">flow_mem_ret</span><span class="si">:</span><span class="s2">.5e</span><span class="si">}</span><span class="s2">, outlet molar flow = </span><span class="si">{</span><span class="n">flow_out_ret</span><span class="si">:</span><span class="s2">.5e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;retentate balance: </span><span class="si">{</span><span class="n">flow_in_ret</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">flow_mem_ret</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">flow_out_ret</span><span class="si">:</span><span class="s2">.5e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;permeate side:  inlet molar flow = </span><span class="si">{</span><span class="n">flow_in_perm</span><span class="si">:</span><span class="s2">.5e</span><span class="si">}</span><span class="s2">, membrane molar flow in  = </span><span class="si">{</span><span class="n">flow_mem_perm</span><span class="si">:</span><span class="s2">.5e</span><span class="si">}</span><span class="s2">, outlet molar flow = </span><span class="si">{</span><span class="n">flow_out_perm</span><span class="si">:</span><span class="s2">.5e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -601,13 +640,17 @@ The purpose of this example is to demonstrate how to couple submodels, either vi
 </div>
 </div>
 </div>
+</section>
+<section id="explicit-coupling">
+<h2>Explicit Coupling<a class="headerlink" href="#explicit-coupling" title="Link to this heading">#</a></h2>
+<p>In this section, the retentate and permeate submodels are coupled explicitly. The coupling is achieved by iteratively updating the boundary conditions at the membrane interface.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Explicit coupling</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pymrm</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_boundary_values</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
 
-<span class="n">num_iter</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">num_iter</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># Number of iterations for the explicit coupling</span>
 <span class="n">c_ret</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape_ret</span><span class="p">)</span>
 <span class="n">c_perm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape_perm</span><span class="p">)</span>
 <span class="n">c_b_ret</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_z</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
@@ -652,7 +695,7 @@ The purpose of this example is to demonstrate how to couple submodels, either vi
 <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-<span class="n">print_balances</span><span class="p">()</span>
+<span class="n">print_balances</span><span class="p">(</span><span class="n">c_ret</span><span class="p">,</span> <span class="n">c_perm</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -667,10 +710,13 @@ overall balance: 7.24578e-10
 </div>
 </div>
 </div>
+</section>
+<section id="implicit-coupling">
+<h2>Implicit Coupling<a class="headerlink" href="#implicit-coupling" title="Link to this heading">#</a></h2>
+<p>In this section, the retentate and permeate submodels are coupled implicitly. The coupling is achieved by solving a single system of equations that includes the interface conditions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Implicit coupling</span>
-
 <span class="n">c_all</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_z</span><span class="p">,</span> <span class="n">num_r_ret</span> <span class="o">+</span> <span class="n">num_r_perm</span><span class="p">))</span>
 <span class="n">c_ret</span> <span class="o">=</span> <span class="n">c_all</span><span class="p">[:,</span> <span class="p">:</span><span class="n">num_r_ret</span><span class="p">]</span>
 <span class="n">c_perm</span> <span class="o">=</span> <span class="n">c_all</span><span class="p">[:,</span> <span class="n">num_r_ret</span><span class="p">:]</span>
@@ -720,7 +766,7 @@ overall balance: 7.24578e-10
 <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-<span class="n">print_balances</span><span class="p">()</span>
+<span class="n">print_balances</span><span class="p">(</span><span class="n">c_ret</span><span class="p">,</span> <span class="n">c_perm</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -735,6 +781,7 @@ overall balance: -1.00873e-17
 </div>
 </div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -773,6 +820,25 @@ overall balance: -1.00873e-17
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#governing-equation">Governing Equation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-conditions">Boundary Conditions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#function-to-compute-and-print-mass-balances">Function to Compute and Print Mass Balances</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explicit-coupling">Explicit Coupling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implicit-coupling">Implicit Coupling</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
